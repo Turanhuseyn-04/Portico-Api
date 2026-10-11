@@ -1,0 +1,126 @@
+{
+  "version": 4,
+  "targets": {
+    "net8.0": {
+      "Portico.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Portico.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Portico.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Portico.Application.dll": {}
+        }
+      },
+      "Portico.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Portico.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Portico.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Portico.Application/1.0.0": {
+      "type": "project",
+      "path": "../Portico.Application/Portico.Application.csproj",
+      "msbuildProject": "../Portico.Application/Portico.Application.csproj"
+    },
+    "Portico.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Portico.Domain/Portico.Domain.csproj",
+      "msbuildProject": "../Portico.Domain/Portico.Domain.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0": [
+      "Portico.Application >= 1.0.0",
+      "Portico.Domain >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\User\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\User\\OneDrive\\Desktop\\Portico\\Backend\\Portico.Api\\Portico.Infrastructure\\Portico.Infrastructure.csproj",
+      "projectName": "Portico.Infrastructure",
+      "projectPath": "C:\\Users\\User\\OneDrive\\Desktop\\Portico\\Backend\\Portico.Api\\Portico.Infrastructure\\Portico.Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\User\\OneDrive\\Desktop\\Portico\\Backend\\Portico.Api\\Portico.Infrastructure\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0": {
+          "framework": "net8.0",
+          "targetAlias": "net8.0",
+          "projectReferences": {
+            "C:\\Users\\User\\OneDrive\\Desktop\\Portico\\Backend\\Portico.Api\\Portico.Application\\Portico.Application.csproj": {
+              "projectPath": "C:\\Users\\User\\OneDrive\\Desktop\\Portico\\Backend\\Portico.Api\\Portico.Application\\Portico.Application.csproj"
+            },
+            "C:\\Users\\User\\OneDrive\\Desktop\\Portico\\Backend\\Portico.Api\\Portico.Domain\\Portico.Domain.csproj": {
+              "projectPath": "C:\\Users\\User\\OneDrive\\Desktop\\Portico\\Backend\\Portico.Api\\Portico.Domain\\Portico.Domain.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "10.0.400"
+    },
+    "frameworks": {
+      "net8.0": {
+        "framework": "net8.0",
+        "targetAlias": "net8.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.401/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

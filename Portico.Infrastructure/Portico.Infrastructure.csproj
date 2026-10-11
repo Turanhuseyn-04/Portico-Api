@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Portico.Application\Portico.Application.csproj" />
+    <ProjectReference Include="..\Portico.Domain\Portico.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

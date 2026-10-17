@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Portico.Application.Properties;
+using Service.Helpers.DTOs.Properties;
+using Service.Services.Interfaces;
 
 namespace Portico.Api.Controllers;
 
@@ -7,37 +8,34 @@ namespace Portico.Api.Controllers;
 [Route("properties")]
 public class PropertiesController : ControllerBase
 {
-    private readonly IPropertyCatalog _catalog;
+    private readonly IPropertyService _properties;
 
-    public PropertiesController(IPropertyCatalog catalog)
+    public PropertiesController(IPropertyService properties)
     {
-        _catalog = catalog;
+        _properties = properties;
     }
 
     [HttpGet]
-    public async Task<IReadOnlyList<StayListItem>> List(CancellationToken cancellationToken)
+    public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
     {
-        return await _catalog.ListAsync(cancellationToken);
+        return Ok(await _properties.GetAllAsync(cancellationToken));
     }
 
     [HttpGet("{id}/availability")]
-    public async Task<ActionResult<IReadOnlyList<RoomAvailability>>> Availability(string id, [FromQuery] DateOnly checkIn, [FromQuery] DateOnly checkOut, CancellationToken cancellationToken)
+    public async Task<IActionResult> AvailabilityAsync(string id, [FromQuery] DateOnly checkIn, [FromQuery] DateOnly checkOut, CancellationToken cancellationToken)
     {
-        var offers = await _catalog.AvailabilityAsync(id, checkIn, checkOut, cancellationToken);
-        return offers is null ? NotFound() : Ok(offers);
+        return Ok(await _properties.AvailabilityAsync(id, checkIn, checkOut, cancellationToken));
     }
 
     [HttpGet("{id}/reviews")]
-    public async Task<ActionResult<IReadOnlyList<StayReview>>> Reviews(string id, CancellationToken cancellationToken)
+    public async Task<IActionResult> ReviewsAsync(string id, CancellationToken cancellationToken)
     {
-        var reviews = await _catalog.ReviewsAsync(id, cancellationToken);
-        return reviews is null ? NotFound() : Ok(reviews);
+        return Ok(await _properties.ReviewsAsync(id, cancellationToken));
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<StayDetail>> Get(string id, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetAsync(string id, CancellationToken cancellationToken)
     {
-        var stay = await _catalog.GetAsync(id, cancellationToken);
-        return stay is null ? NotFound() : Ok(stay);
+        return Ok(await _properties.GetAsync(id, cancellationToken));
     }
 }

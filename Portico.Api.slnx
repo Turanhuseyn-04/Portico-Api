@@ -1,6 +1,6 @@
 <Solution>
   <Project Path="Portico.Api/Portico.Api.csproj" />
-  <Project Path="Portico.Application/Portico.Application.csproj" />
-  <Project Path="Portico.Domain/Portico.Domain.csproj" />
-  <Project Path="Portico.Infrastructure/Portico.Infrastructure.csproj" />
+  <Project Path="Domain/Domain.csproj" />
+  <Project Path="Repository/Repository.csproj" />
+  <Project Path="Service/Service.csproj" />
 </Solution>

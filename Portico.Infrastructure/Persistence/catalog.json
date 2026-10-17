@@ -343,6 +343,104 @@
         ]
       }
     ],
+    "reviews": [
+      {
+        "author": "Ivo P.",
+        "country": "Croatia",
+        "traveller": "Couple",
+        "roomId": "suite",
+        "nights": 3,
+        "date": "2026-09-14",
+        "score": 9.6,
+        "title": "The photo was the room",
+        "liked": "The photo was the room. That is rarer than the big sites admit. The courtyard is silent at night, and breakfast under the orange trees was the best part of the trip.",
+        "disliked": "The lift is small: fine for two, a squeeze with luggage."
+      },
+      {
+        "author": "Marta K.",
+        "country": "Poland",
+        "traveller": "Solo traveller",
+        "roomId": "classic",
+        "nights": 4,
+        "date": "2026-09-02",
+        "score": 9.2,
+        "title": "Quiet, central and honest",
+        "liked": "Five minutes from everything and still quiet. The price I saw was the price I paid.",
+        "disliked": "The Classic room is compact. I would book the twin next time for the extra space."
+      },
+      {
+        "author": "James W.",
+        "country": "United Kingdom",
+        "traveller": "Business",
+        "roomId": "superior",
+        "nights": 2,
+        "date": "2026-08-21",
+        "score": 8.8,
+        "title": "A real desk and fast WiFi",
+        "liked": "A proper desk, a good chair and WiFi that held up on video calls. Staff printed my boarding pass without being asked twice.",
+        "disliked": "The non-refundable rate stung when my meeting moved."
+      },
+      {
+        "author": "Ana \u0026 Rui",
+        "country": "Brazil",
+        "traveller": "Couple",
+        "roomId": "loft",
+        "nights": 5,
+        "date": "2026-08-09",
+        "score": 10,
+        "title": "Book the loft",
+        "liked": "The loft terrace at sunset, with the castle lit up, is worth the stairs. Spotless, calm and generous with the little things.",
+        "disliked": "Nothing at all."
+      },
+      {
+        "author": "Claire D.",
+        "country": "France",
+        "traveller": "Family",
+        "roomId": "suite",
+        "nights": 4,
+        "date": "2026-07-27",
+        "score": 9.4,
+        "title": "Easy with two children",
+        "liked": "The sofa bed was already made when we arrived and the staff found a step stool for the bathroom. Breakfast had something for everyone.",
+        "disliked": "The pool is small, so go early in summer."
+      },
+      {
+        "author": "Kenji T.",
+        "country": "Japan",
+        "traveller": "Couple",
+        "roomId": "twin",
+        "nights": 3,
+        "date": "2026-07-12",
+        "score": 9,
+        "title": "Calm courtyard, good coffee",
+        "liked": "The courtyard room was the quietest we had in Portugal. Good coffee machine in the room.",
+        "disliked": "Twin beds cannot be pushed together."
+      },
+      {
+        "author": "Sofia L.",
+        "country": "Italy",
+        "traveller": "Group",
+        "roomId": "twin",
+        "nights": 2,
+        "date": "2026-06-30",
+        "score": 8.6,
+        "title": "Great base for a weekend",
+        "liked": "The location is perfect for a weekend: bars, the river and the tram all on foot.",
+        "disliked": "Some street noise on Friday night with the windows open."
+      },
+      {
+        "author": "Daniel M.",
+        "country": "Germany",
+        "traveller": "Solo traveller",
+        "roomId": "classic",
+        "nights": 2,
+        "date": "2026-06-18",
+        "score": 9.4,
+        "title": "Would stay again",
+        "liked": "Kind staff, very clean, and the rooftop is a lovely place to read in the evening.",
+        "disliked": "Breakfast is not included in the Classic room."
+      }
+    ],
     "policies": {
       "checkIn": "From 15:00 to 23:00",
       "checkOut": "Until 11:00",
@@ -525,6 +623,44 @@
         ]
       }
     ],
+    "reviews": [
+      {
+        "author": "Hana R.",
+        "country": "South Korea",
+        "traveller": "Couple",
+        "roomId": "garden",
+        "nights": 3,
+        "date": "2026-09-20",
+        "score": 9.4,
+        "title": "The garden in the morning",
+        "liked": "Waking up with the screens open onto the moss garden. The bathhouse slot at night was magic.",
+        "disliked": "Futons are firm, as expected."
+      },
+      {
+        "author": "Tom B.",
+        "country": "Australia",
+        "traveller": "Solo traveller",
+        "roomId": "cedar",
+        "nights": 4,
+        "date": "2026-08-15",
+        "score": 9,
+        "title": "Perfect location",
+        "liked": "Gion on the doorstep and still quiet at night.",
+        "disliked": "The room is small for big suitcases."
+      },
+      {
+        "author": "Luc\u00EDa G.",
+        "country": "Spain",
+        "traveller": "Couple",
+        "roomId": "cedar",
+        "nights": 2,
+        "date": "2026-07-04",
+        "score": 8.8,
+        "title": "Lovely staff",
+        "liked": "The staff drew us a map of the best early-morning walks.",
+        "disliked": "Breakfast ends at 09:30."
+      }
+    ],
     "policies": {
       "checkIn": "From 15:00 to 23:00",
       "checkOut": "Until 11:00",
@@ -695,6 +831,44 @@
             "11 km"
           ]
         ]
+      }
+    ],
+    "reviews": [
+      {
+        "author": "Erik S.",
+        "country": "Sweden",
+        "traveller": "Business",
+        "roomId": "studio",
+        "nights": 5,
+        "date": "2026-09-10",
+        "score": 9,
+        "title": "Best work trip flat",
+        "liked": "The table and the light are perfect for a work week.",
+        "disliked": "The stairs are steep."
+      },
+      {
+        "author": "Priya N.",
+        "country": "India",
+        "traveller": "Couple",
+        "roomId": "courtyard",
+        "nights": 3,
+        "date": "2026-08-02",
+        "score": 8.6,
+        "title": "Lovely street",
+        "liked": "The bikes made the trip. Great bakery underneath.",
+        "disliked": "Morning noise from the workshop downstairs."
+      },
+      {
+        "author": "Max H.",
+        "country": "Germany",
+        "traveller": "Solo traveller",
+        "roomId": "studio",
+        "nights": 2,
+        "date": "2026-06-22",
+        "score": 8.8,
+        "title": "Simple and clean",
+        "liked": "Clean, quiet and the check-in code just worked.",
+        "disliked": "The shower is small."
       }
     ],
     "policies": {
@@ -875,6 +1049,44 @@
             "6 km"
           ]
         ]
+      }
+    ],
+    "reviews": [
+      {
+        "author": "Samir A.",
+        "country": "Egypt",
+        "traveller": "Family",
+        "roomId": "riad",
+        "nights": 4,
+        "date": "2026-09-05",
+        "score": 9.4,
+        "title": "The rule was written down",
+        "liked": "Cancelled on the Tuesday. The rule was written down, and they kept it. When we came back in September, the house was even better than the photos.",
+        "disliked": "Hard to find at night without Fatima."
+      },
+      {
+        "author": "Olivia J.",
+        "country": "Canada",
+        "traveller": "Group",
+        "roomId": "riad-breakfast",
+        "nights": 3,
+        "date": "2026-07-18",
+        "score": 9.8,
+        "title": "Breakfast on the roof",
+        "liked": "Breakfast on the roof every morning was unforgettable.",
+        "disliked": "Nothing."
+      },
+      {
+        "author": "Leo F.",
+        "country": "Netherlands",
+        "traveller": "Couple",
+        "roomId": "riad",
+        "nights": 2,
+        "date": "2026-06-11",
+        "score": 9.6,
+        "title": "A house of our own",
+        "liked": "Having the whole riad to ourselves felt incredible for the price.",
+        "disliked": "The WiFi is slow on the roof."
       }
     ],
     "policies": {
@@ -1078,6 +1290,44 @@
         ]
       }
     ],
+    "reviews": [
+      {
+        "author": "Isabella R.",
+        "country": "United States",
+        "traveller": "Couple",
+        "roomId": "sea",
+        "nights": 4,
+        "date": "2026-09-25",
+        "score": 9.6,
+        "title": "That view",
+        "liked": "Sunrise from the terrace over the sea. The staff remembered our names on day one.",
+        "disliked": "A lot of steps between the terraces."
+      },
+      {
+        "author": "Marco V.",
+        "country": "Italy",
+        "traveller": "Family",
+        "roomId": "garden",
+        "nights": 5,
+        "date": "2026-08-12",
+        "score": 9,
+        "title": "The pool and the shuttle",
+        "liked": "The kids lived in the pool and the shuttle made the beach easy.",
+        "disliked": "Dinner is pricey."
+      },
+      {
+        "author": "Hannah C.",
+        "country": "Ireland",
+        "traveller": "Couple",
+        "roomId": "pool",
+        "nights": 3,
+        "date": "2026-07-01",
+        "score": 9.4,
+        "title": "Worth the splurge",
+        "liked": "The plunge pool suite is the best room we have ever stayed in.",
+        "disliked": "Non-refundable, so be sure of your dates."
+      }
+    ],
     "policies": {
       "checkIn": "From 15:00 to 22:00",
       "checkOut": "Until 11:00",
@@ -1250,6 +1500,44 @@
         ]
       }
     ],
+    "reviews": [
+      {
+        "author": "Rosa M.",
+        "country": "Mexico",
+        "traveller": "Couple",
+        "roomId": "double",
+        "nights": 3,
+        "date": "2026-09-08",
+        "score": 9,
+        "title": "The best breakfast",
+        "liked": "The tamales at breakfast and the cool patio after lunch.",
+        "disliked": "Thin walls."
+      },
+      {
+        "author": "Ben K.",
+        "country": "United States",
+        "traveller": "Family",
+        "roomId": "triple",
+        "nights": 4,
+        "date": "2026-07-21",
+        "score": 8.6,
+        "title": "Great value",
+        "liked": "Excellent location and great value for a family.",
+        "disliked": "The fan is loud at night."
+      },
+      {
+        "author": "Yuki S.",
+        "country": "Japan",
+        "traveller": "Solo traveller",
+        "roomId": "double",
+        "nights": 2,
+        "date": "2026-06-14",
+        "score": 8.8,
+        "title": "Friendly and central",
+        "liked": "Friendly staff and everything is walkable.",
+        "disliked": "Non-refundable only."
+      }
+    ],
     "policies": {
       "checkIn": "From 15:00 to 23:00",
       "checkOut": "Until 11:00",
@@ -1401,6 +1689,44 @@
             "13 km"
           ]
         ]
+      }
+    ],
+    "reviews": [
+      {
+        "author": "Lena S.",
+        "country": "Austria",
+        "traveller": "Couple",
+        "roomId": "studio",
+        "nights": 4,
+        "date": "2026-09-16",
+        "score": 9.2,
+        "title": "The price changed in front of us",
+        "liked": "We changed the dates and the price changed in front of us. The terrace at sunset was wonderful.",
+        "disliked": "The glass roof gets warm at midday."
+      },
+      {
+        "author": "Pedro A.",
+        "country": "Spain",
+        "traveller": "Solo traveller",
+        "roomId": "studio",
+        "nights": 3,
+        "date": "2026-07-29",
+        "score": 8.8,
+        "title": "Calm and bright",
+        "liked": "Bright, calm and very well equipped.",
+        "disliked": "The terrace stairs are narrow."
+      },
+      {
+        "author": "Grace L.",
+        "country": "United Kingdom",
+        "traveller": "Couple",
+        "roomId": "studio",
+        "nights": 2,
+        "date": "2026-06-05",
+        "score": 9,
+        "title": "Lovely neighbourhood",
+        "liked": "Cedofeita is the best part of Porto.",
+        "disliked": "No oven."
       }
     ],
     "policies": {
@@ -1581,6 +1907,44 @@
             "13 km"
           ]
         ]
+      }
+    ],
+    "reviews": [
+      {
+        "author": "Fiona M.",
+        "country": "Scotland",
+        "traveller": "Group",
+        "roomId": "house",
+        "nights": 3,
+        "date": "2026-09-12",
+        "score": 9.4,
+        "title": "A fire and a view",
+        "liked": "The fire was laid when we arrived, and the gallery room is beautiful.",
+        "disliked": "The stair is steep, as promised."
+      },
+      {
+        "author": "Noah P.",
+        "country": "United States",
+        "traveller": "Family",
+        "roomId": "house-breakfast",
+        "nights": 4,
+        "date": "2026-08-03",
+        "score": 9,
+        "title": "Great for a family",
+        "liked": "The breakfast hamper was generous and the kids loved the house.",
+        "disliked": "Street noise during the festival."
+      },
+      {
+        "author": "Elif K.",
+        "country": "T\u00FCrkiye",
+        "traveller": "Couple",
+        "roomId": "house",
+        "nights": 2,
+        "date": "2026-06-26",
+        "score": 9.2,
+        "title": "Perfect location",
+        "liked": "Perfect location and a really cosy house.",
+        "disliked": "Parking is far."
       }
     ],
     "policies": {

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Portico.Application.Messages;
+using Service.Helpers.DTOs.Messages;
+using Service.Services.Interfaces;
 
 namespace Portico.Api.Controllers;
 
@@ -7,22 +8,22 @@ namespace Portico.Api.Controllers;
 [Route("messages")]
 public class MessagesController : ControllerBase
 {
-    private readonly IGuestNotes _notes;
+    private readonly IMessageService _messages;
 
-    public MessagesController(IGuestNotes notes)
+    public MessagesController(IMessageService messages)
     {
-        _notes = notes;
+        _messages = messages;
     }
 
     [HttpGet]
-    public async Task<IReadOnlyList<GuestNote>> List(CancellationToken cancellationToken)
+    public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
     {
-        return await _notes.ListAsync(cancellationToken);
+        return Ok(await _messages.GetAllAsync(cancellationToken));
     }
 
     [HttpPost]
-    public async Task<GuestNote> Create(MessageRequest request, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateAsync(MessageRequest request, CancellationToken cancellationToken)
     {
-        return await _notes.CreateAsync(request, cancellationToken);
+        return Ok(await _messages.CreateAsync(request, cancellationToken));
     }
 }

@@ -1,17 +1,21 @@
 using System.Text.Json;
-using Portico.Infrastructure;
-using Portico.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+using Portico.Api.Middlewares;
+using Repository;
+using Repository.Data;
+using Service;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
     });
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddDbContext<PorticoDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Portico")));
+builder.Services.AddRepositoryLayer();
+builder.Services.AddServiceLayer();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("Development", policy =>
@@ -23,18 +27,18 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod();
     });
 });
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 

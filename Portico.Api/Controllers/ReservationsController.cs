@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Portico.Application.Reservations;
+using Service.Helpers.DTOs.Reservations;
+using Service.Services.Interfaces;
 
 namespace Portico.Api.Controllers;
 
@@ -7,42 +8,34 @@ namespace Portico.Api.Controllers;
 [Route("reservations")]
 public class ReservationsController : ControllerBase
 {
-    private readonly IReservationBook _book;
+    private readonly IReservationService _reservations;
 
-    public ReservationsController(IReservationBook book)
+    public ReservationsController(IReservationService reservations)
     {
-        _book = book;
+        _reservations = reservations;
     }
 
     [HttpPost]
-    public async Task<ActionResult<ReservationCreated>> Create(StayRequest request, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateAsync(StayRequest request, CancellationToken cancellationToken)
     {
-        var result = await _book.CreateAsync(request, cancellationToken);
-        return result switch
-        {
-            Booked booked => Ok(booked.Reservation),
-            BookTaken => Conflict(),
-            _ => NotFound()
-        };
+        return Ok(await _reservations.CreateAsync(request, cancellationToken));
     }
 
     [HttpGet]
-    public async Task<IReadOnlyList<TripDto>> List(CancellationToken cancellationToken)
+    public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
     {
-        return await _book.ListAsync(cancellationToken);
+        return Ok(await _reservations.GetAllAsync(cancellationToken));
     }
 
     [HttpGet("{reference}")]
-    public async Task<ActionResult<TripDto>> Get(string reference, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetAsync(string reference, CancellationToken cancellationToken)
     {
-        var trip = await _book.GetAsync(reference, cancellationToken);
-        return trip is null ? NotFound() : Ok(trip);
+        return Ok(await _reservations.GetAsync(reference, cancellationToken));
     }
 
     [HttpPost("{reference}/cancel")]
-    public async Task<ActionResult<TripDto>> Cancel(string reference, CancellationToken cancellationToken)
+    public async Task<IActionResult> CancelAsync(string reference, CancellationToken cancellationToken)
     {
-        var trip = await _book.CancelAsync(reference, cancellationToken);
-        return trip is null ? NotFound() : Ok(trip);
+        return Ok(await _reservations.CancelAsync(reference, cancellationToken));
     }
 }

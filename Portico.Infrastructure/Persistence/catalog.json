@@ -1,0 +1,1597 @@
+[
+  {
+    "id": "marble",
+    "name": "The Marble Court",
+    "type": "Hotel",
+    "stars": 4,
+    "address": {
+      "street": "Rua Garrett 42",
+      "area": "Chiado",
+      "city": "Lisbon",
+      "postcode": "1200-204",
+      "country": "Portugal"
+    },
+    "location": {
+      "lat": 38.7107,
+      "lng": -9.1421
+    },
+    "score": 9.4,
+    "reviewCount": 186,
+    "scores": {
+      "Staff": 9.6,
+      "Facilities": 9.1,
+      "Cleanliness": 9.5,
+      "Comfort": 9.4,
+      "Value for money": 8.9,
+      "Location": 9.7,
+      "Free WiFi": 9
+    },
+    "summary": "A stone hotel behind a working portico, one street up from the river.",
+    "description": [
+      "The Marble Court sits behind a nineteenth-century portico in Chiado, a short walk uphill from the Tagus. Twenty-two rooms open onto a quiet internal courtyard, where breakfast is served under the orange trees from 07:30.",
+      "Rooms keep to stone, oak and linen: blackout curtains, a proper desk, rain showers and windows that open. The rooftop terrace looks across the Baixa roofs to the castle, and the bar downstairs pours Portuguese wine by the glass until midnight.",
+      "Tram 28 stops at the corner, Baixa-Chiado metro is a four-minute walk, and the river walk starts two streets away."
+    ],
+    "highlights": [
+      {
+        "icon": "pin",
+        "title": "Top location",
+        "text": "Guests rate the location 9.7. Chiado, the river and the metro are all on foot."
+      },
+      {
+        "icon": "breakfast",
+        "title": "Breakfast in the courtyard",
+        "text": "Included on selected rooms, served 07:30\u201310:30 under the orange trees."
+      },
+      {
+        "icon": "terrace",
+        "title": "Rooftop terrace",
+        "text": "Open to guests until 22:00, with a view to S\u00E3o Jorge Castle."
+      }
+    ],
+    "popular": [
+      "wifi",
+      "breakfast",
+      "ac",
+      "terrace",
+      "bar",
+      "desk",
+      "elevator",
+      "nonsmoking"
+    ],
+    "amenityGroups": [
+      {
+        "name": "Bathroom",
+        "items": [
+          "Private bathroom",
+          "Rain shower",
+          "Bathtub in suites",
+          "Hairdryer",
+          "Organic toiletries",
+          "Bathrobes"
+        ]
+      },
+      {
+        "name": "Bedroom",
+        "items": [
+          "Linen",
+          "Wardrobe",
+          "Blackout curtains",
+          "Air conditioning",
+          "Soundproofed windows"
+        ]
+      },
+      {
+        "name": "Food \u0026 drink",
+        "items": [
+          "Breakfast in the courtyard",
+          "Wine bar until 00:00",
+          "Nespresso machine",
+          "Minibar"
+        ]
+      },
+      {
+        "name": "Outdoors",
+        "items": [
+          "Rooftop terrace",
+          "Courtyard with orange trees",
+          "Courtyard pool"
+        ]
+      },
+      {
+        "name": "Internet",
+        "items": [
+          "Free WiFi in all areas, 300 Mbps"
+        ]
+      },
+      {
+        "name": "Services",
+        "items": [
+          "24-hour front desk",
+          "Concierge",
+          "Luggage storage",
+          "Daily housekeeping",
+          "Laundry (paid)"
+        ]
+      },
+      {
+        "name": "Accessibility",
+        "items": [
+          "Lift to all floors",
+          "Step-free entrance"
+        ]
+      },
+      {
+        "name": "Safety \u0026 security",
+        "items": [
+          "Key card access",
+          "Smoke alarms",
+          "Safe in every room",
+          "CCTV at the entrance"
+        ]
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/assets/lisbon.jpg",
+        "alt": "The courtyard pool at dusk, lined with palm trees"
+      },
+      {
+        "src": "/assets/property/room-superior.jpg",
+        "alt": "Superior King Room with a dark oak headboard"
+      },
+      {
+        "src": "/assets/property/room-classic.jpg",
+        "alt": "Classic Double Room with a reading lamp"
+      },
+      {
+        "src": "/assets/marrakech.jpg",
+        "alt": "Deluxe Courtyard Suite with a sitting area"
+      },
+      {
+        "src": "/assets/property/bathroom.jpg",
+        "alt": "Stone bathroom with a freestanding bath"
+      },
+      {
+        "src": "/assets/property/breakfast.jpg",
+        "alt": "Breakfast served in the courtyard"
+      },
+      {
+        "src": "/assets/property/restaurant.jpg",
+        "alt": "The wine bar and dining room"
+      },
+      {
+        "src": "/assets/property/dining.jpg",
+        "alt": "Dinner at the bar"
+      },
+      {
+        "src": "/assets/porto.jpg",
+        "alt": "Loungers on the rooftop terrace"
+      },
+      {
+        "src": "/assets/property/pool-deck.jpg",
+        "alt": "The pool deck in the morning"
+      },
+      {
+        "src": "/assets/property/room-twin.jpg",
+        "alt": "Superior Twin Room"
+      },
+      {
+        "src": "/assets/property/room-loft.jpg",
+        "alt": "Rooftop Loft Suite under the eaves"
+      }
+    ],
+    "rooms": [
+      {
+        "id": "classic",
+        "name": "Classic Double Room",
+        "image": "/assets/property/room-classic.jpg",
+        "size": 18,
+        "beds": "1 double bed",
+        "sleeps": 2,
+        "price": 242,
+        "refundable": true,
+        "breakfast": false,
+        "inventory": 6,
+        "features": [
+          "City view",
+          "Air conditioning",
+          "Rain shower",
+          "Work desk",
+          "Free WiFi"
+        ]
+      },
+      {
+        "id": "twin",
+        "name": "Superior Twin Room",
+        "image": "/assets/property/room-twin.jpg",
+        "size": 22,
+        "beds": "2 single beds",
+        "sleeps": 2,
+        "price": 268,
+        "refundable": true,
+        "breakfast": true,
+        "inventory": 4,
+        "features": [
+          "Courtyard view",
+          "Air conditioning",
+          "Rain shower",
+          "Nespresso machine",
+          "Free WiFi"
+        ]
+      },
+      {
+        "id": "superior",
+        "name": "Superior King Room",
+        "image": "/assets/property/room-superior.jpg",
+        "size": 24,
+        "beds": "1 king bed",
+        "sleeps": 2,
+        "price": 289,
+        "refundable": false,
+        "breakfast": false,
+        "inventory": 3,
+        "features": [
+          "Street view",
+          "Blackout curtains",
+          "Minibar",
+          "Rain shower",
+          "Free WiFi"
+        ]
+      },
+      {
+        "id": "suite",
+        "name": "Deluxe Courtyard Suite",
+        "image": "/assets/marrakech.jpg",
+        "size": 38,
+        "beds": "1 king bed and 1 sofa bed",
+        "sleeps": 3,
+        "price": 342,
+        "refundable": true,
+        "breakfast": true,
+        "inventory": 2,
+        "features": [
+          "Courtyard view",
+          "Separate sitting area",
+          "Bathtub",
+          "Nespresso machine",
+          "Free WiFi"
+        ]
+      },
+      {
+        "id": "loft",
+        "name": "Rooftop Loft Suite",
+        "image": "/assets/property/room-loft.jpg",
+        "size": 46,
+        "beds": "1 king bed and 1 sofa bed",
+        "sleeps": 3,
+        "price": 398,
+        "refundable": true,
+        "breakfast": true,
+        "inventory": 1,
+        "features": [
+          "Castle view",
+          "Private terrace",
+          "Bathtub",
+          "Minibar",
+          "Free WiFi"
+        ]
+      }
+    ],
+    "nearby": [
+      {
+        "group": "What\u0027s nearby",
+        "items": [
+          [
+            "Pra\u00E7a Lu\u00EDs de Cam\u00F5es",
+            "150 m"
+          ],
+          [
+            "Livraria Bertrand",
+            "200 m"
+          ],
+          [
+            "Elevador de Santa Justa",
+            "450 m"
+          ],
+          [
+            "Pra\u00E7a do Com\u00E9rcio",
+            "800 m"
+          ],
+          [
+            "S\u00E3o Jorge Castle",
+            "1.4 km"
+          ]
+        ]
+      },
+      {
+        "group": "Restaurants \u0026 caf\u00E9s",
+        "items": [
+          [
+            "Caf\u00E9 A Brasileira",
+            "120 m"
+          ],
+          [
+            "Manteigaria (past\u00E9is de nata)",
+            "180 m"
+          ],
+          [
+            "Time Out Market",
+            "1.1 km"
+          ]
+        ]
+      },
+      {
+        "group": "Getting around",
+        "items": [
+          [
+            "Tram 28 stop",
+            "100 m"
+          ],
+          [
+            "Baixa-Chiado metro",
+            "300 m"
+          ],
+          [
+            "Cais do Sodr\u00E9 station",
+            "900 m"
+          ],
+          [
+            "Lisbon Airport",
+            "8 km"
+          ]
+        ]
+      }
+    ],
+    "policies": {
+      "checkIn": "From 15:00 to 23:00",
+      "checkOut": "Until 11:00",
+      "children": "Children of any age are welcome. Cots are free for children under 3, on request.",
+      "age": "No age restriction for check-in.",
+      "pets": "Pets are not allowed.",
+      "quiet": "Quiet hours run from 22:00 to 07:00.",
+      "payment": "Visa, Mastercard and American Express. You pay at the property.",
+      "minNights": 1
+    }
+  },
+  {
+    "id": "screens",
+    "name": "House of Paper Screens",
+    "type": "Hotel",
+    "stars": 3,
+    "address": {
+      "street": "Hanamikoji-dori 118",
+      "area": "Gion",
+      "city": "Kyoto",
+      "postcode": "605-0074",
+      "country": "Japan"
+    },
+    "location": {
+      "lat": 35.003,
+      "lng": 135.775
+    },
+    "score": 9.1,
+    "reviewCount": 143,
+    "scores": {
+      "Staff": 9.4,
+      "Facilities": 8.7,
+      "Cleanliness": 9.5,
+      "Comfort": 9,
+      "Value for money": 8.8,
+      "Location": 9.6,
+      "Free WiFi": 8.6
+    },
+    "summary": "A small hotel with paper screens and a cedar bath down the hall.",
+    "description": [
+      "Eleven rooms in a restored townhouse on Hanamikoji, the lane that runs through the heart of Gion. Paper screens slide back onto a moss garden, and a cedar bathhouse is open to guests every evening.",
+      "Breakfast is a tray of rice, grilled fish and pickles, or eggs and toast if you prefer. The tea room stays open until 22:00."
+    ],
+    "highlights": [
+      {
+        "icon": "pin",
+        "title": "In the middle of Gion",
+        "text": "Yasaka Shrine and the Kamo river are both within a ten-minute walk."
+      },
+      {
+        "icon": "bath",
+        "title": "Cedar bathhouse",
+        "text": "Book a private 40-minute slot at the front desk, free for guests."
+      },
+      {
+        "icon": "garden",
+        "title": "Moss garden",
+        "text": "Every room opens onto the garden or the lane."
+      }
+    ],
+    "popular": [
+      "wifi",
+      "breakfast",
+      "ac",
+      "garden",
+      "bath",
+      "nonsmoking",
+      "desk"
+    ],
+    "gallery": [
+      {
+        "src": "/assets/kyoto.jpg",
+        "alt": "Garden Room with screens open to the trees"
+      },
+      {
+        "src": "/assets/property/room-double.jpg",
+        "alt": "Cedar Room with dark wood panelling"
+      },
+      {
+        "src": "/assets/property/bathroom.jpg",
+        "alt": "The deep bath in the bathhouse"
+      },
+      {
+        "src": "/assets/property/breakfast.jpg",
+        "alt": "Breakfast tray"
+      },
+      {
+        "src": "/assets/property/restaurant.jpg",
+        "alt": "The tea room in the evening"
+      }
+    ],
+    "rooms": [
+      {
+        "id": "garden",
+        "name": "Garden Room",
+        "image": "/assets/kyoto.jpg",
+        "size": 16,
+        "beds": "1 double futon bed",
+        "sleeps": 2,
+        "price": 198,
+        "refundable": true,
+        "breakfast": false,
+        "inventory": 4,
+        "features": [
+          "Garden view",
+          "Air conditioning",
+          "Shared bathhouse",
+          "Free WiFi"
+        ]
+      },
+      {
+        "id": "cedar",
+        "name": "Cedar Room",
+        "image": "/assets/property/room-double.jpg",
+        "size": 20,
+        "beds": "1 double bed",
+        "sleeps": 2,
+        "price": 236,
+        "refundable": true,
+        "breakfast": true,
+        "inventory": 3,
+        "features": [
+          "Lane view",
+          "Private bathroom",
+          "Air conditioning",
+          "Free WiFi"
+        ]
+      }
+    ],
+    "nearby": [
+      {
+        "group": "What\u0027s nearby",
+        "items": [
+          [
+            "Hanamikoji lane",
+            "0 m"
+          ],
+          [
+            "Yasaka Shrine",
+            "550 m"
+          ],
+          [
+            "Kennin-ji Temple",
+            "400 m"
+          ],
+          [
+            "Kamo river",
+            "750 m"
+          ]
+        ]
+      },
+      {
+        "group": "Restaurants \u0026 caf\u00E9s",
+        "items": [
+          [
+            "Gion Kinana",
+            "200 m"
+          ],
+          [
+            "Nishiki Market",
+            "1.3 km"
+          ]
+        ]
+      },
+      {
+        "group": "Getting around",
+        "items": [
+          [
+            "Gion-Shijo station",
+            "650 m"
+          ],
+          [
+            "Kyoto Station",
+            "3.4 km"
+          ],
+          [
+            "Kansai Airport",
+            "97 km"
+          ]
+        ]
+      }
+    ],
+    "policies": {
+      "checkIn": "From 15:00 to 23:00",
+      "checkOut": "Until 11:00",
+      "children": "Children of any age are welcome. Cots are free for children under 3, on request.",
+      "age": "No age restriction for check-in.",
+      "pets": "Pets are not allowed.",
+      "quiet": "Quiet hours run from 22:00 to 07:00.",
+      "payment": "Visa, Mastercard and American Express. You pay at the property.",
+      "minNights": 1
+    }
+  },
+  {
+    "id": "atelier",
+    "name": "The North Atelier",
+    "type": "Apartment",
+    "address": {
+      "street": "J\u00E6gersborggade 21",
+      "area": "N\u00F8rrebro",
+      "city": "Copenhagen",
+      "postcode": "2200",
+      "country": "Denmark"
+    },
+    "location": {
+      "lat": 55.6929,
+      "lng": 12.5491
+    },
+    "score": 8.8,
+    "reviewCount": 97,
+    "scores": {
+      "Staff": 9,
+      "Facilities": 8.6,
+      "Cleanliness": 9.1,
+      "Comfort": 8.8,
+      "Value for money": 8.4,
+      "Location": 9.2,
+      "Free WiFi": 9.3
+    },
+    "summary": "A studio with a work table, a good lamp, and a quiet courtyard.",
+    "description": [
+      "Two studio apartments above a ceramics workshop on J\u00E6gersborggade, one of N\u00F8rrebro\u0027s most loved streets. Each has a full kitchen, a long oak work table and windows over a planted courtyard.",
+      "Check-in is by key code, and the host lives two streets away. Bikes are included, so the lakes and the city centre are ten minutes away."
+    ],
+    "highlights": [
+      {
+        "icon": "workspace",
+        "title": "Made for working",
+        "text": "A two-metre oak table, a proper chair and fibre WiFi."
+      },
+      {
+        "icon": "bike",
+        "title": "Bikes included",
+        "text": "Two city bikes with locks, free for the whole stay."
+      },
+      {
+        "icon": "kitchen",
+        "title": "Full kitchen",
+        "text": "Oven, hob, dishwasher and the good coffee from downstairs."
+      }
+    ],
+    "popular": [
+      "wifi",
+      "kitchen",
+      "workspace",
+      "washer",
+      "bike",
+      "nonsmoking"
+    ],
+    "gallery": [
+      {
+        "src": "/assets/copenhagen.jpg",
+        "alt": "Studio Apartment bedroom with warm lamps"
+      },
+      {
+        "src": "/assets/apartment.jpg",
+        "alt": "Courtyard Studio living area with plants"
+      },
+      {
+        "src": "/assets/property/kitchen.jpg",
+        "alt": "The kitchen"
+      },
+      {
+        "src": "/assets/property/bathroom.jpg",
+        "alt": "The bathroom"
+      }
+    ],
+    "rooms": [
+      {
+        "id": "studio",
+        "name": "Studio Apartment",
+        "image": "/assets/copenhagen.jpg",
+        "size": 32,
+        "beds": "1 double bed",
+        "sleeps": 2,
+        "price": 176,
+        "refundable": true,
+        "breakfast": false,
+        "inventory": 1,
+        "features": [
+          "Full kitchen",
+          "Work table",
+          "Washing machine",
+          "Free WiFi"
+        ]
+      },
+      {
+        "id": "courtyard",
+        "name": "Courtyard Studio",
+        "image": "/assets/apartment.jpg",
+        "size": 36,
+        "beds": "1 double bed",
+        "sleeps": 2,
+        "price": 194,
+        "refundable": true,
+        "breakfast": false,
+        "inventory": 1,
+        "features": [
+          "Courtyard view",
+          "Full kitchen",
+          "Two bikes",
+          "Free WiFi"
+        ]
+      }
+    ],
+    "nearby": [
+      {
+        "group": "What\u0027s nearby",
+        "items": [
+          [
+            "Assistens Cemetery",
+            "300 m"
+          ],
+          [
+            "The Lakes",
+            "1.2 km"
+          ],
+          [
+            "Superkilen park",
+            "900 m"
+          ]
+        ]
+      },
+      {
+        "group": "Restaurants \u0026 caf\u00E9s",
+        "items": [
+          [
+            "Coffee Collective",
+            "50 m"
+          ],
+          [
+            "Meyers Bageri",
+            "120 m"
+          ]
+        ]
+      },
+      {
+        "group": "Getting around",
+        "items": [
+          [
+            "N\u00F8rrebros Runddel metro",
+            "450 m"
+          ],
+          [
+            "Copenhagen Central",
+            "3 km"
+          ],
+          [
+            "Copenhagen Airport",
+            "11 km"
+          ]
+        ]
+      }
+    ],
+    "policies": {
+      "checkIn": "From 16:00, self check-in with a key code",
+      "checkOut": "Until 10:00",
+      "children": "Children are welcome. A travel cot is available on request.",
+      "age": "The main guest must be 21 or older.",
+      "pets": "Small pets are allowed on request, free of charge.",
+      "quiet": "No parties or events. Quiet hours run from 22:00 to 08:00.",
+      "payment": "Visa and Mastercard. You pay at the property.",
+      "minNights": 1
+    }
+  },
+  {
+    "id": "riad",
+    "name": "Riad of Small Doors",
+    "type": "Villa",
+    "address": {
+      "street": "Derb Sidi Bouloukat 9",
+      "area": "Medina",
+      "city": "Marrakech",
+      "postcode": "40000",
+      "country": "Morocco"
+    },
+    "location": {
+      "lat": 31.6295,
+      "lng": -7.989
+    },
+    "score": 9.6,
+    "reviewCount": 221,
+    "scores": {
+      "Staff": 9.8,
+      "Facilities": 9.3,
+      "Cleanliness": 9.6,
+      "Comfort": 9.5,
+      "Value for money": 9.5,
+      "Location": 9.4,
+      "Free WiFi": 8.7
+    },
+    "summary": "A whole riad: four small doors, one orange tree, a roof for breakfast.",
+    "description": [
+      "The whole riad is yours: three bedrooms around a tiled courtyard with an orange tree, a salon with a fireplace and a roof terrace looking over the Medina to the Atlas mountains.",
+      "Fatima, who looks after the house, meets you at the square and walks you in. Breakfast on the roof can be added to your stay, and she will cook dinner on request."
+    ],
+    "highlights": [
+      {
+        "icon": "home",
+        "title": "The whole house",
+        "text": "Three bedrooms, two bathrooms and the courtyard, never shared."
+      },
+      {
+        "icon": "terrace",
+        "title": "Roof terrace",
+        "text": "Breakfast with a view over the Medina to the Atlas mountains."
+      },
+      {
+        "icon": "pin",
+        "title": "Five minutes to the square",
+        "text": "Jemaa el-Fnaa is a short walk through the souks."
+      }
+    ],
+    "popular": [
+      "wifi",
+      "breakfast",
+      "terrace",
+      "ac",
+      "family",
+      "kitchen"
+    ],
+    "gallery": [
+      {
+        "src": "/assets/marrakech.jpg",
+        "alt": "The salon with a sofa and the main bedroom beyond"
+      },
+      {
+        "src": "/assets/porto.jpg",
+        "alt": "Loungers on the roof terrace"
+      },
+      {
+        "src": "/assets/property/bedroom.jpg",
+        "alt": "The second bedroom"
+      },
+      {
+        "src": "/assets/property/breakfast.jpg",
+        "alt": "Breakfast on the roof"
+      },
+      {
+        "src": "/assets/property/bathroom.jpg",
+        "alt": "A bathroom with a tadelakt bath"
+      }
+    ],
+    "rooms": [
+      {
+        "id": "riad",
+        "name": "Whole riad, room only",
+        "image": "/assets/marrakech.jpg",
+        "size": 160,
+        "beds": "2 double beds and 2 single beds",
+        "sleeps": 5,
+        "price": 164,
+        "refundable": true,
+        "breakfast": false,
+        "inventory": 1,
+        "features": [
+          "3 bedrooms",
+          "2 bathrooms",
+          "Roof terrace",
+          "Full kitchen"
+        ]
+      },
+      {
+        "id": "riad-breakfast",
+        "name": "Whole riad with breakfast",
+        "image": "/assets/property/breakfast.jpg",
+        "size": 160,
+        "beds": "2 double beds and 2 single beds",
+        "sleeps": 5,
+        "price": 188,
+        "refundable": true,
+        "breakfast": true,
+        "inventory": 1,
+        "features": [
+          "3 bedrooms",
+          "Breakfast on the roof",
+          "Airport pick-up",
+          "Full kitchen"
+        ]
+      }
+    ],
+    "nearby": [
+      {
+        "group": "What\u0027s nearby",
+        "items": [
+          [
+            "Jemaa el-Fnaa",
+            "500 m"
+          ],
+          [
+            "Le Jardin Secret",
+            "650 m"
+          ],
+          [
+            "Bahia Palace",
+            "1.6 km"
+          ],
+          [
+            "Jardin Majorelle",
+            "2.8 km"
+          ]
+        ]
+      },
+      {
+        "group": "Restaurants \u0026 caf\u00E9s",
+        "items": [
+          [
+            "Caf\u00E9 des \u00C9pices",
+            "350 m"
+          ],
+          [
+            "Nomad",
+            "380 m"
+          ]
+        ]
+      },
+      {
+        "group": "Getting around",
+        "items": [
+          [
+            "Taxi rank at Bab Doukkala",
+            "700 m"
+          ],
+          [
+            "Marrakech station",
+            "3.5 km"
+          ],
+          [
+            "Marrakech Menara Airport",
+            "6 km"
+          ]
+        ]
+      }
+    ],
+    "policies": {
+      "checkIn": "From 15:00, the host meets you at the door",
+      "checkOut": "Until 11:00",
+      "children": "Children of any age are welcome. The whole house is yours.",
+      "age": "The main guest must be 25 or older.",
+      "pets": "Pets are not allowed.",
+      "quiet": "No parties or events. Neighbours are close.",
+      "payment": "Visa and Mastercard, or bank transfer before arrival.",
+      "minNights": 2
+    }
+  },
+  {
+    "id": "orchard",
+    "name": "Cliff Orchard",
+    "type": "Resort",
+    "stars": 5,
+    "address": {
+      "street": "Via Pietro Capuano 28",
+      "area": "Above the port",
+      "city": "Amalfi",
+      "postcode": "84011",
+      "country": "Italy"
+    },
+    "location": {
+      "lat": 40.634,
+      "lng": 14.6027
+    },
+    "score": 9.3,
+    "reviewCount": 118,
+    "scores": {
+      "Staff": 9.5,
+      "Facilities": 9.4,
+      "Cleanliness": 9.4,
+      "Comfort": 9.3,
+      "Value for money": 8.5,
+      "Location": 9.2,
+      "Free WiFi": 8.9
+    },
+    "summary": "A lemon-scented resort on the cliff path, with the port below.",
+    "description": [
+      "Cliff Orchard spreads down a terraced lemon grove above Amalfi\u0027s port. Every suite has a terrace, and the pool sits on the lowest terrace with the sea beneath it.",
+      "The restaurant cooks from the garden, the spa uses the grove\u0027s lemons, and a shuttle runs to the beach and the port every half hour."
+    ],
+    "highlights": [
+      {
+        "icon": "pool",
+        "title": "Pool over the sea",
+        "text": "Heated from April to October, with loungers on two terraces."
+      },
+      {
+        "icon": "view",
+        "title": "A terrace for every suite",
+        "text": "All suites face the sea or the lemon grove."
+      },
+      {
+        "icon": "shuttle",
+        "title": "Beach shuttle",
+        "text": "Free every 30 minutes to the port and the private beach."
+      }
+    ],
+    "popular": [
+      "pool",
+      "spa",
+      "restaurant",
+      "breakfast",
+      "view",
+      "parking",
+      "wifi",
+      "shuttle"
+    ],
+    "gallery": [
+      {
+        "src": "/assets/amalfi.jpg",
+        "alt": "The pool surrounded by palms and mountains"
+      },
+      {
+        "src": "/assets/resort.jpg",
+        "alt": "The resort and pool at dusk"
+      },
+      {
+        "src": "/assets/oaxaca.jpg",
+        "alt": "The lower pool terrace with loungers"
+      },
+      {
+        "src": "/assets/property/pool-deck.jpg",
+        "alt": "The pool deck in the morning"
+      },
+      {
+        "src": "/assets/property/room-loft.jpg",
+        "alt": "Sea View Suite"
+      },
+      {
+        "src": "/assets/property/dining.jpg",
+        "alt": "Dinner at the garden restaurant"
+      }
+    ],
+    "rooms": [
+      {
+        "id": "garden",
+        "name": "Garden Suite",
+        "image": "/assets/property/bedroom.jpg",
+        "size": 34,
+        "beds": "1 king bed",
+        "sleeps": 2,
+        "price": 310,
+        "refundable": true,
+        "breakfast": true,
+        "inventory": 4,
+        "features": [
+          "Lemon grove view",
+          "Private terrace",
+          "Bathtub",
+          "Free WiFi"
+        ]
+      },
+      {
+        "id": "sea",
+        "name": "Sea View Suite",
+        "image": "/assets/property/room-loft.jpg",
+        "size": 42,
+        "beds": "1 king bed and 1 sofa bed",
+        "sleeps": 3,
+        "price": 368,
+        "refundable": true,
+        "breakfast": true,
+        "inventory": 3,
+        "features": [
+          "Sea view",
+          "Private terrace",
+          "Bathtub",
+          "Minibar"
+        ]
+      },
+      {
+        "id": "pool",
+        "name": "Cliff Pool Suite",
+        "image": "/assets/resort.jpg",
+        "size": 55,
+        "beds": "1 king bed and 1 sofa bed",
+        "sleeps": 3,
+        "price": 455,
+        "refundable": false,
+        "breakfast": true,
+        "inventory": 1,
+        "features": [
+          "Plunge pool",
+          "Sea view",
+          "Outdoor shower",
+          "Butler service"
+        ]
+      }
+    ],
+    "nearby": [
+      {
+        "group": "What\u0027s nearby",
+        "items": [
+          [
+            "Amalfi Cathedral",
+            "600 m"
+          ],
+          [
+            "Port of Amalfi",
+            "400 m"
+          ],
+          [
+            "Valle delle Ferriere trail",
+            "1.5 km"
+          ]
+        ]
+      },
+      {
+        "group": "Restaurants \u0026 caf\u00E9s",
+        "items": [
+          [
+            "Pasticceria Pansa",
+            "550 m"
+          ],
+          [
+            "Da Gemma",
+            "650 m"
+          ]
+        ]
+      },
+      {
+        "group": "Getting around",
+        "items": [
+          [
+            "Ferry pier",
+            "450 m"
+          ],
+          [
+            "SITA bus stop",
+            "500 m"
+          ],
+          [
+            "Naples Airport",
+            "68 km"
+          ]
+        ]
+      }
+    ],
+    "policies": {
+      "checkIn": "From 15:00 to 22:00",
+      "checkOut": "Until 11:00",
+      "children": "Children of any age are welcome. Extra beds are available in suites that sleep 3.",
+      "age": "No age restriction for check-in.",
+      "pets": "Pets are not allowed.",
+      "quiet": "The pool closes at 20:00. Quiet hours run from 23:00 to 08:00.",
+      "payment": "Visa, Mastercard and American Express. You pay at the property.",
+      "minNights": 1
+    }
+  },
+  {
+    "id": "patio",
+    "name": "Casa del Patio",
+    "type": "Hotel",
+    "stars": 3,
+    "address": {
+      "street": "Calle de Macedonio Alcal\u00E1 407",
+      "area": "Centro",
+      "city": "Oaxaca",
+      "postcode": "68000",
+      "country": "Mexico"
+    },
+    "location": {
+      "lat": 17.0654,
+      "lng": -96.7236
+    },
+    "score": 8.9,
+    "reviewCount": 76,
+    "scores": {
+      "Staff": 9.3,
+      "Facilities": 8.4,
+      "Cleanliness": 9,
+      "Comfort": 8.7,
+      "Value for money": 9.1,
+      "Location": 9.5,
+      "Free WiFi": 8.2
+    },
+    "summary": "A tiled hotel on a patio that stays cool after lunch.",
+    "description": [
+      "Nine tiled rooms open onto a patio of pots and a fountain, on the pedestrian street that runs up to Santo Domingo.",
+      "Breakfast is caf\u00E9 de olla, fresh fruit and tamales. Every rate is non-refundable, which is how the patio keeps its prices low."
+    ],
+    "highlights": [
+      {
+        "icon": "pin",
+        "title": "On the Alcal\u00E1",
+        "text": "The walking street between the Z\u00F3calo and Santo Domingo."
+      },
+      {
+        "icon": "breakfast",
+        "title": "Oaxacan breakfast",
+        "text": "Served on the patio, included in every rate."
+      },
+      {
+        "icon": "garden",
+        "title": "Cool patio",
+        "text": "Shaded by bougainvillea all afternoon."
+      }
+    ],
+    "popular": [
+      "wifi",
+      "breakfast",
+      "garden",
+      "nonsmoking",
+      "desk"
+    ],
+    "gallery": [
+      {
+        "src": "/assets/oaxaca.jpg",
+        "alt": "The patio and pool under a palm-thatched roof"
+      },
+      {
+        "src": "/assets/property/room-twin.jpg",
+        "alt": "Patio Double room"
+      },
+      {
+        "src": "/assets/property/room-classic.jpg",
+        "alt": "Patio Triple room"
+      },
+      {
+        "src": "/assets/property/breakfast.jpg",
+        "alt": "Breakfast on the patio"
+      },
+      {
+        "src": "/assets/property/restaurant.jpg",
+        "alt": "The bar in the evening"
+      }
+    ],
+    "rooms": [
+      {
+        "id": "double",
+        "name": "Patio Double",
+        "image": "/assets/property/room-twin.jpg",
+        "size": 19,
+        "beds": "1 double bed",
+        "sleeps": 2,
+        "price": 132,
+        "refundable": false,
+        "breakfast": true,
+        "inventory": 5,
+        "features": [
+          "Patio view",
+          "Ceiling fan",
+          "Private bathroom",
+          "Free WiFi"
+        ]
+      },
+      {
+        "id": "triple",
+        "name": "Patio Triple",
+        "image": "/assets/property/room-classic.jpg",
+        "size": 24,
+        "beds": "1 double bed and 1 single bed",
+        "sleeps": 3,
+        "price": 158,
+        "refundable": false,
+        "breakfast": true,
+        "inventory": 2,
+        "features": [
+          "Patio view",
+          "Ceiling fan",
+          "Private bathroom",
+          "Free WiFi"
+        ]
+      }
+    ],
+    "nearby": [
+      {
+        "group": "What\u0027s nearby",
+        "items": [
+          [
+            "Templo de Santo Domingo",
+            "350 m"
+          ],
+          [
+            "Z\u00F3calo",
+            "500 m"
+          ],
+          [
+            "Mercado 20 de Noviembre",
+            "800 m"
+          ]
+        ]
+      },
+      {
+        "group": "Restaurants \u0026 caf\u00E9s",
+        "items": [
+          [
+            "Caf\u00E9 Br\u00FAjula",
+            "100 m"
+          ],
+          [
+            "Casa Oaxaca",
+            "300 m"
+          ]
+        ]
+      },
+      {
+        "group": "Getting around",
+        "items": [
+          [
+            "ADO bus station",
+            "1.6 km"
+          ],
+          [
+            "Oaxaca Airport",
+            "10 km"
+          ]
+        ]
+      }
+    ],
+    "policies": {
+      "checkIn": "From 15:00 to 23:00",
+      "checkOut": "Until 11:00",
+      "children": "Children of any age are welcome. Cots are free for children under 3, on request.",
+      "age": "No age restriction for check-in.",
+      "pets": "Pets are not allowed.",
+      "quiet": "Quiet hours run from 22:00 to 07:00.",
+      "payment": "Visa, Mastercard and American Express. You pay at the property.",
+      "minNights": 1
+    }
+  },
+  {
+    "id": "greenhouse",
+    "name": "Greenhouse No. 4",
+    "type": "Apartment",
+    "address": {
+      "street": "Rua de Cedofeita 312",
+      "area": "Cedofeita",
+      "city": "Porto",
+      "postcode": "4050-174",
+      "country": "Portugal"
+    },
+    "location": {
+      "lat": 41.1525,
+      "lng": -8.6195
+    },
+    "score": 9,
+    "reviewCount": 64,
+    "scores": {
+      "Staff": 9.2,
+      "Facilities": 8.8,
+      "Cleanliness": 9.3,
+      "Comfort": 9,
+      "Value for money": 8.9,
+      "Location": 9.1,
+      "Free WiFi": 9
+    },
+    "summary": "A glass-roofed studio two blocks from the bakery you will use.",
+    "description": [
+      "A studio apartment under a glass roof at the back of a nineteenth-century house, with a kitchenette, a reading chair and a roof terrace with a view over Porto.",
+      "Check-in is by key code. The host leaves a map of the neighbourhood and the bakery\u0027s opening hours."
+    ],
+    "highlights": [
+      {
+        "icon": "terrace",
+        "title": "Roof terrace",
+        "text": "Loungers and a view to the hills beyond the city."
+      },
+      {
+        "icon": "kitchen",
+        "title": "Kitchenette",
+        "text": "Two hobs, a fridge and a coffee machine."
+      },
+      {
+        "icon": "pin",
+        "title": "Cedofeita",
+        "text": "Galleries, caf\u00E9s and the bakery all within two blocks."
+      }
+    ],
+    "popular": [
+      "wifi",
+      "kitchen",
+      "terrace",
+      "workspace",
+      "washer"
+    ],
+    "gallery": [
+      {
+        "src": "/assets/porto.jpg",
+        "alt": "The roof terrace with two loungers"
+      },
+      {
+        "src": "/assets/apartment.jpg",
+        "alt": "The living area under the glass roof"
+      },
+      {
+        "src": "/assets/property/kitchen.jpg",
+        "alt": "The kitchenette"
+      },
+      {
+        "src": "/assets/property/bathroom.jpg",
+        "alt": "The bathroom"
+      }
+    ],
+    "rooms": [
+      {
+        "id": "studio",
+        "name": "Glass-roof Studio",
+        "image": "/assets/apartment.jpg",
+        "size": 30,
+        "beds": "1 double bed",
+        "sleeps": 2,
+        "price": 154,
+        "refundable": true,
+        "breakfast": false,
+        "inventory": 1,
+        "features": [
+          "Roof terrace",
+          "Kitchenette",
+          "Washing machine",
+          "Free WiFi"
+        ]
+      }
+    ],
+    "nearby": [
+      {
+        "group": "What\u0027s nearby",
+        "items": [
+          [
+            "Jardins do Pal\u00E1cio de Cristal",
+            "1 km"
+          ],
+          [
+            "Livraria Lello",
+            "800 m"
+          ],
+          [
+            "Cl\u00E9rigos Tower",
+            "900 m"
+          ]
+        ]
+      },
+      {
+        "group": "Restaurants \u0026 caf\u00E9s",
+        "items": [
+          [
+            "Padaria Ribeiro",
+            "200 m"
+          ],
+          [
+            "Caf\u00E9 Majestic",
+            "1.4 km"
+          ]
+        ]
+      },
+      {
+        "group": "Getting around",
+        "items": [
+          [
+            "Lapa metro",
+            "600 m"
+          ],
+          [
+            "S\u00E3o Bento station",
+            "1.3 km"
+          ],
+          [
+            "Porto Airport",
+            "13 km"
+          ]
+        ]
+      }
+    ],
+    "policies": {
+      "checkIn": "From 16:00, self check-in with a key code",
+      "checkOut": "Until 10:00",
+      "children": "Children are welcome. A travel cot is available on request.",
+      "age": "The main guest must be 21 or older.",
+      "pets": "Small pets are allowed on request, free of charge.",
+      "quiet": "No parties or events. Quiet hours run from 22:00 to 08:00.",
+      "payment": "Visa and Mastercard. You pay at the property.",
+      "minNights": 1
+    }
+  },
+  {
+    "id": "gallery",
+    "name": "The Long Gallery",
+    "type": "Villa",
+    "address": {
+      "street": "Victoria Street 14",
+      "area": "Old Town",
+      "city": "Edinburgh",
+      "postcode": "EH1 2HE",
+      "country": "Scotland"
+    },
+    "location": {
+      "lat": 55.9488,
+      "lng": -3.1928
+    },
+    "score": 9.2,
+    "reviewCount": 159,
+    "scores": {
+      "Staff": 9.3,
+      "Facilities": 9,
+      "Cleanliness": 9.2,
+      "Comfort": 9.1,
+      "Value for money": 8.7,
+      "Location": 9.7,
+      "Free WiFi": 8.8
+    },
+    "summary": "A long stone gallery of a house, with a fire and a steep stair.",
+    "description": [
+      "A whole stone house on Victoria Street, with a long gallery room, a working fireplace, two bedrooms and a kitchen. The castle is a five-minute walk uphill.",
+      "Your host leaves logs by the fire and a breakfast hamper if you book the breakfast rate."
+    ],
+    "highlights": [
+      {
+        "icon": "fireplace",
+        "title": "Working fireplace",
+        "text": "Logs are laid ready when you arrive."
+      },
+      {
+        "icon": "home",
+        "title": "The whole house",
+        "text": "Two bedrooms, a long gallery and a kitchen."
+      },
+      {
+        "icon": "pin",
+        "title": "Old Town",
+        "text": "The castle and the Royal Mile are five minutes away."
+      }
+    ],
+    "popular": [
+      "wifi",
+      "fireplace",
+      "kitchen",
+      "washer",
+      "family",
+      "workspace"
+    ],
+    "gallery": [
+      {
+        "src": "/assets/edinburgh.jpg",
+        "alt": "The house and garden pool"
+      },
+      {
+        "src": "/assets/property/house-exterior.jpg",
+        "alt": "The house at night"
+      },
+      {
+        "src": "/assets/property/bedroom.jpg",
+        "alt": "The main bedroom"
+      },
+      {
+        "src": "/assets/apartment.jpg",
+        "alt": "The long gallery living room"
+      },
+      {
+        "src": "/assets/property/kitchen.jpg",
+        "alt": "The kitchen"
+      }
+    ],
+    "rooms": [
+      {
+        "id": "house",
+        "name": "Whole house",
+        "image": "/assets/edinburgh.jpg",
+        "size": 120,
+        "beds": "2 double beds",
+        "sleeps": 4,
+        "price": 208,
+        "refundable": true,
+        "breakfast": false,
+        "inventory": 1,
+        "features": [
+          "2 bedrooms",
+          "Fireplace",
+          "Full kitchen",
+          "Free WiFi"
+        ]
+      },
+      {
+        "id": "house-breakfast",
+        "name": "Whole house with breakfast hamper",
+        "image": "/assets/property/breakfast.jpg",
+        "size": 120,
+        "beds": "2 double beds",
+        "sleeps": 4,
+        "price": 232,
+        "refundable": true,
+        "breakfast": true,
+        "inventory": 1,
+        "features": [
+          "2 bedrooms",
+          "Breakfast hamper",
+          "Fireplace",
+          "Free WiFi"
+        ]
+      }
+    ],
+    "nearby": [
+      {
+        "group": "What\u0027s nearby",
+        "items": [
+          [
+            "Grassmarket",
+            "100 m"
+          ],
+          [
+            "Edinburgh Castle",
+            "450 m"
+          ],
+          [
+            "Royal Mile",
+            "300 m"
+          ],
+          [
+            "National Museum of Scotland",
+            "400 m"
+          ]
+        ]
+      },
+      {
+        "group": "Restaurants \u0026 caf\u00E9s",
+        "items": [
+          [
+            "Mary\u0027s Milk Bar",
+            "150 m"
+          ],
+          [
+            "The Bow Bar",
+            "50 m"
+          ]
+        ]
+      },
+      {
+        "group": "Getting around",
+        "items": [
+          [
+            "Waverley station",
+            "900 m"
+          ],
+          [
+            "Airport tram",
+            "1.1 km"
+          ],
+          [
+            "Edinburgh Airport",
+            "13 km"
+          ]
+        ]
+      }
+    ],
+    "policies": {
+      "checkIn": "From 15:00, the host meets you at the door",
+      "checkOut": "Until 11:00",
+      "children": "Children of any age are welcome. The whole house is yours.",
+      "age": "The main guest must be 25 or older.",
+      "pets": "Pets are not allowed.",
+      "quiet": "No parties or events. Neighbours are close.",
+      "payment": "Visa and Mastercard, or bank transfer before arrival.",
+      "minNights": 2
+    }
+  }
+]

@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Portico.Infrastructure;
+using Portico.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,5 +43,11 @@ app.UseCors("Development");
 app.UseAuthorization();
 
 app.MapControllers();
+
+await using (var scope = app.Services.CreateAsyncScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<PorticoDbContext>();
+    await CatalogSeed.EnsureAsync(db, CancellationToken.None);
+}
 
 app.Run();

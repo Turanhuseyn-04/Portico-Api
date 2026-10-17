@@ -11,19 +11,26 @@ public static class CatalogSeed
 
     public static async Task EnsureAsync(PorticoDbContext db, CancellationToken cancellationToken)
     {
-        if (await db.Properties.AnyAsync(cancellationToken)) return;
+        var stays = ReadStays();
+        if (!await db.Properties.AnyAsync(cancellationToken))
+        {
+            db.Properties.AddRange(stays.Select(ToProperty));
+            await db.SaveChangesAsync(cancellationToken);
+            return;
+        }
 
-        db.Properties.AddRange(Read());
+        if (await db.Reviews.AnyAsync(cancellationToken)) return;
+
+        db.Reviews.AddRange(stays.SelectMany(stay => stay.Reviews.Select(review => ToReview(stay.Id, review))));
         await db.SaveChangesAsync(cancellationToken);
     }
 
-    private static IEnumerable<Property> Read()
+    private static List<CatalogStay> ReadStays()
     {
         using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Portico.Infrastructure.Persistence.catalog.json")
             ?? throw new InvalidOperationException("The stay catalog is missing from the API.");
-        var stays = JsonSerializer.Deserialize<List<CatalogStay>>(stream, Json)
+        return JsonSerializer.Deserialize<List<CatalogStay>>(stream, Json)
             ?? throw new InvalidOperationException("The stay catalog is empty.");
-        return stays.Select(ToProperty);
     }
 
     private static Property ToProperty(CatalogStay stay)
@@ -66,7 +73,26 @@ public static class CatalogSeed
                 Breakfast = room.Breakfast,
                 Inventory = room.Inventory,
                 FeaturesJson = AsJson(room.Features)
-            }).ToList()
+            }).ToList(),
+            Reviews = stay.Reviews.Select(review => ToReview(stay.Id, review)).ToList()
+        };
+    }
+
+    private static Review ToReview(string propertyId, CatalogReview review)
+    {
+        return new Review
+        {
+            PropertyId = propertyId,
+            RoomId = review.RoomId,
+            Author = review.Author,
+            Country = review.Country,
+            Traveller = review.Traveller,
+            Nights = review.Nights,
+            Date = review.Date,
+            Score = review.Score,
+            Title = review.Title,
+            Liked = review.Liked,
+            Disliked = review.Disliked
         };
     }
 
@@ -92,6 +118,21 @@ public static class CatalogSeed
         public List<CatalogNearby> Nearby { get; set; } = [];
         public CatalogPolicies? Policies { get; set; }
         public List<CatalogRoom> Rooms { get; set; } = [];
+        public List<CatalogReview> Reviews { get; set; } = [];
+    }
+
+    private sealed class CatalogReview
+    {
+        public string Author { get; set; } = "";
+        public string Country { get; set; } = "";
+        public string Traveller { get; set; } = "";
+        public string? RoomId { get; set; }
+        public int Nights { get; set; }
+        public DateOnly Date { get; set; }
+        public decimal Score { get; set; }
+        public string Title { get; set; } = "";
+        public string Liked { get; set; } = "";
+        public string Disliked { get; set; } = "";
     }
 
     private sealed class CatalogAddress

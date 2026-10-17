@@ -1,8 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Portico.Application.Accounts;
+using Portico.Application.Messages;
 using Portico.Application.Properties;
 using Portico.Application.Reservations;
+using Portico.Infrastructure.Accounts;
+using Portico.Infrastructure.Messages;
 using Portico.Infrastructure.Persistence;
 using Portico.Infrastructure.Properties;
 using Portico.Infrastructure.Reservations;
@@ -17,6 +21,8 @@ public static class DependencyInjection
             options.UseSqlServer(configuration.GetConnectionString("Portico")));
         services.AddScoped<IPropertyCatalog, PropertyCatalog>();
         services.AddScoped<IReservationBook, ReservationBook>();
+        services.AddScoped<IAccountDirectory, AccountDirectory>();
+        services.AddScoped<IGuestNotes, GuestNotes>();
 
         return services;
     }

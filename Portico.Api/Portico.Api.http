@@ -1,6 +1,6 @@
 @Portico.Api_HostAddress = http://localhost:5125
 
-GET {{Portico.Api_HostAddress}}/weatherforecast/
+GET {{Portico.Api_HostAddress}}/properties
 Accept: application/json
 
 ###

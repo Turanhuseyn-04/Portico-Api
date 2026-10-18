@@ -74,7 +74,7 @@ public class PropertyService : IPropertyService
             property.Score,
             property.ReviewCount,
             property.Summary,
-            Read<List<StayPhoto>>(property.GalleryJson),
+            PhotosOf(property),
             property.Rooms
                 .OrderBy(room => room.Price)
                 .ThenBy(room => room.Id, StringComparer.Ordinal)
@@ -115,7 +115,7 @@ public class PropertyService : IPropertyService
             Read<List<StayHighlight>>(property.HighlightsJson),
             Read<List<string>>(property.PopularJson),
             Read<List<StayAmenityGroup>>(property.AmenityGroupsJson),
-            Read<List<StayPhoto>>(property.GalleryJson),
+            PhotosOf(property),
             property.Rooms
                 .OrderBy(room => room.Price)
                 .ThenBy(room => room.Id, StringComparer.Ordinal)
@@ -180,6 +180,20 @@ public class PropertyService : IPropertyService
         var nights = new List<DateOnly>();
         for (var day = checkIn; day < checkOut; day = day.AddDays(1)) nights.Add(day);
         return nights;
+    }
+
+    private static IReadOnlyList<StayPhoto> PhotosOf(Property property)
+    {
+        if (property.Photos.Count > 0)
+        {
+            return property.Photos
+                .OrderBy(photo => photo.Order)
+                .ThenBy(photo => photo.Id)
+                .Select(photo => new StayPhoto(photo.Src, photo.Alt))
+                .ToArray();
+        }
+
+        return Read<List<StayPhoto>>(property.GalleryJson);
     }
 
     private static StayPolicies ReadPolicies(string? json)

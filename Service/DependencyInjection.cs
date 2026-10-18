@@ -12,6 +12,11 @@ public static class DependencyInjection
         services.AddScoped<IReservationService, ReservationService>();
         services.AddScoped<IAccountService, AccountService>();
         services.AddScoped<IMessageService, MessageService>();
+        services.AddScoped<ISlideService, SlideService>();
+        services.AddScoped<IVideoService, VideoService>();
+        services.AddScoped<IAdminReviewService, AdminReviewService>();
+        services.AddScoped<IAdminPropertyService, AdminPropertyService>();
+        services.AddScoped<IAdminPhotoService, AdminPhotoService>();
         return services;
     }
 }

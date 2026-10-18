@@ -74,6 +74,61 @@ namespace Repository.Migrations
                     b.ToTable("SavedStays");
                 });
 
+            modelBuilder.Entity("Portico.Domain.Content.SiteVideo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Src")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Videos", (string)null);
+                });
+
+            modelBuilder.Entity("Portico.Domain.Content.Slide", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Stays")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Slides");
+                });
+
             modelBuilder.Entity("Portico.Domain.Messages.GuestMessage", b =>
                 {
                     b.Property<int>("Id")
@@ -206,6 +261,39 @@ namespace Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Properties");
+                });
+
+            modelBuilder.Entity("Portico.Domain.Properties.PropertyPhoto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Alt")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PropertyId")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("Src")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PropertyId");
+
+                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("Portico.Domain.Properties.Review", b =>
@@ -462,6 +550,17 @@ namespace Repository.Migrations
                     b.Navigation("Property");
                 });
 
+            modelBuilder.Entity("Portico.Domain.Properties.PropertyPhoto", b =>
+                {
+                    b.HasOne("Portico.Domain.Properties.Property", "Property")
+                        .WithMany("Photos")
+                        .HasForeignKey("PropertyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Property");
+                });
+
             modelBuilder.Entity("Portico.Domain.Properties.Review", b =>
                 {
                     b.HasOne("Portico.Domain.Properties.Property", "Property")
@@ -500,6 +599,8 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Portico.Domain.Properties.Property", b =>
                 {
+                    b.Navigation("Photos");
+
                     b.Navigation("Reviews");
 
                     b.Navigation("Rooms");

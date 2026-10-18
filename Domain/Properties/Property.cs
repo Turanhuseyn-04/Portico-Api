@@ -27,4 +27,5 @@ public class Property
 
     public ICollection<Room> Rooms { get; set; } = new List<Room>();
     public ICollection<Review> Reviews { get; set; } = new List<Review>();
+    public ICollection<PropertyPhoto> Photos { get; set; } = new List<PropertyPhoto>();
 }

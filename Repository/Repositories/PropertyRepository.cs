@@ -20,6 +20,7 @@ public class PropertyRepository : IPropertyRepository
         return await _db.Properties
             .AsNoTracking()
             .Include(property => property.Rooms)
+            .Include(property => property.Photos)
             .ToListAsync(cancellationToken);
     }
 
@@ -29,6 +30,7 @@ public class PropertyRepository : IPropertyRepository
             .AsNoTracking()
             .Include(property => property.Rooms)
             .Include(property => property.Reviews)
+            .Include(property => property.Photos)
             .FirstOrDefaultAsync(property => property.Id == id, cancellationToken);
     }
 
@@ -37,6 +39,7 @@ public class PropertyRepository : IPropertyRepository
         return _db.Properties
             .AsNoTracking()
             .Include(property => property.Rooms)
+            .Include(property => property.Photos)
             .FirstOrDefaultAsync(property => property.Id == id, cancellationToken);
     }
 

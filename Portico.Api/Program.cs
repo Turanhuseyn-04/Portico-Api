@@ -24,7 +24,8 @@ builder.Services.AddCors(options =>
                 Uri.TryCreate(origin, UriKind.Absolute, out var uri)
                 && (uri.Host == "localhost" || uri.Host == "127.0.0.1"))
             .AllowAnyHeader()
-            .AllowAnyMethod();
+            .AllowAnyMethod()
+            .AllowCredentials();
     });
 });
 builder.Services.AddEndpointsApiExplorer();

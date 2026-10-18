@@ -20,6 +20,18 @@ public class AccountRepository : IAccountRepository
         return query.FirstOrDefaultAsync(account => account.Email == email, cancellationToken);
     }
 
+    public async Task<IReadOnlyList<Account>> ListAsync(CancellationToken cancellationToken)
+    {
+        return await _db.Accounts.AsNoTracking()
+            .OrderBy(account => account.Email)
+            .ToListAsync(cancellationToken);
+    }
+
+    public Task<int> CountInRoleAsync(string role, CancellationToken cancellationToken)
+    {
+        return _db.Accounts.CountAsync(account => account.Role == role, cancellationToken);
+    }
+
     public async Task AddAsync(Account account, CancellationToken cancellationToken)
     {
         await _db.Accounts.AddAsync(account, cancellationToken);

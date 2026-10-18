@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Portico.Domain.Accounts;
 using Service.Helpers.DTOs.Admin;
 using Service.Services.Interfaces;
 
 namespace Portico.Api.Controllers.Admin;
 
 [ApiController]
+[Authorize(Roles = AccountRoles.Staff)]
 [Route("admin/properties")]
 public class PropertiesController : ControllerBase
 {

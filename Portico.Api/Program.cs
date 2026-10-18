@@ -1,6 +1,10 @@
+using System.Security.Claims;
 using System.Text.Json;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Portico.Api.Middlewares;
+using Portico.Api.Security;
 using Repository;
 using Repository.Data;
 using Service;
@@ -17,6 +21,49 @@ builder.Services.AddDbContext<PorticoDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Portico")));
 builder.Services.AddRepositoryLayer();
 builder.Services.AddServiceLayer();
+
+// Tokens are signed with Jwt:Key. Without a key of at least 32 characters the API does not start.
+var jwt = builder.Configuration.GetSection("Jwt").Get<JwtOptions>() ?? new JwtOptions();
+if (string.IsNullOrWhiteSpace(jwt.Key) || jwt.Key.Length < 32)
+    throw new InvalidOperationException("Jwt:Key must be set to at least 32 characters.");
+builder.Services.AddSingleton(jwt);
+builder.Services.AddSingleton<TokenService>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.MapInboundClaims = false;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidIssuer = jwt.Issuer,
+            ValidAudience = jwt.Audience,
+            IssuerSigningKey = jwt.SigningKey(),
+            ValidateIssuerSigningKey = true,
+            ClockSkew = TimeSpan.FromMinutes(1),
+            NameClaimType = PorticoClaims.Name,
+            RoleClaimType = PorticoClaims.Role
+        };
+        options.Events = new JwtBearerEvents
+        {
+            // The role comes from the database on every request, so a demotion or a deleted account applies at once.
+            OnTokenValidated = async context =>
+            {
+                var email = context.Principal?.EmailOf();
+                var accounts = context.HttpContext.RequestServices.GetRequiredService<IAccountService>();
+                var role = string.IsNullOrWhiteSpace(email) ? null : await accounts.CurrentRoleAsync(email, context.HttpContext.RequestAborted);
+                if (role is null || context.Principal?.Identity is not ClaimsIdentity identity)
+                {
+                    context.Fail("The account no longer exists.");
+                    return;
+                }
+
+                foreach (var claim in identity.FindAll(PorticoClaims.Role).ToList()) identity.RemoveClaim(claim);
+                identity.AddClaim(new Claim(PorticoClaims.Role, role));
+            }
+        };
+    });
+builder.Services.AddAuthorization();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("Development", policy =>
@@ -40,12 +87,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<AuditMiddleware>();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 
 app.UseCors("Development");
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
@@ -55,16 +104,18 @@ await using (var scope = app.Services.CreateAsyncScope())
     var db = scope.ServiceProvider.GetRequiredService<PorticoDbContext>();
     await CatalogSeed.EnsureAsync(db, CancellationToken.None);
 
-    // The first admin comes from configuration: Admin:Email and Admin:Password, kept in user-secrets in development.
-    var admin = app.Configuration.GetSection("Admin");
-    if (!string.IsNullOrWhiteSpace(admin["Email"]) && !string.IsNullOrWhiteSpace(admin["Password"]))
+    // The first SuperAdmin comes from configuration, kept in user-secrets in development.
+    // SuperAdmin:Email and SuperAdmin:Password are read first; Admin:Email and Admin:Password still work.
+    var seed = app.Configuration.GetSection("SuperAdmin");
+    if (string.IsNullOrWhiteSpace(seed["Email"])) seed = app.Configuration.GetSection("Admin");
+    if (!string.IsNullOrWhiteSpace(seed["Email"]) && !string.IsNullOrWhiteSpace(seed["Password"]))
     {
         var accounts = scope.ServiceProvider.GetRequiredService<IAccountService>();
-        await accounts.EnsureAdminAsync(admin["Name"] ?? "Portico admin", admin["Email"]!, admin["Password"]!, CancellationToken.None);
+        await accounts.EnsureSuperAdminAsync(seed["Name"] ?? "Portico admin", seed["Email"]!, seed["Password"]!, CancellationToken.None);
     }
     else
     {
-        app.Logger.LogWarning("No admin is configured. Set Admin:Email and Admin:Password to create one.");
+        app.Logger.LogWarning("No SuperAdmin is configured. Set SuperAdmin:Email and SuperAdmin:Password to create one.");
     }
 }
 

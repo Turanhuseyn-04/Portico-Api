@@ -31,6 +31,10 @@ public class ExceptionHandlingMiddleware
         {
             await WriteAsync(context, StatusCodes.Status409Conflict, ex.Message);
         }
+        catch (ForbiddenException ex)
+        {
+            await WriteAsync(context, StatusCodes.Status403Forbidden, ex.Message);
+        }
         catch (OperationCanceledException) when (context.RequestAborted.IsCancellationRequested)
         {
         }

@@ -176,6 +176,84 @@ namespace Repository.Migrations
                     b.ToTable("Messages", (string)null);
                 });
 
+            modelBuilder.Entity("Portico.Domain.Platform.AuditEntry", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ActorEmail")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("ActorRole")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Detail")
+                        .HasMaxLength(400)
+                        .HasColumnType("nvarchar(400)");
+
+                    b.Property<string>("Method")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasMaxLength(400)
+                        .HasColumnType("nvarchar(400)");
+
+                    b.Property<int>("StatusCode")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("At");
+
+                    b.ToTable("AuditEntries");
+                });
+
+            modelBuilder.Entity("Portico.Domain.Platform.SiteSetting", b =>
+                {
+                    b.Property<string>("Key")
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasMaxLength(400)
+                        .HasColumnType("nvarchar(400)");
+
+                    b.HasKey("Key");
+
+                    b.ToTable("Settings");
+
+                    b.HasData(
+                        new
+                        {
+                            Key = "SupportPhone",
+                            Value = "+994 55 299 28 03"
+                        },
+                        new
+                        {
+                            Key = "SupportEmail",
+                            Value = "support@portico.az"
+                        },
+                        new
+                        {
+                            Key = "SupportLocation",
+                            Value = "Baku, Azerbaijan"
+                        });
+                });
+
             modelBuilder.Entity("Portico.Domain.Properties.Property", b =>
                 {
                     b.Property<string>("Id")

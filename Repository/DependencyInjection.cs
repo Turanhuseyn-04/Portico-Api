@@ -17,6 +17,8 @@ public static class DependencyInjection
         services.AddScoped<IReviewRepository, ReviewRepository>();
         services.AddScoped<IPropertyPhotoRepository, PropertyPhotoRepository>();
         services.AddScoped<IAdminPropertyRepository, AdminPropertyRepository>();
+        services.AddScoped<ISiteSettingRepository, SiteSettingRepository>();
+        services.AddScoped<IAuditRepository, AuditRepository>();
         return services;
     }
 }

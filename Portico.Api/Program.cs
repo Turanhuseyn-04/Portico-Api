@@ -4,6 +4,7 @@ using Portico.Api.Middlewares;
 using Repository;
 using Repository.Data;
 using Service;
+using Service.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +25,8 @@ builder.Services.AddCors(options =>
                 Uri.TryCreate(origin, UriKind.Absolute, out var uri)
                 && (uri.Host == "localhost" || uri.Host == "127.0.0.1"))
             .AllowAnyHeader()
-            .AllowAnyMethod();
+            .AllowAnyMethod()
+            .AllowCredentials();
     });
 });
 builder.Services.AddEndpointsApiExplorer();
@@ -52,6 +54,18 @@ await using (var scope = app.Services.CreateAsyncScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<PorticoDbContext>();
     await CatalogSeed.EnsureAsync(db, CancellationToken.None);
+
+    // The first admin comes from configuration: Admin:Email and Admin:Password, kept in user-secrets in development.
+    var admin = app.Configuration.GetSection("Admin");
+    if (!string.IsNullOrWhiteSpace(admin["Email"]) && !string.IsNullOrWhiteSpace(admin["Password"]))
+    {
+        var accounts = scope.ServiceProvider.GetRequiredService<IAccountService>();
+        await accounts.EnsureAdminAsync(admin["Name"] ?? "Portico admin", admin["Email"]!, admin["Password"]!, CancellationToken.None);
+    }
+    else
+    {
+        app.Logger.LogWarning("No admin is configured. Set Admin:Email and Admin:Password to create one.");
+    }
 }
 
 app.Run();

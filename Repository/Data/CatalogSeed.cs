@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Portico.Domain.Properties;
+using Portico.Domain.Reservations;
 
 namespace Repository.Data;
 
@@ -16,12 +17,77 @@ public static class CatalogSeed
         {
             db.Properties.AddRange(stays.Select(ToProperty));
             await db.SaveChangesAsync(cancellationToken);
-            return;
+        }
+        else if (!await db.Reviews.AnyAsync(cancellationToken))
+        {
+            db.Reviews.AddRange(stays.SelectMany(stay => stay.Reviews.Select(review => ToReview(stay.Id, review))));
+            await db.SaveChangesAsync(cancellationToken);
         }
 
-        if (await db.Reviews.AnyAsync(cancellationToken)) return;
+        await EnsureSampleReservationAsync(db, cancellationToken);
+        await EnsurePhotosAsync(db, cancellationToken);
+    }
 
-        db.Reviews.AddRange(stays.SelectMany(stay => stay.Reviews.Select(review => ToReview(stay.Id, review))));
+    private static async Task EnsurePhotosAsync(PorticoDbContext db, CancellationToken cancellationToken)
+    {
+        var properties = await db.Properties.Include(property => property.Photos).ToListAsync(cancellationToken);
+        var added = false;
+        foreach (var property in properties)
+        {
+            if (property.Photos.Count > 0) continue;
+            var gallery = JsonSerializer.Deserialize<List<GallerySeed>>(property.GalleryJson, Json) ?? new List<GallerySeed>();
+            var order = 0;
+            foreach (var item in gallery)
+            {
+                if (string.IsNullOrWhiteSpace(item.Src)) continue;
+                property.Photos.Add(new PropertyPhoto
+                {
+                    Src = item.Src,
+                    Alt = item.Alt ?? "",
+                    Order = order
+                });
+                order++;
+                added = true;
+            }
+        }
+
+        if (added) await db.SaveChangesAsync(cancellationToken);
+    }
+
+    private sealed class GallerySeed
+    {
+        public string Src { get; set; } = "";
+        public string? Alt { get; set; }
+    }
+
+    private static async Task EnsureSampleReservationAsync(PorticoDbContext db, CancellationToken cancellationToken)
+    {
+        if (await db.Reservations.AnyAsync(reservation => reservation.Reference == "PT-656069", cancellationToken)) return;
+
+        db.Reservations.Add(new Reservation
+        {
+            Reference = "PT-656069",
+            PropertyId = "marble",
+            PropertyName = "The Marble Court",
+            City = "Lisbon",
+            Country = "Portugal",
+            Area = "Chiado",
+            Image = "/assets/lisbon.jpg",
+            RoomId = "suite",
+            RoomName = "Deluxe Courtyard Suite",
+            CheckIn = new DateOnly(2026, 11, 12),
+            CheckOut = new DateOnly(2026, 11, 15),
+            Refundable = true,
+            Nightly = 342,
+            Total = 1026,
+            Rooms = 1,
+            Adults = 2,
+            Children = 0,
+            Cancelled = false,
+            Refund = 0,
+            Currency = "EUR",
+            Status = "Pending"
+        });
         await db.SaveChangesAsync(cancellationToken);
     }
 

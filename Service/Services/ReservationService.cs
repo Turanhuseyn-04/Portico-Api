@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Portico.Domain.Properties;
 using Portico.Domain.Reservations;
 using Repository.Repositories.Interfaces;
 using Service.Helpers.DTOs.Reservations;
@@ -47,7 +48,7 @@ public class ReservationService : IReservationService
             City = property.City,
             Country = property.Country,
             Area = property.Area,
-            Image = FirstPhoto(property.GalleryJson),
+            Image = FirstPhoto(property),
             RoomId = room.Id,
             RoomName = room.Name,
             CheckIn = request.CheckIn,
@@ -67,9 +68,9 @@ public class ReservationService : IReservationService
         return new ReservationCreated(reference, reservation.Status, total, reservation.Currency);
     }
 
-    public async Task<IReadOnlyList<TripDto>> GetAllAsync(CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<TripDto>> GetAllAsync(string? email, CancellationToken cancellationToken)
     {
-        var rows = await _reservations.ListAsync(cancellationToken);
+        var rows = await _reservations.ListAsync(email?.Trim(), cancellationToken);
         return rows.Select(Map).ToArray();
     }
 
@@ -138,9 +139,11 @@ public class ReservationService : IReservationService
             reservation.Status);
     }
 
-    private static string FirstPhoto(string galleryJson)
+    private static string FirstPhoto(Property property)
     {
-        var photos = JsonSerializer.Deserialize<List<GalleryPhoto>>(galleryJson, Json);
+        var photo = property.Photos.OrderBy(item => item.Order).ThenBy(item => item.Id).FirstOrDefault();
+        if (photo is not null) return photo.Src;
+        var photos = JsonSerializer.Deserialize<List<GalleryPhoto>>(property.GalleryJson, Json);
         return photos?.FirstOrDefault()?.Src ?? "";
     }
 

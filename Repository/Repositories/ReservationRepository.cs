@@ -14,10 +14,11 @@ public class ReservationRepository : IReservationRepository
         _db = db;
     }
 
-    public async Task<IReadOnlyList<Reservation>> ListAsync(CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<Reservation>> ListAsync(string? email, CancellationToken cancellationToken)
     {
-        return await _db.Reservations
-            .AsNoTracking()
+        var query = _db.Reservations.AsNoTracking();
+        if (!string.IsNullOrWhiteSpace(email)) query = query.Where(reservation => reservation.Email == email);
+        return await query
             .OrderBy(reservation => reservation.CheckIn)
             .ThenBy(reservation => reservation.Reference)
             .ToListAsync(cancellationToken);

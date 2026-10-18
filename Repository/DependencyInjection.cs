@@ -12,6 +12,11 @@ public static class DependencyInjection
         services.AddScoped<IReservationRepository, ReservationRepository>();
         services.AddScoped<IAccountRepository, AccountRepository>();
         services.AddScoped<IMessageRepository, MessageRepository>();
+        services.AddScoped<ISlideRepository, SlideRepository>();
+        services.AddScoped<IVideoRepository, VideoRepository>();
+        services.AddScoped<IReviewRepository, ReviewRepository>();
+        services.AddScoped<IPropertyPhotoRepository, PropertyPhotoRepository>();
+        services.AddScoped<IAdminPropertyRepository, AdminPropertyRepository>();
         return services;
     }
 }

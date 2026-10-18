@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Portico.Domain.Accounts;
+using Portico.Domain.Content;
 using Portico.Domain.Messages;
 using Portico.Domain.Properties;
 using Portico.Domain.Reservations;
@@ -20,6 +21,9 @@ public class PorticoDbContext : DbContext
     public DbSet<Account> Accounts => Set<Account>();
     public DbSet<SavedStay> SavedStays => Set<SavedStay>();
     public DbSet<GuestMessage> Messages => Set<GuestMessage>();
+    public DbSet<Slide> Slides => Set<Slide>();
+    public DbSet<SiteVideo> Videos => Set<SiteVideo>();
+    public DbSet<PropertyPhoto> Photos => Set<PropertyPhoto>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -97,6 +101,8 @@ public class PorticoDbContext : DbContext
             entity.HasIndex(account => account.Email).IsUnique();
             entity.Property(account => account.Name).HasMaxLength(120);
             entity.Property(account => account.Email).HasMaxLength(256);
+            entity.Property(account => account.PasswordHash).HasMaxLength(512);
+            entity.Property(account => account.Role).HasMaxLength(20).HasDefaultValue(AccountRoles.Guest);
         });
 
         modelBuilder.Entity<SavedStay>(entity =>
@@ -119,6 +125,30 @@ public class PorticoDbContext : DbContext
             entity.Property(message => message.Email).HasMaxLength(256);
             entity.Property(message => message.Stay).HasMaxLength(160);
             entity.Property(message => message.Body).HasColumnName("Message");
+        });
+
+        modelBuilder.Entity<Slide>(entity =>
+        {
+            entity.Property(slide => slide.City).HasMaxLength(80);
+            entity.Property(slide => slide.Country).HasMaxLength(80);
+            entity.Property(slide => slide.Image).HasMaxLength(300);
+        });
+
+        modelBuilder.Entity<SiteVideo>(entity =>
+        {
+            entity.ToTable("Videos");
+            entity.Property(video => video.Src).HasMaxLength(300);
+        });
+
+        modelBuilder.Entity<PropertyPhoto>(entity =>
+        {
+            entity.Property(photo => photo.PropertyId).HasMaxLength(40);
+            entity.Property(photo => photo.Src).HasMaxLength(300);
+            entity.Property(photo => photo.Alt).HasMaxLength(200);
+            entity.HasOne(photo => photo.Property)
+                .WithMany(property => property.Photos)
+                .HasForeignKey(photo => photo.PropertyId)
+                .OnDelete(DeleteBehavior.Cascade);
         });
     }
 }

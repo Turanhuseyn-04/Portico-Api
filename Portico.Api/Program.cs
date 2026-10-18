@@ -8,6 +8,7 @@ using Portico.Api.Security;
 using Repository;
 using Repository.Data;
 using Service;
+using Service.Helpers.Email;
 using Service.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +29,14 @@ if (string.IsNullOrWhiteSpace(jwt.Key) || jwt.Key.Length < 32)
     throw new InvalidOperationException("Jwt:Key must be set to at least 32 characters.");
 builder.Services.AddSingleton(jwt);
 builder.Services.AddSingleton<TokenService>();
+
+// Confirmation emails go through Email:Smtp when a host is set, otherwise into the Email:PickupDirectory folder.
+var email = builder.Configuration.GetSection("Email").Get<EmailOptions>() ?? new EmailOptions();
+if (string.IsNullOrWhiteSpace(email.ConfirmUrl))
+    throw new InvalidOperationException("Email:ConfirmUrl must point at the Web's confirm-email page.");
+email.PickupDirectory = Path.GetFullPath(email.PickupDirectory, builder.Environment.ContentRootPath);
+builder.Services.AddSingleton(email);
+builder.Services.AddSingleton<IEmailSender, SmtpEmailSender>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

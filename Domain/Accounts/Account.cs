@@ -10,6 +10,11 @@ public class Account
     public string? PasswordHash { get; set; }
     public string Role { get; set; } = AccountRoles.Guest;
 
+    // Sign-in waits until the guest opens the link sent to this address. Only a hash of the link's token is kept.
+    public bool EmailConfirmed { get; set; }
+    public string? ConfirmTokenHash { get; set; }
+    public DateTime? ConfirmTokenExpires { get; set; }
+
     public ICollection<SavedStay> SavedStays { get; set; } = new List<SavedStay>();
 }
 

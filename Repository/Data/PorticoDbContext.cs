@@ -106,6 +106,7 @@ public class PorticoDbContext : DbContext
             entity.Property(account => account.Email).HasMaxLength(256);
             entity.Property(account => account.PasswordHash).HasMaxLength(512);
             entity.Property(account => account.Role).HasMaxLength(20).HasDefaultValue(AccountRoles.Guest);
+            entity.Property(account => account.ConfirmTokenHash).HasMaxLength(64);
         });
 
         modelBuilder.Entity<SiteSetting>(entity =>

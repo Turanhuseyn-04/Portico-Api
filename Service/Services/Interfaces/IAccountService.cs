@@ -4,7 +4,9 @@ namespace Service.Services.Interfaces;
 
 public interface IAccountService
 {
-    Task<AccountProfile> RegisterAsync(AccountRequest request, CancellationToken cancellationToken);
+    Task<Registered> RegisterAsync(AccountRequest request, CancellationToken cancellationToken);
+    Task<AccountProfile> ConfirmEmailAsync(ConfirmEmailRequest request, CancellationToken cancellationToken);
+    Task ResendConfirmationAsync(ResendConfirmationRequest request, CancellationToken cancellationToken);
     Task<AccountProfile?> SignInAsync(SignInRequest request, CancellationToken cancellationToken);
     Task<AccountProfile> GetAsync(string email, CancellationToken cancellationToken);
     Task<IReadOnlyList<string>> ListSavedAsync(string email, CancellationToken cancellationToken);

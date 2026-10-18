@@ -21,10 +21,24 @@ public class AccountController : ControllerBase
         _tokens = tokens;
     }
 
+    // No token here: the account signs in after its email is confirmed.
     [HttpPost("register")]
     public async Task<IActionResult> RegisterAsync(AccountRequest request, CancellationToken cancellationToken)
     {
-        return Ok(_tokens.Issue(await _accounts.RegisterAsync(request, cancellationToken)));
+        return Ok(await _accounts.RegisterAsync(request, cancellationToken));
+    }
+
+    [HttpPost("confirm")]
+    public async Task<IActionResult> ConfirmAsync(ConfirmEmailRequest request, CancellationToken cancellationToken)
+    {
+        return Ok(await _accounts.ConfirmEmailAsync(request, cancellationToken));
+    }
+
+    [HttpPost("confirm/resend")]
+    public async Task<IActionResult> ResendAsync(ResendConfirmationRequest request, CancellationToken cancellationToken)
+    {
+        await _accounts.ResendConfirmationAsync(request, cancellationToken);
+        return Ok(new { sent = true });
     }
 
     [HttpPost("signin")]

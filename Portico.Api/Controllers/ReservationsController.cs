@@ -22,9 +22,9 @@ public class ReservationsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
+    public async Task<IActionResult> GetAllAsync([FromQuery] string? email, CancellationToken cancellationToken)
     {
-        return Ok(await _reservations.GetAllAsync(cancellationToken));
+        return Ok(await _reservations.GetAllAsync(email, cancellationToken));
     }
 
     [HttpGet("{reference}")]

@@ -4,12 +4,11 @@ using Service.Services.Interfaces;
 
 namespace Portico.Api.Controllers;
 
+// Portico.Web signs guests in with its own cookie and names the account in the address of each call.
 [ApiController]
 [Route("account")]
 public class AccountController : ControllerBase
 {
-    public const string CookieName = "portico-account";
-
     private readonly IAccountService _accounts;
 
     public AccountController(IAccountService accounts)
@@ -20,56 +19,37 @@ public class AccountController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> RegisterAsync(AccountRequest request, CancellationToken cancellationToken)
     {
-        var profile = await _accounts.RegisterAsync(request.Name, request.Email, cancellationToken);
-        Remember(profile.Email);
-        return Ok(profile);
+        return Ok(await _accounts.RegisterAsync(request, cancellationToken));
     }
 
     [HttpPost("signin")]
     public async Task<IActionResult> SignInAsync(SignInRequest request, CancellationToken cancellationToken)
     {
-        var profile = await _accounts.SignInAsync(request.Email, cancellationToken);
-        if (profile is null) return Unauthorized();
-
-        Remember(profile.Email);
-        return Ok(profile);
+        var profile = await _accounts.SignInAsync(request, cancellationToken);
+        return profile is null ? Unauthorized() : Ok(profile);
     }
 
-    [HttpGet]
-    public async Task<IActionResult> CurrentAsync(CancellationToken cancellationToken)
+    [HttpGet("{email}")]
+    public async Task<IActionResult> GetAsync(string email, CancellationToken cancellationToken)
     {
-        var profile = await _accounts.CurrentAsync(Request.Cookies[CookieName], cancellationToken);
-        return profile is null ? NotFound() : Ok(profile);
+        return Ok(await _accounts.GetAsync(email, cancellationToken));
     }
 
-    [HttpGet("saved")]
-    public async Task<IActionResult> SavedAsync(CancellationToken cancellationToken)
+    [HttpGet("{email}/saved")]
+    public async Task<IActionResult> SavedAsync(string email, CancellationToken cancellationToken)
     {
-        return Ok(await _accounts.ListSavedAsync(Request.Cookies[CookieName], cancellationToken));
+        return Ok(await _accounts.ListSavedAsync(email, cancellationToken));
     }
 
-    [HttpPost("saved/{id}")]
-    public async Task<IActionResult> SaveAsync(string id, CancellationToken cancellationToken)
+    [HttpPost("{email}/saved/{id}")]
+    public async Task<IActionResult> SaveAsync(string email, string id, CancellationToken cancellationToken)
     {
-        return Ok(await _accounts.SaveAsync(Request.Cookies[CookieName], id, cancellationToken));
+        return Ok(await _accounts.SaveAsync(email, id, cancellationToken));
     }
 
-    [HttpDelete("saved/{id}")]
-    public async Task<IActionResult> UnsaveAsync(string id, CancellationToken cancellationToken)
+    [HttpDelete("{email}/saved/{id}")]
+    public async Task<IActionResult> UnsaveAsync(string email, string id, CancellationToken cancellationToken)
     {
-        return Ok(await _accounts.UnsaveAsync(Request.Cookies[CookieName], id, cancellationToken));
-    }
-
-    private void Remember(string email)
-    {
-        Response.Cookies.Append(CookieName, email, new CookieOptions
-        {
-            HttpOnly = true,
-            SameSite = SameSiteMode.Lax,
-            Secure = Request.IsHttps,
-            Path = "/",
-            IsEssential = true,
-            MaxAge = TimeSpan.FromDays(30)
-        });
+        return Ok(await _accounts.UnsaveAsync(email, id, cancellationToken));
     }
 }

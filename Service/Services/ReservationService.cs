@@ -68,9 +68,9 @@ public class ReservationService : IReservationService
         return new ReservationCreated(reference, reservation.Status, total, reservation.Currency);
     }
 
-    public async Task<IReadOnlyList<TripDto>> GetAllAsync(CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<TripDto>> GetAllAsync(string? email, CancellationToken cancellationToken)
     {
-        var rows = await _reservations.ListAsync(cancellationToken);
+        var rows = await _reservations.ListAsync(email?.Trim(), cancellationToken);
         return rows.Select(Map).ToArray();
     }
 

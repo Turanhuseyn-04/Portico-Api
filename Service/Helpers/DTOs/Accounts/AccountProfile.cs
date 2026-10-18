@@ -1,14 +1,16 @@
 namespace Service.Helpers.DTOs.Accounts;
 
-public sealed record AccountProfile(string Name, string Email);
+public sealed record AccountProfile(string Name, string Email, string Role);
 
 public sealed class AccountRequest
 {
     public string Name { get; set; } = "";
     public string Email { get; set; } = "";
+    public string Password { get; set; } = "";
 }
 
 public sealed class SignInRequest
 {
     public string Email { get; set; } = "";
+    public string Password { get; set; } = "";
 }

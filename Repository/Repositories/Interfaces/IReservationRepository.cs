@@ -4,7 +4,7 @@ namespace Repository.Repositories.Interfaces;
 
 public interface IReservationRepository
 {
-    Task<IReadOnlyList<Reservation>> ListAsync(CancellationToken cancellationToken);
+    Task<IReadOnlyList<Reservation>> ListAsync(string? email, CancellationToken cancellationToken);
     Task<Reservation?> FindByReferenceAsync(string reference, bool tracking, CancellationToken cancellationToken);
     Task<bool> ReferenceExistsAsync(string reference, CancellationToken cancellationToken);
     Task AddAsync(Reservation reservation, CancellationToken cancellationToken);

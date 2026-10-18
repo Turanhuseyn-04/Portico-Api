@@ -101,6 +101,8 @@ public class PorticoDbContext : DbContext
             entity.HasIndex(account => account.Email).IsUnique();
             entity.Property(account => account.Name).HasMaxLength(120);
             entity.Property(account => account.Email).HasMaxLength(256);
+            entity.Property(account => account.PasswordHash).HasMaxLength(512);
+            entity.Property(account => account.Role).HasMaxLength(20).HasDefaultValue(AccountRoles.Guest);
         });
 
         modelBuilder.Entity<SavedStay>(entity =>

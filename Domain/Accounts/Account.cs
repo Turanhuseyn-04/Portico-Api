@@ -6,5 +6,15 @@ public class Account
     public string Name { get; set; } = "";
     public string Email { get; set; } = "";
 
+    // Null for accounts made before passwords existed; registering again with the same email sets one.
+    public string? PasswordHash { get; set; }
+    public string Role { get; set; } = AccountRoles.Guest;
+
     public ICollection<SavedStay> SavedStays { get; set; } = new List<SavedStay>();
+}
+
+public static class AccountRoles
+{
+    public const string Guest = "Guest";
+    public const string Admin = "Admin";
 }

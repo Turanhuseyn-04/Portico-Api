@@ -4,3 +4,6 @@
 **/obj/
 *.user
 *.suo
+
+# Confirmation emails written to disk in development
+**/App_Data/mail/

@@ -1,6 +1,6 @@
 namespace Service.Helpers.DTOs.Admin;
 
-public sealed record AccountRowDto(string Name, string Email, string Role, bool HasPassword);
+public sealed record AccountRowDto(string Name, string Email, string Role, bool HasPassword, bool EmailConfirmed);
 
 public sealed class RoleRequest
 {

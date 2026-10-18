@@ -45,5 +45,5 @@ public class AccountAdminService : IAccountAdminService
         return new RoleChanged(Map(account), previous);
     }
 
-    private static AccountRowDto Map(Account account) => new(account.Name, account.Email, account.Role, account.PasswordHash is not null);
+    private static AccountRowDto Map(Account account) => new(account.Name, account.Email, account.Role, account.PasswordHash is not null, account.EmailConfirmed);
 }

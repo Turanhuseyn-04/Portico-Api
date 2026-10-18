@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Portico.Api.Security;
+using Portico.Domain.Accounts;
 using Service.Helpers.DTOs.Reservations;
 using Service.Services.Interfaces;
 
@@ -21,9 +24,13 @@ public class ReservationsController : ControllerBase
         return Ok(await _reservations.CreateAsync(request, cancellationToken));
     }
 
+    // A guest lists their own trips. Every reservation, or another guest's, is for staff.
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetAllAsync([FromQuery] string? email, CancellationToken cancellationToken)
     {
+        var staff = AccountRoles.IsStaff(User.RoleOf());
+        if (string.IsNullOrWhiteSpace(email) ? !staff : !(staff || User.IsSelf(email))) return Forbid();
         return Ok(await _reservations.GetAllAsync(email, cancellationToken));
     }
 

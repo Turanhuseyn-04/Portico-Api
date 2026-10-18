@@ -20,6 +20,9 @@ public static class DependencyInjection
         services.AddScoped<IAdminReviewService, AdminReviewService>();
         services.AddScoped<IAdminPropertyService, AdminPropertyService>();
         services.AddScoped<IAdminPhotoService, AdminPhotoService>();
+        services.AddScoped<IAccountAdminService, AccountAdminService>();
+        services.AddScoped<ISettingService, SettingService>();
+        services.AddScoped<IAuditService, AuditService>();
         return services;
     }
 }

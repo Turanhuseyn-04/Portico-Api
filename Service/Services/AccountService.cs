@@ -104,9 +104,16 @@ public class AccountService : IAccountService
         return Ids(account);
     }
 
-    // The admin from configuration always exists with the Admin role. Its password is set only when it has none,
+    // The current role, read on every API request so a role change applies at once. Null when the account is gone.
+    public async Task<string?> CurrentRoleAsync(string email, CancellationToken cancellationToken)
+    {
+        var account = await _accounts.FindByEmailAsync(email.Trim(), includeSaved: false, cancellationToken);
+        return account?.Role;
+    }
+
+    // The SuperAdmin from configuration always exists with that role. Its password is set only when it has none,
     // so a password changed later is not reset on every start.
-    public async Task EnsureAdminAsync(string name, string email, string password, CancellationToken cancellationToken)
+    public async Task EnsureSuperAdminAsync(string name, string email, string password, CancellationToken cancellationToken)
     {
         var account = await _accounts.FindByEmailAsync(email.Trim(), includeSaved: false, cancellationToken);
         if (account is null)
@@ -115,7 +122,7 @@ public class AccountService : IAccountService
             await _accounts.AddAsync(account, cancellationToken);
         }
 
-        account.Role = AccountRoles.Admin;
+        account.Role = AccountRoles.SuperAdmin;
         if (string.IsNullOrWhiteSpace(account.Name)) account.Name = name.Trim();
         account.PasswordHash ??= _hasher.HashPassword(account, password);
         await _accounts.SaveAsync(cancellationToken);

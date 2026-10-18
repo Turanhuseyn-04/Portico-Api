@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Portico.Domain.Accounts;
 using Service.Helpers.DTOs.Messages;
 using Service.Services.Interfaces;
 
@@ -15,6 +17,8 @@ public class MessagesController : ControllerBase
         _messages = messages;
     }
 
+    // Anyone can send a note from Help; only staff read them.
+    [Authorize(Roles = AccountRoles.Staff)]
     [HttpGet]
     public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
     {

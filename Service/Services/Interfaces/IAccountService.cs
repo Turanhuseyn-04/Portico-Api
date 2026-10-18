@@ -10,5 +10,6 @@ public interface IAccountService
     Task<IReadOnlyList<string>> ListSavedAsync(string email, CancellationToken cancellationToken);
     Task<IReadOnlyList<string>> SaveAsync(string email, string propertyId, CancellationToken cancellationToken);
     Task<IReadOnlyList<string>> UnsaveAsync(string email, string propertyId, CancellationToken cancellationToken);
-    Task EnsureAdminAsync(string name, string email, string password, CancellationToken cancellationToken);
+    Task<string?> CurrentRoleAsync(string email, CancellationToken cancellationToken);
+    Task EnsureSuperAdminAsync(string name, string email, string password, CancellationToken cancellationToken);
 }

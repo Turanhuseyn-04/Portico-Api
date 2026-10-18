@@ -4,6 +4,7 @@ using Portico.Domain.Content;
 using Portico.Domain.Messages;
 using Portico.Domain.Properties;
 using Portico.Domain.Reservations;
+using Portico.Domain.Platform;
 
 namespace Repository.Data;
 
@@ -24,6 +25,8 @@ public class PorticoDbContext : DbContext
     public DbSet<Slide> Slides => Set<Slide>();
     public DbSet<SiteVideo> Videos => Set<SiteVideo>();
     public DbSet<PropertyPhoto> Photos => Set<PropertyPhoto>();
+    public DbSet<SiteSetting> Settings => Set<SiteSetting>();
+    public DbSet<AuditEntry> AuditEntries => Set<AuditEntry>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -103,6 +106,24 @@ public class PorticoDbContext : DbContext
             entity.Property(account => account.Email).HasMaxLength(256);
             entity.Property(account => account.PasswordHash).HasMaxLength(512);
             entity.Property(account => account.Role).HasMaxLength(20).HasDefaultValue(AccountRoles.Guest);
+        });
+
+        modelBuilder.Entity<SiteSetting>(entity =>
+        {
+            entity.HasKey(setting => setting.Key);
+            entity.Property(setting => setting.Key).HasMaxLength(60);
+            entity.Property(setting => setting.Value).HasMaxLength(400);
+            entity.HasData(SiteSettingKeys.Defaults.Select(pair => new SiteSetting { Key = pair.Key, Value = pair.Value }));
+        });
+
+        modelBuilder.Entity<AuditEntry>(entity =>
+        {
+            entity.HasIndex(entry => entry.At);
+            entity.Property(entry => entry.ActorEmail).HasMaxLength(256);
+            entity.Property(entry => entry.ActorRole).HasMaxLength(20);
+            entity.Property(entry => entry.Method).HasMaxLength(10);
+            entity.Property(entry => entry.Path).HasMaxLength(400);
+            entity.Property(entry => entry.Detail).HasMaxLength(400);
         });
 
         modelBuilder.Entity<SavedStay>(entity =>

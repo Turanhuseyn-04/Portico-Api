@@ -35,6 +35,10 @@ public class ExceptionHandlingMiddleware
         {
             await WriteAsync(context, StatusCodes.Status403Forbidden, ex.Message);
         }
+        catch (TooManyRequestsException ex)
+        {
+            await WriteAsync(context, StatusCodes.Status429TooManyRequests, ex.Message);
+        }
         catch (OperationCanceledException) when (context.RequestAborted.IsCancellationRequested)
         {
         }

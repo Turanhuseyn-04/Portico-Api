@@ -18,6 +18,8 @@ public class AccountService : IAccountService
     public const int MinPasswordLength = 8;
     public static readonly TimeSpan ConfirmLinkLifetime = TimeSpan.FromHours(24);
     private static readonly TimeSpan ResendGap = TimeSpan.FromMinutes(1);
+    public const int MaxFailedSignIns = 5;
+    public static readonly TimeSpan LockoutLength = TimeSpan.FromMinutes(15);
 
     private readonly IAccountRepository _accounts;
     private readonly IPropertyRepository _properties;
@@ -43,20 +45,26 @@ public class AccountService : IAccountService
     }
 
     // Creates the account unconfirmed and sends the confirmation link. Sign-in waits until the link is opened.
+    // The answer is the same whether or not the email is registered, so the form cannot be used to find accounts:
+    // the inbox learns what happened, the caller does not.
     public async Task<Registered> RegisterAsync(AccountRequest request, CancellationToken cancellationToken)
     {
-        var name = request.Name.Trim();
-        var email = request.Email.Trim();
+        var name = (request.Name ?? "").Trim();
+        var email = (request.Email ?? "").Trim();
+        var password = request.Password ?? "";
         if (name.Length < 2) throw new BadRequestException("A name of at least 2 letters is required.");
         if (!IsEmail(email)) throw new BadRequestException("A valid email is required.");
-        if (request.Password.Length < MinPasswordLength) throw new BadRequestException($"A password of at least {MinPasswordLength} characters is required.");
+        if (password.Length < MinPasswordLength) throw new BadRequestException($"A password of at least {MinPasswordLength} characters is required.");
 
         var account = await _accounts.FindByEmailAsync(email, includeSaved: false, cancellationToken);
         if (account?.PasswordHash is not null)
         {
-            throw new ConflictException(account.EmailConfirmed
-                ? "An account with this email already exists. Sign in instead."
-                : "This email is registered but not confirmed yet. Use the link in the email, or ask for a new one.");
+            // Confirmed: tell the owner someone tried to register. Not confirmed yet: send a new link, but keep the
+            // password from the first registration, so a stranger cannot swap it before the owner confirms.
+            var sent = account.EmailConfirmed
+                ? await TrySendAsync(AlreadyRegisteredMessage(account), cancellationToken)
+                : await ResendIfDueAsync(account, cancellationToken);
+            return new Registered(name, email, ConfirmationRequired: true, EmailSent: sent);
         }
 
         if (account is null)
@@ -68,31 +76,51 @@ public class AccountService : IAccountService
         // An account from before passwords existed is claimed by registering its email; the confirmation link
         // makes sure only the owner of that inbox can finish the claim.
         account.Name = name;
-        account.PasswordHash = _hasher.HashPassword(account, request.Password);
+        account.PasswordHash = _hasher.HashPassword(account, password);
         account.EmailConfirmed = false;
         var token = IssueConfirmToken(account);
         await _accounts.SaveAsync(cancellationToken);
 
-        var sent = await TrySendConfirmationAsync(account, token, cancellationToken);
-        return new Registered(account.Name, account.Email, ConfirmationRequired: true, EmailSent: sent);
+        var delivered = await TrySendAsync(ConfirmationMessage(account, token), cancellationToken);
+        return new Registered(name, email, ConfirmationRequired: true, EmailSent: delivered);
     }
 
+    // Too many wrong passwords in a row lock sign-in for a while, even with the right password, so a password
+    // cannot be guessed by trying many. A right password resets the count.
     public async Task<AccountProfile?> SignInAsync(SignInRequest request, CancellationToken cancellationToken)
     {
-        var account = await _accounts.FindByEmailAsync(request.Email.Trim(), includeSaved: false, cancellationToken);
+        var account = await _accounts.FindByEmailAsync((request.Email ?? "").Trim(), includeSaved: false, cancellationToken);
         if (account?.PasswordHash is null) return null;
 
-        var result = _hasher.VerifyHashedPassword(account, account.PasswordHash, request.Password);
-        if (result == PasswordVerificationResult.Failed) return null;
+        var now = DateTime.UtcNow;
+        if (account.LockedUntil > now)
+        {
+            var minutes = (int)Math.Ceiling((account.LockedUntil.Value - now).TotalMinutes);
+            throw new TooManyRequestsException($"Too many wrong passwords. Try again in {minutes} minute{(minutes == 1 ? "" : "s")}.");
+        }
+
+        var result = _hasher.VerifyHashedPassword(account, account.PasswordHash, request.Password ?? "");
+        if (result == PasswordVerificationResult.Failed)
+        {
+            account.FailedSignIns++;
+            if (account.FailedSignIns >= MaxFailedSignIns)
+            {
+                account.FailedSignIns = 0;
+                account.LockedUntil = now.Add(LockoutLength);
+            }
+
+            await _accounts.SaveAsync(cancellationToken);
+            return null;
+        }
+
+        account.FailedSignIns = 0;
+        account.LockedUntil = null;
+        if (result == PasswordVerificationResult.SuccessRehashNeeded)
+            account.PasswordHash = _hasher.HashPassword(account, request.Password!);
+        await _accounts.SaveAsync(cancellationToken);
 
         // Checked after the password, so an unconfirmed account is only revealed to someone who knows it.
         if (!account.EmailConfirmed) throw new ForbiddenException("Confirm your email first. We sent a link when you registered.");
-
-        if (result == PasswordVerificationResult.SuccessRehashNeeded)
-        {
-            account.PasswordHash = _hasher.HashPassword(account, request.Password);
-            await _accounts.SaveAsync(cancellationToken);
-        }
 
         return Profile(account);
     }
@@ -122,15 +150,20 @@ public class AccountService : IAccountService
     // A new link replaces the old one, at most once a minute.
     public async Task ResendConfirmationAsync(ResendConfirmationRequest request, CancellationToken cancellationToken)
     {
-        var account = await _accounts.FindByEmailAsync(request.Email.Trim(), includeSaved: false, cancellationToken);
+        var account = await _accounts.FindByEmailAsync((request.Email ?? "").Trim(), includeSaved: false, cancellationToken);
         if (account is null || account.EmailConfirmed || account.PasswordHash is null) return;
+        await ResendIfDueAsync(account, cancellationToken);
+    }
 
+    // Sends a new link unless one went out less than a minute ago. Counts a skipped send as sent, since a link is on its way.
+    private async Task<bool> ResendIfDueAsync(Account account, CancellationToken cancellationToken)
+    {
         var lastSent = account.ConfirmTokenExpires - ConfirmLinkLifetime;
-        if (lastSent > DateTime.UtcNow - ResendGap) return;
+        if (lastSent > DateTime.UtcNow - ResendGap) return true;
 
         var token = IssueConfirmToken(account);
         await _accounts.SaveAsync(cancellationToken);
-        await TrySendConfirmationAsync(account, token, cancellationToken);
+        return await TrySendAsync(ConfirmationMessage(account, token), cancellationToken);
     }
 
     private string IssueConfirmToken(Account account)
@@ -141,17 +174,31 @@ public class AccountService : IAccountService
         return token;
     }
 
-    // A mail server that is down does not undo the registration; the guest can ask for a new link.
-    private async Task<bool> TrySendConfirmationAsync(Account account, string token, CancellationToken cancellationToken)
+    private EmailMessage ConfirmationMessage(Account account, string token)
     {
         var link = $"{_emailOptions.ConfirmUrl}?email={Uri.EscapeDataString(account.Email)}&token={Uri.EscapeDataString(token)}";
         var name = WebUtility.HtmlEncode(account.Name);
         var href = WebUtility.HtmlEncode(link);
-        var message = new EmailMessage(
+        return new EmailMessage(
             account.Email,
             "Confirm your Portico email",
             $"Hello {account.Name},\n\nConfirm your email to start using Portico:\n{link}\n\nThe link works once and ends in 24 hours. If you did not register, ignore this email.\n\nPortico",
             $"<p>Hello {name},</p><p>Confirm your email to start using Portico.</p><p><a href=\"{href}\">Confirm my email</a></p><p>The link works once and ends in 24 hours. If you did not register, ignore this email.</p><p>Portico</p>");
+    }
+
+    private static EmailMessage AlreadyRegisteredMessage(Account account)
+    {
+        var name = WebUtility.HtmlEncode(account.Name);
+        return new EmailMessage(
+            account.Email,
+            "You already have a Portico account",
+            $"Hello {account.Name},\n\nSomeone tried to register a new Portico account with this email. You already have one, so nothing changed. Sign in with this email and your password.\n\nIf this was not you, you can ignore this email.\n\nPortico",
+            $"<p>Hello {name},</p><p>Someone tried to register a new Portico account with this email. You already have one, so nothing changed. Sign in with this email and your password.</p><p>If this was not you, you can ignore this email.</p><p>Portico</p>");
+    }
+
+    // A mail server that is down does not undo the registration; the guest can ask for a new link.
+    private async Task<bool> TrySendAsync(EmailMessage message, CancellationToken cancellationToken)
+    {
         try
         {
             await _email.SendAsync(message, cancellationToken);
@@ -159,7 +206,7 @@ public class AccountService : IAccountService
         }
         catch (Exception ex) when (ex is SmtpException or InvalidOperationException or IOException or UnauthorizedAccessException)
         {
-            _logger.LogError(ex, "The confirmation email for {Email} could not be sent.", account.Email);
+            _logger.LogError(ex, "The email \"{Subject}\" for {Email} could not be sent.", message.Subject, message.To);
             return false;
         }
     }

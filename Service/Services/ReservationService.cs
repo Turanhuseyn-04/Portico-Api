@@ -1,3 +1,5 @@
+using System.Net.Mail;
+using System.Security.Cryptography;
 using System.Text.Json;
 using Portico.Domain.Properties;
 using Portico.Domain.Reservations;
@@ -23,49 +25,78 @@ public class ReservationService : IReservationService
         _catalog = catalog;
     }
 
-    public async Task<ReservationCreated> CreateAsync(StayRequest request, CancellationToken cancellationToken)
+    // The same limits the Web's booking form uses.
+    public const int MaxRooms = 4;
+    public const int MaxAdults = 8;
+    public const int MaxChildren = 6;
+    public const int MaxNights = 30;
+    public const int MaxNameLength = 120;
+
+    // No 0/O or 1/I, so a reference read aloud or copied by hand stays right. 32^10 references cannot be guessed.
+    private const string ReferenceAlphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    private const int ReferenceLength = 10;
+
+    private static DateOnly Today => DateOnly.FromDateTime(DateTime.UtcNow);
+
+    public async Task<ReservationCreated> CreateAsync(StayRequest request, string email, CancellationToken cancellationToken)
     {
+        var name = (request.Name ?? "").Trim();
+        email = (email ?? "").Trim();
         var rooms = request.Rooms < 1 ? 1 : request.Rooms;
         var adults = request.Adults < 1 ? 1 : request.Adults;
-        if (request.CheckOut <= request.CheckIn) throw new NotFoundException("That stay does not exist.");
+        var children = request.Children < 0 ? 0 : request.Children;
+        var nights = request.CheckOut.DayNumber - request.CheckIn.DayNumber;
 
-        var property = await _properties.GetWithRoomsAsync(request.PropertyId, cancellationToken);
-        var room = property?.Rooms.FirstOrDefault(item => item.Id == request.RoomId);
-        if (property is null || room is null) throw new NotFoundException("That stay does not exist.");
+        if (string.IsNullOrWhiteSpace(request.PropertyId) || string.IsNullOrWhiteSpace(request.RoomId)) throw new BadRequestException("Choose a stay and a room.");
+        if (name.Length < 2 || name.Length > MaxNameLength) throw new BadRequestException($"The main guest's name must be 2 to {MaxNameLength} characters.");
+        if (!MailAddress.TryCreate(email, out _)) throw new BadRequestException("A valid email is required.");
+        if (nights < 1) throw new BadRequestException("Check-out must be after check-in.");
+        if (request.CheckIn < Today) throw new BadRequestException("Check-in cannot be in the past.");
+        if (nights > MaxNights) throw new BadRequestException($"Stays can be up to {MaxNights} nights.");
+        if (rooms > MaxRooms) throw new BadRequestException($"A reservation can hold up to {MaxRooms} rooms.");
+        if (adults > MaxAdults) throw new BadRequestException($"A reservation can hold up to {MaxAdults} adults.");
+        if (children > MaxChildren) throw new BadRequestException($"A reservation can hold up to {MaxChildren} children.");
 
-        var offers = await _catalog.AvailabilityAsync(property.Id, request.CheckIn, request.CheckOut, cancellationToken);
-        var offer = offers.FirstOrDefault(item => item.RoomId == room.Id);
-        if (offer is null) throw new NotFoundException("That stay does not exist.");
-        if (offer.Left < rooms) throw new ConflictException("That room was just taken for these dates.");
-
-        var reference = await NextReference(cancellationToken);
-        var total = offer.Nightly * offer.Nights * rooms;
-        var reservation = new Reservation
+        return await _reservations.WithPropertyLockAsync(request.PropertyId, async () =>
         {
-            Reference = reference,
-            PropertyId = property.Id,
-            PropertyName = property.Name,
-            City = property.City,
-            Country = property.Country,
-            Area = property.Area,
-            Image = FirstPhoto(property),
-            RoomId = room.Id,
-            RoomName = room.Name,
-            CheckIn = request.CheckIn,
-            CheckOut = request.CheckOut,
-            Refundable = room.Refundable,
-            Nightly = room.Price,
-            Total = total,
-            Rooms = rooms,
-            Adults = adults,
-            Children = request.Children < 0 ? 0 : request.Children,
-            Name = request.Name.Trim(),
-            Email = request.Email.Trim(),
-            Currency = "EUR",
-            Status = "Pending"
-        };
-        await _reservations.AddAsync(reservation, cancellationToken);
-        return new ReservationCreated(reference, reservation.Status, total, reservation.Currency);
+            var property = await _properties.GetWithRoomsAsync(request.PropertyId, cancellationToken);
+            var room = property?.Rooms.FirstOrDefault(item => item.Id == request.RoomId);
+            if (property is null || room is null) throw new NotFoundException("That stay does not exist.");
+
+            var offers = await _catalog.AvailabilityAsync(property.Id, request.CheckIn, request.CheckOut, cancellationToken);
+            var offer = offers.FirstOrDefault(item => item.RoomId == room.Id);
+            if (offer is null) throw new NotFoundException("That stay does not exist.");
+            if (offer.Left < rooms) throw new ConflictException("That room was just taken for these dates.");
+
+            var reference = await NextReference(cancellationToken);
+            var total = offer.Nightly * offer.Nights * rooms;
+            var reservation = new Reservation
+            {
+                Reference = reference,
+                PropertyId = property.Id,
+                PropertyName = property.Name,
+                City = property.City,
+                Country = property.Country,
+                Area = property.Area,
+                Image = FirstPhoto(property),
+                RoomId = room.Id,
+                RoomName = room.Name,
+                CheckIn = request.CheckIn,
+                CheckOut = request.CheckOut,
+                Refundable = room.Refundable,
+                Nightly = room.Price,
+                Total = total,
+                Rooms = rooms,
+                Adults = adults,
+                Children = children,
+                Name = name,
+                Email = email,
+                Currency = "EUR",
+                Status = "Pending"
+            };
+            await _reservations.AddAsync(reservation, cancellationToken);
+            return new ReservationCreated(reference, reservation.Status, total, reservation.Currency);
+        }, cancellationToken);
     }
 
     public async Task<IReadOnlyList<TripDto>> GetAllAsync(string? email, CancellationToken cancellationToken)
@@ -74,17 +105,16 @@ public class ReservationService : IReservationService
         return rows.Select(Map).ToArray();
     }
 
-    public async Task<TripDto> GetAsync(string reference, CancellationToken cancellationToken)
+    public async Task<TripDto> GetAsync(string reference, string? ownerEmail, CancellationToken cancellationToken)
     {
-        var row = await _reservations.FindByReferenceAsync(reference, tracking: false, cancellationToken);
-        if (row is null) throw new NotFoundException("That reservation does not exist.");
-        return Map(row);
+        return Map(await FindAsync(reference, ownerEmail, tracking: false, cancellationToken));
     }
 
-    public async Task<TripDto> CancelAsync(string reference, CancellationToken cancellationToken)
+    public async Task<TripDto> CancelAsync(string reference, string? ownerEmail, CancellationToken cancellationToken)
     {
-        var row = await _reservations.FindByReferenceAsync(reference, tracking: true, cancellationToken);
-        if (row is null) throw new NotFoundException("That reservation does not exist.");
+        var row = await FindAsync(reference, ownerEmail, tracking: true, cancellationToken);
+        if (row.Cancelled) throw new ConflictException("This reservation is already cancelled.");
+        if (row.CheckIn <= Today) throw new ConflictException("This stay has already started, so it can no longer be cancelled.");
 
         row.Cancelled = true;
         row.Status = "Cancelled";
@@ -93,11 +123,20 @@ public class ReservationService : IReservationService
         return Map(row);
     }
 
+    // Someone else's reservation answers as missing, so a reference cannot be used to find out whether it exists.
+    private async Task<Reservation> FindAsync(string reference, string? ownerEmail, bool tracking, CancellationToken cancellationToken)
+    {
+        var row = await _reservations.FindByReferenceAsync(reference.Trim(), tracking, cancellationToken);
+        if (row is null || (ownerEmail is not null && !string.Equals(row.Email.Trim(), ownerEmail.Trim(), StringComparison.OrdinalIgnoreCase)))
+            throw new NotFoundException("That reservation does not exist.");
+        return row;
+    }
+
     private async Task<string> NextReference(CancellationToken cancellationToken)
     {
         for (var attempt = 0; attempt < 8; attempt++)
         {
-            var reference = $"PT-{Random.Shared.Next(100000, 1000000)}";
+            var reference = "PT-" + RandomNumberGenerator.GetString(ReferenceAlphabet, ReferenceLength);
             if (!await _reservations.ReferenceExistsAsync(reference, cancellationToken)) return reference;
         }
 
@@ -108,7 +147,7 @@ public class ReservationService : IReservationService
     {
         if (!reservation.Refundable) return 0;
         var limit = reservation.CheckIn.AddDays(-3);
-        return DateOnly.FromDateTime(DateTime.Today) <= limit ? reservation.Total : 0;
+        return Today <= limit ? reservation.Total : 0;
     }
 
     private static TripDto Map(Reservation reservation)

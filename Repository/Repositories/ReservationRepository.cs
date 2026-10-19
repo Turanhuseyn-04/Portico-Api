@@ -45,4 +45,21 @@ public class ReservationRepository : IReservationRepository
     {
         return _db.SaveChangesAsync(cancellationToken);
     }
+
+    // An exclusive SQL Server application lock named after the property, released when the transaction ends.
+    // If the work throws, disposing the transaction rolls it back.
+    public async Task<T> WithPropertyLockAsync<T>(string propertyId, Func<Task<T>> work, CancellationToken cancellationToken)
+    {
+        await using var transaction = await _db.Database.BeginTransactionAsync(cancellationToken);
+        var resource = $"portico:reservations:{propertyId}";
+        await _db.Database.ExecuteSqlInterpolatedAsync($"""
+            DECLARE @result int;
+            EXEC @result = sp_getapplock @Resource = {resource}, @LockMode = 'Exclusive', @LockOwner = 'Transaction', @LockTimeout = 10000;
+            IF @result < 0 THROW 51000, 'The property lock could not be taken.', 1;
+            """, cancellationToken);
+
+        var result = await work();
+        await transaction.CommitAsync(cancellationToken);
+        return result;
+    }
 }

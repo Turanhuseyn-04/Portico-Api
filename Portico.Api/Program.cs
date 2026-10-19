@@ -24,9 +24,10 @@ builder.Services.AddRepositoryLayer();
 builder.Services.AddServiceLayer();
 
 // Tokens are signed with Jwt:Key. Without a key of at least 32 characters the API does not start.
+// The key is never committed: in development it lives in user-secrets, elsewhere in the environment (Jwt__Key).
 var jwt = builder.Configuration.GetSection("Jwt").Get<JwtOptions>() ?? new JwtOptions();
 if (string.IsNullOrWhiteSpace(jwt.Key) || jwt.Key.Length < 32)
-    throw new InvalidOperationException("Jwt:Key must be set to at least 32 characters.");
+    throw new InvalidOperationException("Jwt:Key must be set to at least 32 characters. In development run: dotnet user-secrets set Jwt:Key <random value> --project Portico.Api");
 builder.Services.AddSingleton(jwt);
 builder.Services.AddSingleton<TokenService>();
 
@@ -73,14 +74,25 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 builder.Services.AddAuthorization();
 
+// Portico.Web calls the API from its server, so browsers need no CORS. Development allows any localhost page;
+// elsewhere only the origins listed in Cors:Origins, none by default.
+var corsOrigins = builder.Configuration.GetSection("Cors:Origins").Get<string[]>() ?? [];
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("Development", policy =>
+    options.AddPolicy("Portico", policy =>
     {
-        policy.SetIsOriginAllowed(origin =>
+        if (builder.Environment.IsDevelopment())
+        {
+            policy.SetIsOriginAllowed(origin =>
                 Uri.TryCreate(origin, UriKind.Absolute, out var uri)
-                && (uri.Host == "localhost" || uri.Host == "127.0.0.1"))
-            .AllowAnyHeader()
+                && (uri.Host == "localhost" || uri.Host == "127.0.0.1"));
+        }
+        else
+        {
+            policy.WithOrigins(corsOrigins);
+        }
+
+        policy.AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
     });
@@ -101,7 +113,7 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 
-app.UseCors("Development");
+app.UseCors("Portico");
 
 app.UseAuthentication();
 app.UseAuthorization();

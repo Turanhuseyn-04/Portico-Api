@@ -15,6 +15,10 @@ public class Account
     public string? ConfirmTokenHash { get; set; }
     public DateTime? ConfirmTokenExpires { get; set; }
 
+    // Wrong passwords in a row, and when sign-in opens again after too many of them.
+    public int FailedSignIns { get; set; }
+    public DateTime? LockedUntil { get; set; }
+
     public ICollection<SavedStay> SavedStays { get; set; } = new List<SavedStay>();
 }
 

@@ -12,7 +12,9 @@ public class PropertyService : IPropertyService
 {
     private static readonly string[] Order =
     [
-        "marble", "screens", "atelier", "riad", "orchard", "patio", "greenhouse", "gallery"
+        "marble", "screens", "atelier", "riad", "orchard", "patio", "greenhouse", "gallery",
+        "lantern", "terraces", "plaka", "yali", "tilleuls", "palmeraie", "marais", "pergola",
+        "cloister", "arashiyama", "monti", "agave", "rio", "lido", "leith", "foz"
     ];
 
     private static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);

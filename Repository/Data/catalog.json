@@ -1957,5 +1957,805 @@
       "payment": "Visa and Mastercard, or bank transfer before arrival.",
       "minNights": 2
     }
+  },
+  {
+    "id": "lantern",
+    "name": "The Lantern House",
+    "type": "Hotel",
+    "stars": 4,
+    "address": { "street": "Serdar-ı Ekrem Sokak 27", "area": "Galata", "city": "Istanbul", "postcode": "34421", "country": "Turkey" },
+    "location": { "lat": 41.0262, "lng": 28.9741 },
+    "score": 9.2,
+    "reviewCount": 204,
+    "scores": { "Staff": 9.5, "Facilities": 8.9, "Cleanliness": 9.3, "Comfort": 9.1, "Value for money": 8.8, "Location": 9.6, "Free WiFi": 9.0 },
+    "summary": "A tall stone townhouse below the Galata Tower, with a roof that looks across the Golden Horn.",
+    "description": [
+      "The Lantern House fills a narrow 1890s apartment building on Serdar-ı Ekrem, the steep lane that runs down from the Galata Tower. Sixteen rooms climb six floors, each with tall windows, plaster ceilings and copper lamps made in the Grand Bazaar.",
+      "Breakfast is laid out on the roof from 07:00: simit, white cheese, olives, tomatoes and tea in tulip glasses. In the evening the same roof turns into a small bar with a view over the Golden Horn to the mosques of the old city.",
+      "Karaköy, the ferries and the tram are all downhill. İstiklal Avenue is five minutes up the other way."
+    ],
+    "highlights": [
+      { "icon": "pin", "title": "Below the Galata Tower", "text": "Guests rate the location 9.6. The tower, Karaköy and İstiklal are all on foot." },
+      { "icon": "terrace", "title": "Roof over the Golden Horn", "text": "Breakfast and evening drinks with a view to the old city." },
+      { "icon": "breakfast", "title": "Turkish breakfast", "text": "Served on the roof 07:00–10:30, included on selected rooms." }
+    ],
+    "popular": ["wifi", "breakfast", "ac", "terrace", "bar", "elevator", "nonsmoking"],
+    "amenityGroups": [
+      { "name": "Bathroom", "items": ["Private bathroom", "Walk-in shower", "Hammam towels", "Hairdryer"] },
+      { "name": "Bedroom", "items": ["Linen", "Wardrobe", "Blackout curtains", "Air conditioning"] },
+      { "name": "Food & drink", "items": ["Breakfast on the roof", "Roof bar until 23:30", "Tea and coffee in every room"] },
+      { "name": "Services", "items": ["24-hour front desk", "Airport transfer (paid)", "Luggage storage", "Daily housekeeping"] }
+    ],
+    "gallery": [
+      { "src": "/assets/istanbul.jpg", "alt": "The Golden Horn at dusk from the roof" },
+      { "src": "/assets/property/room-classic.jpg", "alt": "Classic Room with a copper lamp" },
+      { "src": "/assets/property/room-superior.jpg", "alt": "Tower View Room with tall windows" },
+      { "src": "/assets/property/breakfast.jpg", "alt": "Turkish breakfast on the roof" },
+      { "src": "/assets/property/bathroom.jpg", "alt": "Marble bathroom with a walk-in shower" },
+      { "src": "/assets/property/restaurant.jpg", "alt": "The roof bar in the evening" }
+    ],
+    "rooms": [
+      { "id": "classic", "name": "Classic Room", "image": "/assets/property/room-classic.jpg", "size": 17, "beds": "1 double bed", "sleeps": 2, "price": 148, "refundable": true, "breakfast": false, "inventory": 6, "features": ["Lane view", "Air conditioning", "Walk-in shower", "Free WiFi"] },
+      { "id": "tower", "name": "Tower View Room", "image": "/assets/property/room-superior.jpg", "size": 22, "beds": "1 king bed", "sleeps": 2, "price": 186, "refundable": true, "breakfast": true, "inventory": 4, "features": ["Galata Tower view", "Air conditioning", "Minibar", "Free WiFi"] },
+      { "id": "horn", "name": "Golden Horn Suite", "image": "/assets/istanbul.jpg", "size": 34, "beds": "1 king bed and 1 sofa bed", "sleeps": 3, "price": 254, "refundable": false, "breakfast": true, "inventory": 2, "features": ["Golden Horn view", "Sitting area", "Bathtub", "Free WiFi"] }
+    ],
+    "nearby": [
+      { "group": "What's nearby", "items": [["Galata Tower", "120 m"], ["İstiklal Avenue", "550 m"], ["Galata Bridge", "900 m"], ["Hagia Sophia", "2.4 km"]] },
+      { "group": "Restaurants & cafés", "items": [["Karaköy Güllüoğlu", "750 m"], ["Galata Kahvesi", "90 m"]] },
+      { "group": "Getting around", "items": [["Karaköy tram stop", "700 m"], ["Şişhane metro", "400 m"], ["Istanbul Airport", "42 km"]] }
+    ],
+    "reviews": [
+      { "author": "Elif K.", "country": "Germany", "traveller": "Couple", "roomId": "tower", "nights": 3, "date": "2026-10-04", "score": 9.4, "title": "The tower from our bed", "liked": "We could see the Galata Tower from the pillow. Breakfast on the roof was the best part of each day.", "disliked": "The lane is very steep with a suitcase." },
+      { "author": "Marco D.", "country": "Italy", "traveller": "Solo traveller", "roomId": "classic", "nights": 4, "date": "2026-09-12", "score": 9.0, "title": "Small room, great base", "liked": "Quiet at night, friendly staff, and everything within walking distance.", "disliked": "The classic room is compact." },
+      { "author": "Grace W.", "country": "United Kingdom", "traveller": "Couple", "roomId": "horn", "nights": 2, "date": "2026-08-21", "score": 9.6, "title": "Worth the suite", "liked": "Watching the ferries cross the Golden Horn from the sofa.", "disliked": "Nothing at all." }
+    ],
+    "policies": { "checkIn": "From 14:00 to 00:00", "checkOut": "Until 12:00", "children": "Children of any age are welcome. Cots are free on request.", "age": "No age restriction for check-in.", "pets": "Pets are not allowed.", "quiet": "Quiet hours run from 23:00 to 07:00.", "payment": "Visa, Mastercard and American Express. You pay at the property.", "minNights": 1 }
+  },
+  {
+    "id": "tilleuls",
+    "name": "Hôtel des Tilleuls",
+    "type": "Hotel",
+    "stars": 4,
+    "address": { "street": "Rue Jacob 19", "area": "Saint-Germain-des-Prés", "city": "Paris", "postcode": "75006", "country": "France" },
+    "location": { "lat": 48.8552, "lng": 2.3343 },
+    "score": 9.0,
+    "reviewCount": 312,
+    "scores": { "Staff": 9.3, "Facilities": 8.7, "Cleanliness": 9.2, "Comfort": 8.9, "Value for money": 8.4, "Location": 9.8, "Free WiFi": 8.9 },
+    "summary": "A Left Bank hotel around a courtyard of lime trees, three streets from the Seine.",
+    "description": [
+      "Hôtel des Tilleuls is a seventeenth-century hôtel particulier on Rue Jacob, built around a cobbled courtyard planted with lime trees. Twenty-four rooms are papered in old toile and furnished from the antique dealers on the same street.",
+      "Breakfast is served in the vaulted cellar or under the trees when the weather allows. The honesty bar in the library stays open all night.",
+      "The Seine, the Louvre and the Luxembourg Gardens are all within fifteen minutes on foot."
+    ],
+    "highlights": [
+      { "icon": "pin", "title": "Saint-Germain on the doorstep", "text": "Guests rate the location 9.8. Cafés, galleries and the Seine are all close." },
+      { "icon": "garden", "title": "Courtyard of lime trees", "text": "A quiet place to sit between the street and the rooms." },
+      { "icon": "bar", "title": "Library honesty bar", "text": "Open all night, with French wine and cognac." }
+    ],
+    "popular": ["wifi", "breakfast", "ac", "garden", "bar", "elevator", "desk", "nonsmoking"],
+    "amenityGroups": [
+      { "name": "Bathroom", "items": ["Private bathroom", "Bathtub or shower", "Hairdryer", "Bathrobes"] },
+      { "name": "Bedroom", "items": ["Linen", "Wardrobe", "Air conditioning", "Soundproofed windows"] },
+      { "name": "Food & drink", "items": ["Breakfast in the cellar", "Honesty bar", "Minibar"] },
+      { "name": "Services", "items": ["24-hour front desk", "Concierge", "Luggage storage", "Daily housekeeping"] }
+    ],
+    "gallery": [
+      { "src": "/assets/hotel.jpg", "alt": "The hotel façade on Rue Jacob" },
+      { "src": "/assets/paris.jpg", "alt": "The Seine five minutes from the hotel" },
+      { "src": "/assets/property/room-twin.jpg", "alt": "Courtyard Twin Room" },
+      { "src": "/assets/property/room-double.jpg", "alt": "Classic Double Room with toile walls" },
+      { "src": "/assets/property/dining.jpg", "alt": "Breakfast in the vaulted cellar" },
+      { "src": "/assets/property/bathroom.jpg", "alt": "Bathroom with a claw-foot bath" }
+    ],
+    "rooms": [
+      { "id": "classic", "name": "Classic Double Room", "image": "/assets/property/room-double.jpg", "size": 15, "beds": "1 double bed", "sleeps": 2, "price": 268, "refundable": true, "breakfast": false, "inventory": 8, "features": ["Street view", "Air conditioning", "Shower", "Free WiFi"] },
+      { "id": "twin", "name": "Courtyard Twin Room", "image": "/assets/property/room-twin.jpg", "size": 19, "beds": "2 single beds", "sleeps": 2, "price": 296, "refundable": true, "breakfast": true, "inventory": 5, "features": ["Courtyard view", "Air conditioning", "Bathtub", "Free WiFi"] },
+      { "id": "junior", "name": "Junior Suite", "image": "/assets/hotel.jpg", "size": 28, "beds": "1 king bed", "sleeps": 3, "price": 384, "refundable": false, "breakfast": true, "inventory": 2, "features": ["Courtyard view", "Sitting area", "Claw-foot bath", "Nespresso machine"] }
+    ],
+    "nearby": [
+      { "group": "What's nearby", "items": [["Saint-Germain-des-Prés church", "300 m"], ["Musée d'Orsay", "800 m"], ["Pont des Arts", "650 m"], ["Luxembourg Gardens", "1.1 km"]] },
+      { "group": "Restaurants & cafés", "items": [["Café de Flore", "350 m"], ["Les Deux Magots", "330 m"]] },
+      { "group": "Getting around", "items": [["Saint-Germain-des-Prés metro", "280 m"], ["Gare du Nord", "4.6 km"], ["Charles de Gaulle Airport", "32 km"]] }
+    ],
+    "reviews": [
+      { "author": "Sophie L.", "country": "Belgium", "traveller": "Couple", "roomId": "twin", "nights": 3, "date": "2026-10-10", "score": 9.2, "title": "Paris as it should be", "liked": "The courtyard was silent at night even though the street outside is busy.", "disliked": "The lift fits one person and a bag." },
+      { "author": "James H.", "country": "United States", "traveller": "Family", "roomId": "junior", "nights": 5, "date": "2026-09-01", "score": 8.8, "title": "Charming and central", "liked": "We walked everywhere. The staff booked us a great bistro.", "disliked": "Breakfast is pricey if not included." },
+      { "author": "Ana M.", "country": "Brazil", "traveller": "Solo traveller", "roomId": "classic", "nights": 2, "date": "2026-07-27", "score": 9.0, "title": "Tiny but perfect", "liked": "The room was small but beautifully done, and the bed was excellent.", "disliked": "Some street noise in the morning." }
+    ],
+    "policies": { "checkIn": "From 15:00", "checkOut": "Until 11:00", "children": "Children of any age are welcome. Extra beds in the Junior Suite only.", "age": "No age restriction for check-in.", "pets": "Small dogs are welcome on request (charges may apply).", "quiet": "Quiet hours run from 22:00 to 07:00.", "payment": "Visa, Mastercard and American Express. Card held at booking.", "minNights": 1 }
+  },
+  {
+    "id": "rio",
+    "name": "Casa sul Rio",
+    "type": "Hotel",
+    "stars": 3,
+    "address": { "street": "Fondamenta della Misericordia 2560", "area": "Cannaregio", "city": "Venice", "postcode": "30121", "country": "Italy" },
+    "location": { "lat": 45.4446, "lng": 12.3333 },
+    "score": 8.9,
+    "reviewCount": 167,
+    "scores": { "Staff": 9.4, "Facilities": 8.5, "Cleanliness": 9.1, "Comfort": 8.8, "Value for money": 9.0, "Location": 9.0, "Free WiFi": 8.3 },
+    "summary": "A family-run canal house in Cannaregio, where Venetians still outnumber visitors.",
+    "description": [
+      "Casa sul Rio is a pink-plastered house on the Misericordia canal, run by the same family for three generations. Nine rooms look over the water or a small walled garden with a fig tree.",
+      "Breakfast comes from the pasticceria two bridges away. In the evening the fondamenta outside fills with locals at the bacari, and the vaporetto stop is a short walk."
+    ],
+    "highlights": [
+      { "icon": "view", "title": "On the canal", "text": "Most rooms look straight over the Rio della Misericordia." },
+      { "icon": "garden", "title": "Walled garden", "text": "A fig tree, a table and a place to read." },
+      { "icon": "pin", "title": "Local Venice", "text": "The bacari of Cannaregio are on the doorstep." }
+    ],
+    "popular": ["wifi", "breakfast", "ac", "garden", "view", "nonsmoking"],
+    "amenityGroups": [
+      { "name": "Bathroom", "items": ["Private bathroom", "Shower", "Hairdryer"] },
+      { "name": "Bedroom", "items": ["Linen", "Wardrobe", "Air conditioning"] },
+      { "name": "Outdoors", "items": ["Walled garden", "Canal-side bench"] },
+      { "name": "Services", "items": ["Front desk 08:00–22:00", "Luggage storage", "Water-taxi booking"] }
+    ],
+    "gallery": [
+      { "src": "/assets/venice.jpg", "alt": "Gondolas on the canal outside the house" },
+      { "src": "/assets/property/room-classic.jpg", "alt": "Garden Room with a wooden floor" },
+      { "src": "/assets/property/room-double.jpg", "alt": "Canal Room with a window over the water" },
+      { "src": "/assets/property/breakfast.jpg", "alt": "Pastries from the pasticceria" },
+      { "src": "/assets/property/bathroom.jpg", "alt": "A bathroom in Venetian terrazzo" }
+    ],
+    "rooms": [
+      { "id": "garden", "name": "Garden Room", "image": "/assets/property/room-classic.jpg", "size": 16, "beds": "1 double bed", "sleeps": 2, "price": 158, "refundable": true, "breakfast": true, "inventory": 4, "features": ["Garden view", "Air conditioning", "Shower", "Free WiFi"] },
+      { "id": "canal", "name": "Canal Room", "image": "/assets/property/room-double.jpg", "size": 18, "beds": "1 double bed", "sleeps": 2, "price": 194, "refundable": true, "breakfast": true, "inventory": 4, "features": ["Canal view", "Air conditioning", "Shower", "Free WiFi"] },
+      { "id": "family", "name": "Family Canal Room", "image": "/assets/venice.jpg", "size": 26, "beds": "1 double bed and 2 single beds", "sleeps": 4, "price": 238, "refundable": false, "breakfast": true, "inventory": 1, "features": ["Canal view", "Air conditioning", "Bathtub", "Free WiFi"] }
+    ],
+    "nearby": [
+      { "group": "What's nearby", "items": [["Madonna dell'Orto", "450 m"], ["Ca' d'Oro", "600 m"], ["Rialto Bridge", "1.2 km"], ["St Mark's Square", "1.8 km"]] },
+      { "group": "Restaurants & cafés", "items": [["Al Timon", "120 m"], ["Pasticceria Dal Mas", "800 m"]] },
+      { "group": "Getting around", "items": [["Orto vaporetto stop", "350 m"], ["Venezia Santa Lucia station", "1.3 km"], ["Marco Polo Airport", "13 km"]] }
+    ],
+    "reviews": [
+      { "author": "Claire P.", "country": "France", "traveller": "Couple", "roomId": "canal", "nights": 3, "date": "2026-10-01", "score": 9.2, "title": "Like staying with family", "liked": "Signora Rossi gave us a hand-drawn list of bacari. We tried every one.", "disliked": "No lift, and the stairs are narrow." },
+      { "author": "Daniel S.", "country": "Israel", "traveller": "Family", "roomId": "family", "nights": 4, "date": "2026-08-09", "score": 8.6, "title": "Real Venice", "liked": "Away from the crowds but still easy to walk to the Rialto.", "disliked": "Air conditioning was a bit loud." },
+      { "author": "Emma T.", "country": "Ireland", "traveller": "Solo traveller", "roomId": "garden", "nights": 2, "date": "2026-06-30", "score": 9.0, "title": "Fig tree breakfast", "liked": "Breakfast in the garden under the fig tree.", "disliked": "The garden room is a little dark." }
+    ],
+    "policies": { "checkIn": "From 14:00 to 22:00", "checkOut": "Until 10:30", "children": "Children of any age are welcome.", "age": "No age restriction for check-in.", "pets": "Pets are not allowed.", "quiet": "Quiet hours run from 22:00 to 07:30.", "payment": "Visa and Mastercard. The Venice tourist tax is paid in cash at the property.", "minNights": 1 }
+  },
+  {
+    "id": "cloister",
+    "name": "The Cloister Rooms",
+    "type": "Hotel",
+    "stars": 3,
+    "address": { "street": "Via della Lungaretta 81", "area": "Trastevere", "city": "Rome", "postcode": "00153", "country": "Italy" },
+    "location": { "lat": 41.8891, "lng": 12.4706 },
+    "score": 9.3,
+    "reviewCount": 258,
+    "scores": { "Staff": 9.6, "Facilities": 8.8, "Cleanliness": 9.5, "Comfort": 9.2, "Value for money": 9.2, "Location": 9.5, "Free WiFi": 8.8 },
+    "summary": "Twelve rooms in a former convent in Trastevere, around a cloister with a well.",
+    "description": [
+      "The Cloister Rooms took over the guest wing of a sixteenth-century convent in Trastevere. Twelve whitewashed rooms open onto an arcaded cloister with a stone well and climbing jasmine.",
+      "The sisters still keep the chapel next door; the hotel keeps the cloister quiet in return. Breakfast is cornetti and espresso at long refectory tables.",
+      "Piazza di Santa Maria in Trastevere is three minutes away, and the river is just beyond."
+    ],
+    "highlights": [
+      { "icon": "garden", "title": "A cloister of your own", "text": "Arcades, jasmine and a well, closed to the street." },
+      { "icon": "pin", "title": "Heart of Trastevere", "text": "Guests rate the location 9.5. The piazza and the Tiber are steps away." },
+      { "icon": "breakfast", "title": "Refectory breakfast", "text": "Cornetti, fruit and espresso from 07:30." }
+    ],
+    "popular": ["wifi", "breakfast", "ac", "garden", "nonsmoking", "desk"],
+    "amenityGroups": [
+      { "name": "Bathroom", "items": ["Private bathroom", "Shower", "Hairdryer", "Toiletries"] },
+      { "name": "Bedroom", "items": ["Linen", "Air conditioning", "Thick stone walls"] },
+      { "name": "Outdoors", "items": ["Cloister garden", "Jasmine pergola"] },
+      { "name": "Services", "items": ["Front desk 07:00–23:00", "Luggage storage", "Daily housekeeping"] }
+    ],
+    "gallery": [
+      { "src": "/assets/rome.jpg", "alt": "Rooftops of Trastevere at sunset" },
+      { "src": "/assets/property/room-twin.jpg", "alt": "Cell Twin Room with whitewashed walls" },
+      { "src": "/assets/property/room-classic.jpg", "alt": "Cloister Double Room" },
+      { "src": "/assets/property/dining.jpg", "alt": "The refectory breakfast tables" },
+      { "src": "/assets/property/bathroom.jpg", "alt": "A stone bathroom" }
+    ],
+    "rooms": [
+      { "id": "cell", "name": "Cell Twin Room", "image": "/assets/property/room-twin.jpg", "size": 14, "beds": "2 single beds", "sleeps": 2, "price": 138, "refundable": true, "breakfast": true, "inventory": 5, "features": ["Cloister view", "Air conditioning", "Shower", "Free WiFi"] },
+      { "id": "cloister", "name": "Cloister Double Room", "image": "/assets/property/room-classic.jpg", "size": 18, "beds": "1 double bed", "sleeps": 2, "price": 164, "refundable": true, "breakfast": true, "inventory": 5, "features": ["Cloister view", "Air conditioning", "Work desk", "Free WiFi"] },
+      { "id": "abbess", "name": "The Abbess's Room", "image": "/assets/rome.jpg", "size": 30, "beds": "1 king bed and 1 single bed", "sleeps": 3, "price": 226, "refundable": false, "breakfast": true, "inventory": 1, "features": ["Rooftop view", "Frescoed ceiling", "Bathtub", "Free WiFi"] }
+    ],
+    "nearby": [
+      { "group": "What's nearby", "items": [["Santa Maria in Trastevere", "200 m"], ["Ponte Sisto", "600 m"], ["Campo de' Fiori", "950 m"], ["Colosseum", "2.6 km"]] },
+      { "group": "Restaurants & cafés", "items": [["Da Enzo al 29", "400 m"], ["Biscottificio Innocenti", "500 m"]] },
+      { "group": "Getting around", "items": [["Tram 8 at Belli", "300 m"], ["Roma Trastevere station", "1.7 km"], ["Fiumicino Airport", "27 km"]] }
+    ],
+    "reviews": [
+      { "author": "Isabel R.", "country": "Spain", "traveller": "Couple", "roomId": "cloister", "nights": 4, "date": "2026-10-15", "score": 9.4, "title": "An oasis in Trastevere", "liked": "Stepping from the noisy street into the silent cloister every evening.", "disliked": "The bathroom is small." },
+      { "author": "Peter N.", "country": "Sweden", "traveller": "Solo traveller", "roomId": "cell", "nights": 3, "date": "2026-09-08", "score": 9.0, "title": "Simple and lovely", "liked": "Spotless, quiet and great value for Rome.", "disliked": "Single beds are narrow." },
+      { "author": "Akira M.", "country": "Japan", "traveller": "Couple", "roomId": "abbess", "nights": 3, "date": "2026-07-22", "score": 9.8, "title": "The frescoed ceiling", "liked": "We lay in bed looking at a 400-year-old ceiling. Unforgettable.", "disliked": "Nothing." }
+    ],
+    "policies": { "checkIn": "From 14:00 to 23:00", "checkOut": "Until 10:30", "children": "Children of any age are welcome.", "age": "No age restriction for check-in.", "pets": "Pets are not allowed.", "quiet": "The cloister is quiet from 22:00 to 08:00.", "payment": "Visa and Mastercard. The Rome city tax is paid at the property.", "minNights": 1 }
+  },
+  {
+    "id": "terraces",
+    "name": "Olive Terraces Resort",
+    "type": "Resort",
+    "stars": 5,
+    "address": { "street": "Leoforos Apollonos 40", "area": "Vouliagmeni", "city": "Athens", "postcode": "166 71", "country": "Greece" },
+    "location": { "lat": 37.8079, "lng": 23.7849 },
+    "score": 9.3,
+    "reviewCount": 274,
+    "scores": { "Staff": 9.5, "Facilities": 9.4, "Cleanliness": 9.4, "Comfort": 9.3, "Value for money": 8.6, "Location": 9.0, "Free WiFi": 8.9 },
+    "summary": "A seaside resort on the Athens Riviera, stepped down a hillside of olive trees to a private cove.",
+    "description": [
+      "Olive Terraces climbs a hillside above Vouliagmeni, half an hour from the Acropolis. Forty suites sit on terraces among old olive trees, each with a balcony over the Saronic Gulf.",
+      "A saltwater pool, a spa carved into the rock and a taverna on the cove make it easy to stay put. A shuttle runs to the city twice a day."
+    ],
+    "highlights": [
+      { "icon": "pool", "title": "Saltwater infinity pool", "text": "Overlooking the bay, with loungers on three levels." },
+      { "icon": "spa", "title": "Spa in the rock", "text": "Steam room, treatments and a cold plunge." },
+      { "icon": "shuttle", "title": "Shuttle to Athens", "text": "Twice a day to Syntagma Square, free for guests." }
+    ],
+    "popular": ["wifi", "breakfast", "pool", "spa", "restaurant", "view", "parking", "shuttle"],
+    "amenityGroups": [
+      { "name": "Bathroom", "items": ["Private bathroom", "Rain shower", "Bathtub", "Bathrobes", "Slippers"] },
+      { "name": "Wellness", "items": ["Spa", "Steam room", "Cold plunge", "Massage (paid)"] },
+      { "name": "Food & drink", "items": ["Seafood taverna", "Pool bar", "Room service"] },
+      { "name": "Outdoors", "items": ["Infinity pool", "Private cove", "Olive terraces"] }
+    ],
+    "gallery": [
+      { "src": "/assets/athens.jpg", "alt": "The Acropolis, half an hour from the resort" },
+      { "src": "/assets/resort.jpg", "alt": "The infinity pool over the bay" },
+      { "src": "/assets/property/pool-deck.jpg", "alt": "Loungers on the pool deck" },
+      { "src": "/assets/property/room-superior.jpg", "alt": "Sea View Suite" },
+      { "src": "/assets/property/restaurant.jpg", "alt": "The taverna on the cove" },
+      { "src": "/assets/property/bathroom.jpg", "alt": "Suite bathroom with a stone bath" }
+    ],
+    "rooms": [
+      { "id": "garden", "name": "Olive Garden Suite", "image": "/assets/property/room-classic.jpg", "size": 36, "beds": "1 king bed", "sleeps": 2, "price": 342, "refundable": true, "breakfast": true, "inventory": 6, "features": ["Garden view", "Balcony", "Rain shower", "Free WiFi"] },
+      { "id": "sea", "name": "Sea View Suite", "image": "/assets/property/room-superior.jpg", "size": 42, "beds": "1 king bed and 1 sofa bed", "sleeps": 3, "price": 418, "refundable": true, "breakfast": true, "inventory": 4, "features": ["Sea view", "Balcony", "Bathtub", "Nespresso machine"] },
+      { "id": "pool", "name": "Pool Villa Suite", "image": "/assets/resort.jpg", "size": 70, "beds": "1 king bed and 2 single beds", "sleeps": 4, "price": 640, "refundable": false, "breakfast": true, "inventory": 2, "features": ["Private plunge pool", "Sea view", "Living room", "Butler service"] }
+    ],
+    "nearby": [
+      { "group": "What's nearby", "items": [["Lake Vouliagmeni", "1.2 km"], ["Astir Beach", "900 m"], ["Temple of Poseidon, Sounion", "42 km"], ["Acropolis", "23 km"]] },
+      { "group": "Restaurants & cafés", "items": [["The resort taverna", "0 m"], ["Vouliagmeni marina cafés", "1.5 km"]] },
+      { "group": "Getting around", "items": [["Resort shuttle to Syntagma", "0 m"], ["Glyfada tram stop", "7 km"], ["Athens Airport", "33 km"]] }
+    ],
+    "reviews": [
+      { "author": "Nikos P.", "country": "Cyprus", "traveller": "Couple", "roomId": "sea", "nights": 5, "date": "2026-10-05", "score": 9.6, "title": "Sunrise over the gulf", "liked": "Coffee on the balcony watching the sun come up over the water.", "disliked": "Dinner at the taverna is expensive." },
+      { "author": "Hannah F.", "country": "Germany", "traveller": "Family", "roomId": "pool", "nights": 7, "date": "2026-08-18", "score": 9.4, "title": "The kids never left the pool", "liked": "Our own plunge pool and the cove for snorkelling.", "disliked": "The shuttle fills up quickly." },
+      { "author": "Raj S.", "country": "India", "traveller": "Couple", "roomId": "garden", "nights": 4, "date": "2026-06-14", "score": 9.0, "title": "Peaceful", "liked": "The olive terraces are beautiful and very quiet.", "disliked": "The garden suite has a partial view only." }
+    ],
+    "policies": { "checkIn": "From 15:00", "checkOut": "Until 12:00", "children": "Children of any age are welcome. Kids' club from 4 to 12.", "age": "No age restriction for check-in.", "pets": "Pets are not allowed.", "quiet": "Quiet hours run from 23:00 to 08:00.", "payment": "Visa, Mastercard and American Express. A deposit is taken at booking.", "minNights": 2 }
+  },
+  {
+    "id": "palmeraie",
+    "name": "Palm Grove Resort",
+    "type": "Resort",
+    "stars": 5,
+    "address": { "street": "Circuit de la Palmeraie", "area": "Palmeraie", "city": "Marrakech", "postcode": "40060", "country": "Morocco" },
+    "location": { "lat": 31.6683, "lng": -7.9712 },
+    "score": 9.1,
+    "reviewCount": 389,
+    "scores": { "Staff": 9.4, "Facilities": 9.2, "Cleanliness": 9.3, "Comfort": 9.2, "Value for money": 8.5, "Location": 8.4, "Free WiFi": 8.8 },
+    "summary": "Pavilions in a palm grove, with a hammam, three pools and the Atlas mountains on the horizon.",
+    "description": [
+      "Palm Grove Resort spreads across twelve acres of the Palmeraie, ten minutes north of the Medina. Pavilions of rammed earth sit among date palms and olive trees, linked by shaded paths.",
+      "There are three pools, a traditional hammam, a tennis court and a restaurant that cooks over wood. A shuttle runs to the Medina every hour."
+    ],
+    "highlights": [
+      { "icon": "pool", "title": "Three pools", "text": "One heated, one for families and one quiet pool for adults." },
+      { "icon": "spa", "title": "Hammam and spa", "text": "A traditional scrub and steam, bookable daily." },
+      { "icon": "shuttle", "title": "Medina shuttle", "text": "Every hour to Jemaa el-Fnaa, free for guests." }
+    ],
+    "popular": ["wifi", "breakfast", "pool", "spa", "restaurant", "parking", "shuttle", "family"],
+    "amenityGroups": [
+      { "name": "Bathroom", "items": ["Private bathroom", "Tadelakt walls", "Bathtub", "Bathrobes"] },
+      { "name": "Wellness", "items": ["Hammam", "Spa", "Fitness room", "Tennis court"] },
+      { "name": "Food & drink", "items": ["Wood-fired restaurant", "Pool bar", "Breakfast buffet"] },
+      { "name": "Outdoors", "items": ["Three pools", "Palm gardens", "Mountain views"] }
+    ],
+    "gallery": [
+      { "src": "/assets/marrakech-city.jpg", "alt": "Marrakech, ten minutes from the resort" },
+      { "src": "/assets/property/pool-deck.jpg", "alt": "The heated pool among the palms" },
+      { "src": "/assets/property/bedroom.jpg", "alt": "Garden Pavilion bedroom" },
+      { "src": "/assets/property/restaurant.jpg", "alt": "The wood-fired restaurant" },
+      { "src": "/assets/property/breakfast.jpg", "alt": "Breakfast on the terrace" }
+    ],
+    "rooms": [
+      { "id": "pavilion", "name": "Garden Pavilion", "image": "/assets/property/bedroom.jpg", "size": 45, "beds": "1 king bed", "sleeps": 2, "price": 296, "refundable": true, "breakfast": true, "inventory": 8, "features": ["Garden view", "Private terrace", "Bathtub", "Free WiFi"] },
+      { "id": "family", "name": "Family Pavilion", "image": "/assets/property/room-twin.jpg", "size": 64, "beds": "1 king bed and 2 single beds", "sleeps": 4, "price": 388, "refundable": true, "breakfast": true, "inventory": 4, "features": ["Two bedrooms", "Private terrace", "Bathtub", "Free WiFi"] },
+      { "id": "atlas", "name": "Atlas Pool Pavilion", "image": "/assets/property/pool-deck.jpg", "size": 90, "beds": "1 king bed", "sleeps": 2, "price": 560, "refundable": false, "breakfast": true, "inventory": 2, "features": ["Private pool", "Atlas view", "Outdoor shower", "Butler service"] }
+    ],
+    "nearby": [
+      { "group": "What's nearby", "items": [["Palmeraie camel rides", "1 km"], ["Jardin Majorelle", "6 km"], ["Jemaa el-Fnaa", "9 km"]] },
+      { "group": "Restaurants & cafés", "items": [["The resort restaurant", "0 m"], ["Nomad", "9 km"]] },
+      { "group": "Getting around", "items": [["Resort shuttle to the Medina", "0 m"], ["Marrakech station", "8 km"], ["Marrakech Menara Airport", "14 km"]] }
+    ],
+    "reviews": [
+      { "author": "Charlotte B.", "country": "France", "traveller": "Family", "roomId": "family", "nights": 6, "date": "2026-10-20", "score": 9.2, "title": "A real holiday", "liked": "The family pool and the shuttle made it easy to do both rest and the Medina.", "disliked": "The buffet gets busy at 09:00." },
+      { "author": "Omar Z.", "country": "United Arab Emirates", "traveller": "Couple", "roomId": "atlas", "nights": 3, "date": "2026-09-14", "score": 9.6, "title": "Our own pool", "liked": "Swimming at sunset with the mountains in the distance.", "disliked": "Nothing." },
+      { "author": "Laura V.", "country": "Netherlands", "traveller": "Couple", "roomId": "pavilion", "nights": 4, "date": "2026-05-09", "score": 8.8, "title": "Very calm", "liked": "The hammam was the best I've had.", "disliked": "Far from the city without the shuttle." }
+    ],
+    "policies": { "checkIn": "From 15:00", "checkOut": "Until 12:00", "children": "Children of any age are welcome. Kids' club from 4 to 12.", "age": "No age restriction for check-in.", "pets": "Pets are not allowed.", "quiet": "The adults' pool is quiet at all times.", "payment": "Visa, Mastercard and American Express. You pay at the property.", "minNights": 2 }
+  },
+  {
+    "id": "arashiyama",
+    "name": "Riverbend Ryokan Resort",
+    "type": "Resort",
+    "stars": 4,
+    "address": { "street": "Sagatenryuji Susukinobaba-cho 12", "area": "Arashiyama", "city": "Kyoto", "postcode": "616-8385", "country": "Japan" },
+    "location": { "lat": 35.0136, "lng": 135.6735 },
+    "score": 9.5,
+    "reviewCount": 196,
+    "scores": { "Staff": 9.7, "Facilities": 9.4, "Cleanliness": 9.7, "Comfort": 9.4, "Value for money": 8.8, "Location": 9.3, "Free WiFi": 8.5 },
+    "summary": "A riverside ryokan resort in Arashiyama, with hot-spring baths and dinner served in your room.",
+    "description": [
+      "Riverbend sits on a bend of the Katsura river in Arashiyama, at the foot of wooded hills. Twenty rooms are laid with tatami and look across the water to the maples.",
+      "Indoor and outdoor hot-spring baths are open until midnight, and a kaiseki dinner of eight courses is served in your room. The bamboo grove is a short walk away, best before 08:00."
+    ],
+    "highlights": [
+      { "icon": "spa", "title": "Hot-spring baths", "text": "Indoor and open-air baths, with private family baths to book." },
+      { "icon": "restaurant", "title": "Kaiseki dinner", "text": "Eight seasonal courses, served in your room." },
+      { "icon": "view", "title": "River and maples", "text": "Every room looks across the Katsura river." }
+    ],
+    "popular": ["wifi", "breakfast", "spa", "restaurant", "view", "garden", "nonsmoking"],
+    "amenityGroups": [
+      { "name": "Bathroom", "items": ["Private bathroom", "Cypress tub", "Yukata", "Toiletries"] },
+      { "name": "Wellness", "items": ["Hot-spring baths", "Private family baths", "Massage (paid)"] },
+      { "name": "Food & drink", "items": ["Kaiseki dinner", "Japanese breakfast", "Tea service"] },
+      { "name": "Outdoors", "items": ["River terrace", "Moss garden"] }
+    ],
+    "gallery": [
+      { "src": "/assets/kyoto-city.jpg", "alt": "Kyoto in autumn" },
+      { "src": "/assets/property/room-double.jpg", "alt": "Tatami room with a river view" },
+      { "src": "/assets/property/bathroom.jpg", "alt": "The cypress tub in a private bath" },
+      { "src": "/assets/property/dining.jpg", "alt": "Kaiseki dinner in the room" },
+      { "src": "/assets/property/breakfast.jpg", "alt": "Japanese breakfast" }
+    ],
+    "rooms": [
+      { "id": "tatami", "name": "River Tatami Room", "image": "/assets/property/room-double.jpg", "size": 28, "beds": "2 futon beds", "sleeps": 2, "price": 362, "refundable": true, "breakfast": true, "inventory": 6, "features": ["River view", "Tatami floor", "Shared hot-spring baths", "Kaiseki dinner"] },
+      { "id": "bath", "name": "Room with Private Hot Spring", "image": "/assets/property/bathroom.jpg", "size": 40, "beds": "2 futon beds and 1 sofa bed", "sleeps": 3, "price": 486, "refundable": true, "breakfast": true, "inventory": 3, "features": ["River view", "Private open-air bath", "Kaiseki dinner", "Free WiFi"] },
+      { "id": "suite", "name": "Maple Suite", "image": "/assets/kyoto-city.jpg", "size": 62, "beds": "2 twin beds and 2 futon beds", "sleeps": 4, "price": 690, "refundable": false, "breakfast": true, "inventory": 1, "features": ["Corner river view", "Private open-air bath", "Living room", "Kaiseki dinner"] }
+    ],
+    "nearby": [
+      { "group": "What's nearby", "items": [["Togetsukyo Bridge", "350 m"], ["Arashiyama bamboo grove", "800 m"], ["Tenryu-ji Temple", "650 m"], ["Monkey Park Iwatayama", "700 m"]] },
+      { "group": "Restaurants & cafés", "items": [["% Arabica Arashiyama", "300 m"], ["Shoraian tofu restaurant", "900 m"]] },
+      { "group": "Getting around", "items": [["Arashiyama station (Randen)", "500 m"], ["Saga-Arashiyama station", "1.2 km"], ["Kansai Airport", "108 km"]] }
+    ],
+    "reviews": [
+      { "author": "Mei L.", "country": "Singapore", "traveller": "Couple", "roomId": "bath", "nights": 2, "date": "2026-10-28", "score": 9.8, "title": "The private bath", "liked": "Soaking in our own hot spring while the river ran below. The dinner was a work of art.", "disliked": "Wish we had stayed longer." },
+      { "author": "Michael C.", "country": "United States", "traveller": "Family", "roomId": "suite", "nights": 3, "date": "2026-09-25", "score": 9.4, "title": "Worth every yen", "liked": "The staff took care of everything, including our kids' dietary needs.", "disliked": "Futons take getting used to." },
+      { "author": "Freya N.", "country": "Norway", "traveller": "Solo traveller", "roomId": "tatami", "nights": 2, "date": "2026-04-03", "score": 9.2, "title": "Early to the bamboo", "liked": "Being able to walk to the bamboo grove before the crowds.", "disliked": "Dinner is at a fixed time." }
+    ],
+    "policies": { "checkIn": "From 15:00 to 19:00 (dinner starts at 18:30)", "checkOut": "Until 11:00", "children": "Children of any age are welcome.", "age": "No age restriction for check-in.", "pets": "Pets are not allowed.", "quiet": "Quiet hours run from 22:00 to 07:00.", "payment": "Visa, Mastercard, JCB and American Express. You pay at the property.", "minNights": 1 }
+  },
+  {
+    "id": "lido",
+    "name": "The Lido Gardens",
+    "type": "Resort",
+    "stars": 5,
+    "address": { "street": "Lungomare Guglielmo Marconi 17", "area": "Lido", "city": "Venice", "postcode": "30126", "country": "Italy" },
+    "location": { "lat": 45.4061, "lng": 12.3698 },
+    "score": 9.0,
+    "reviewCount": 241,
+    "scores": { "Staff": 9.2, "Facilities": 9.1, "Cleanliness": 9.2, "Comfort": 9.1, "Value for money": 8.3, "Location": 8.9, "Free WiFi": 8.6 },
+    "summary": "A Belle Époque beach resort on the Lido, with a private beach and a boat to St Mark's.",
+    "description": [
+      "The Lido Gardens is a restored 1908 seaside hotel facing the Adriatic, with its own stretch of beach and striped cabanas. Gardens of pine and oleander separate it from the road.",
+      "A private launch crosses the lagoon to St Mark's in fifteen minutes, so you can spend the morning on the beach and the evening in the city."
+    ],
+    "highlights": [
+      { "icon": "pool", "title": "Private beach and pool", "text": "Cabanas, loungers and a heated seawater pool." },
+      { "icon": "shuttle", "title": "Boat to St Mark's", "text": "A private launch every 30 minutes, free for guests." },
+      { "icon": "garden", "title": "Pine gardens", "text": "Shaded gardens between the hotel and the sea." }
+    ],
+    "popular": ["wifi", "breakfast", "pool", "spa", "restaurant", "bar", "shuttle", "family"],
+    "amenityGroups": [
+      { "name": "Bathroom", "items": ["Private bathroom", "Marble bath", "Bathrobes", "Slippers"] },
+      { "name": "Wellness", "items": ["Seawater pool", "Spa", "Sauna"] },
+      { "name": "Food & drink", "items": ["Beach restaurant", "Cocktail bar", "Room service"] },
+      { "name": "Outdoors", "items": ["Private beach", "Cabanas", "Pine gardens"] }
+    ],
+    "gallery": [
+      { "src": "/assets/resort.jpg", "alt": "The pool and beach at the Lido Gardens" },
+      { "src": "/assets/venice.jpg", "alt": "Venice, fifteen minutes by boat" },
+      { "src": "/assets/property/room-superior.jpg", "alt": "Sea View Room" },
+      { "src": "/assets/property/pool-deck.jpg", "alt": "Loungers by the seawater pool" },
+      { "src": "/assets/property/restaurant.jpg", "alt": "The beach restaurant" }
+    ],
+    "rooms": [
+      { "id": "garden", "name": "Garden Room", "image": "/assets/property/room-classic.jpg", "size": 24, "beds": "1 king bed", "sleeps": 2, "price": 318, "refundable": true, "breakfast": true, "inventory": 8, "features": ["Garden view", "Air conditioning", "Marble bath", "Free WiFi"] },
+      { "id": "sea", "name": "Sea View Room", "image": "/assets/property/room-superior.jpg", "size": 28, "beds": "1 king bed", "sleeps": 2, "price": 392, "refundable": true, "breakfast": true, "inventory": 6, "features": ["Adriatic view", "Balcony", "Marble bath", "Free WiFi"] },
+      { "id": "family", "name": "Family Beach Suite", "image": "/assets/resort.jpg", "size": 52, "beds": "1 king bed and 2 single beds", "sleeps": 4, "price": 548, "refundable": false, "breakfast": true, "inventory": 2, "features": ["Adriatic view", "Two bedrooms", "Reserved cabana", "Free WiFi"] }
+    ],
+    "nearby": [
+      { "group": "What's nearby", "items": [["Lido beach", "0 m"], ["Venice Film Festival palace", "1.4 km"], ["St Mark's Square (by boat)", "3.5 km"]] },
+      { "group": "Restaurants & cafés", "items": [["The beach restaurant", "0 m"], ["Gran Viale cafés", "600 m"]] },
+      { "group": "Getting around", "items": [["Hotel launch to St Mark's", "0 m"], ["Lido S.M.E. vaporetto", "900 m"], ["Marco Polo Airport", "20 km by water"]] }
+    ],
+    "reviews": [
+      { "author": "Victoria A.", "country": "United Kingdom", "traveller": "Family", "roomId": "family", "nights": 6, "date": "2026-08-28", "score": 9.2, "title": "Beach and Venice", "liked": "Mornings on the beach, evenings in Venice. The boat made it effortless.", "disliked": "Drinks at the bar are expensive." },
+      { "author": "Luca G.", "country": "Switzerland", "traveller": "Couple", "roomId": "sea", "nights": 3, "date": "2026-07-15", "score": 9.0, "title": "Old-world glamour", "liked": "The building is beautiful and the sea view room was lovely.", "disliked": "Breakfast area gets crowded." },
+      { "author": "Yuki T.", "country": "Japan", "traveller": "Couple", "roomId": "garden", "nights": 2, "date": "2026-06-02", "score": 8.8, "title": "Relaxing", "liked": "A calm escape from the crowds in Venice.", "disliked": "The garden room is a little dark." }
+    ],
+    "policies": { "checkIn": "From 15:00", "checkOut": "Until 11:00", "children": "Children of any age are welcome.", "age": "No age restriction for check-in.", "pets": "Small pets are allowed on request.", "quiet": "Quiet hours run from 23:00 to 07:00.", "payment": "Visa, Mastercard and American Express. Card held at booking.", "minNights": 2 }
+  },
+  {
+    "id": "plaka",
+    "name": "Rooftops of Plaka",
+    "type": "Apartment",
+    "address": { "street": "Kydathineon 14", "area": "Plaka", "city": "Athens", "postcode": "105 58", "country": "Greece" },
+    "location": { "lat": 37.9719, "lng": 23.7302 },
+    "score": 9.4,
+    "reviewCount": 132,
+    "scores": { "Staff": 9.6, "Facilities": 9.0, "Cleanliness": 9.5, "Comfort": 9.3, "Value for money": 9.2, "Location": 9.8, "Free WiFi": 8.9 },
+    "summary": "A top-floor apartment in Plaka with a private roof terrace facing the Acropolis.",
+    "description": [
+      "This bright one-bedroom apartment takes the whole top floor of a neoclassical house on Kydathineon, the pedestrian street through Plaka. Steps lead up to a private roof terrace with a table, two loungers and the Acropolis straight ahead.",
+      "The kitchen is fully equipped, and the host leaves Greek coffee, honey and fruit for your first morning."
+    ],
+    "highlights": [
+      { "icon": "terrace", "title": "Acropolis from the roof", "text": "A private terrace with a direct view of the Parthenon." },
+      { "icon": "kitchen", "title": "Full kitchen", "text": "Oven, hob, dishwasher and an espresso machine." },
+      { "icon": "pin", "title": "Car-free street", "text": "Guests rate the location 9.8. The Acropolis entrance is a ten-minute walk." }
+    ],
+    "popular": ["wifi", "ac", "terrace", "kitchen", "washer", "view"],
+    "amenityGroups": [
+      { "name": "Kitchen", "items": ["Oven", "Hob", "Dishwasher", "Espresso machine", "Fridge"] },
+      { "name": "Bedroom", "items": ["Linen", "Wardrobe", "Air conditioning", "Blackout blinds"] },
+      { "name": "Laundry", "items": ["Washing machine", "Iron"] },
+      { "name": "Outdoors", "items": ["Private roof terrace", "Outdoor dining table"] }
+    ],
+    "gallery": [
+      { "src": "/assets/apartment.jpg", "alt": "The living room with tall windows" },
+      { "src": "/assets/athens.jpg", "alt": "The Acropolis from the roof terrace" },
+      { "src": "/assets/property/kitchen.jpg", "alt": "The kitchen" },
+      { "src": "/assets/property/bedroom.jpg", "alt": "The bedroom" }
+    ],
+    "rooms": [
+      { "id": "apartment", "name": "One-Bedroom Apartment with Roof Terrace", "image": "/assets/apartment.jpg", "size": 58, "beds": "1 queen bed and 1 sofa bed", "sleeps": 4, "price": 168, "refundable": true, "breakfast": false, "inventory": 1, "features": ["Acropolis view", "Private roof terrace", "Full kitchen", "Washing machine"] }
+    ],
+    "nearby": [
+      { "group": "What's nearby", "items": [["Anafiotika", "450 m"], ["Acropolis Museum", "650 m"], ["Acropolis entrance", "900 m"], ["Syntagma Square", "700 m"]] },
+      { "group": "Restaurants & cafés", "items": [["Kafeneio Plaka", "80 m"], ["Brettos bar", "60 m"]] },
+      { "group": "Getting around", "items": [["Syntagma metro", "750 m"], ["Akropoli metro", "650 m"], ["Athens Airport", "34 km"]] }
+    ],
+    "reviews": [
+      { "author": "Chloe D.", "country": "Australia", "traveller": "Couple", "roomId": "apartment", "nights": 5, "date": "2026-10-12", "score": 9.6, "title": "That terrace", "liked": "Dinner on the roof with the Parthenon lit up in front of us. Every night.", "disliked": "Three flights of stairs, no lift." },
+      { "author": "Stefan W.", "country": "Austria", "traveller": "Family", "roomId": "apartment", "nights": 4, "date": "2026-08-30", "score": 9.2, "title": "Perfect for a family", "liked": "Plenty of room, a real kitchen and a washing machine.", "disliked": "Plaka is busy in the evening." },
+      { "author": "Giulia F.", "country": "Italy", "traveller": "Group", "roomId": "apartment", "nights": 3, "date": "2026-05-18", "score": 9.4, "title": "Great host", "liked": "The host met us with a list of places only locals know.", "disliked": "Sofa bed is a bit firm." }
+    ],
+    "policies": { "checkIn": "From 15:00, self check-in with a lockbox", "checkOut": "Until 11:00", "children": "Children of any age are welcome. A cot and high chair are available.", "age": "The main guest must be 21 or older.", "pets": "Pets are not allowed.", "quiet": "No parties. Quiet hours from 23:00 to 08:00.", "payment": "Paid online at booking.", "minNights": 2 }
+  },
+  {
+    "id": "marais",
+    "name": "Rue des Archives Flat",
+    "type": "Apartment",
+    "address": { "street": "Rue des Archives 52", "area": "Le Marais", "city": "Paris", "postcode": "75003", "country": "France" },
+    "location": { "lat": 48.8611, "lng": 2.3577 },
+    "score": 9.1,
+    "reviewCount": 98,
+    "scores": { "Staff": 9.3, "Facilities": 8.8, "Cleanliness": 9.2, "Comfort": 9.0, "Value for money": 8.7, "Location": 9.7, "Free WiFi": 9.1 },
+    "summary": "A beamed flat in the Marais, with a desk by the window and a bakery on the corner.",
+    "description": [
+      "A two-room flat on the third floor of a seventeenth-century building in the Upper Marais. Exposed beams, oak floors and two tall windows over the street make it bright from morning to evening.",
+      "There is a proper desk, fast WiFi and a kitchen for simple meals. The Marché des Enfants Rouges is three minutes away."
+    ],
+    "highlights": [
+      { "icon": "workspace", "title": "Made for working", "text": "A desk by the window and 500 Mbps WiFi." },
+      { "icon": "kitchen", "title": "Kitchen", "text": "Two hobs, a combination oven and a coffee maker." },
+      { "icon": "pin", "title": "Upper Marais", "text": "Galleries, markets and the Picasso Museum close by." }
+    ],
+    "popular": ["wifi", "kitchen", "workspace", "washer", "elevator", "nonsmoking"],
+    "amenityGroups": [
+      { "name": "Kitchen", "items": ["Hob", "Combination oven", "Coffee maker", "Fridge"] },
+      { "name": "Workspace", "items": ["Desk", "Office chair", "Free WiFi, 500 Mbps"] },
+      { "name": "Bedroom", "items": ["Linen", "Wardrobe", "Blackout curtains"] },
+      { "name": "Laundry", "items": ["Washer-dryer", "Iron"] }
+    ],
+    "gallery": [
+      { "src": "/assets/paris.jpg", "alt": "Paris rooftops near the flat" },
+      { "src": "/assets/property/room-loft.jpg", "alt": "The living room under the beams" },
+      { "src": "/assets/property/kitchen.jpg", "alt": "The kitchen" },
+      { "src": "/assets/property/bedroom.jpg", "alt": "The bedroom" }
+    ],
+    "rooms": [
+      { "id": "flat", "name": "One-Bedroom Flat", "image": "/assets/property/room-loft.jpg", "size": 42, "beds": "1 queen bed", "sleeps": 2, "price": 214, "refundable": true, "breakfast": false, "inventory": 1, "features": ["Street view", "Desk", "Kitchen", "Washer-dryer"] },
+      { "id": "flat-flex", "name": "One-Bedroom Flat, non-refundable", "image": "/assets/property/bedroom.jpg", "size": 42, "beds": "1 queen bed", "sleeps": 2, "price": 189, "refundable": false, "breakfast": false, "inventory": 1, "features": ["Street view", "Desk", "Kitchen", "Lower price"] }
+    ],
+    "nearby": [
+      { "group": "What's nearby", "items": [["Marché des Enfants Rouges", "250 m"], ["Musée Picasso", "400 m"], ["Place des Vosges", "1 km"], ["Centre Pompidou", "800 m"]] },
+      { "group": "Restaurants & cafés", "items": [["Boulangerie on the corner", "40 m"], ["Café Charlot", "200 m"]] },
+      { "group": "Getting around", "items": [["Filles du Calvaire metro", "500 m"], ["Gare de Lyon", "2.8 km"], ["Charles de Gaulle Airport", "28 km"]] }
+    ],
+    "reviews": [
+      { "author": "Thomas R.", "country": "Germany", "traveller": "Business traveller", "roomId": "flat", "nights": 6, "date": "2026-10-18", "score": 9.2, "title": "Best work trip flat", "liked": "Great desk, fast internet and a lovely neighbourhood after work.", "disliked": "The stairs creak." },
+      { "author": "Nora E.", "country": "Denmark", "traveller": "Couple", "roomId": "flat-flex", "nights": 3, "date": "2026-09-19", "score": 9.0, "title": "Beautiful beams", "liked": "Felt like living in Paris rather than visiting.", "disliked": "Bathroom is small." },
+      { "author": "Kevin O.", "country": "Canada", "traveller": "Solo traveller", "roomId": "flat", "nights": 4, "date": "2026-06-25", "score": 9.0, "title": "Fresh croissants", "liked": "The bakery on the corner. And the market.", "disliked": "Street can be lively on Saturday nights." }
+    ],
+    "policies": { "checkIn": "From 16:00, self check-in with a code", "checkOut": "Until 11:00", "children": "Children are welcome. The flat suits two guests.", "age": "The main guest must be 21 or older.", "pets": "Pets are not allowed.", "quiet": "No parties. Quiet hours from 22:00 to 08:00.", "payment": "Paid online at booking.", "minNights": 2 }
+  },
+  {
+    "id": "monti",
+    "name": "The Monti Loft",
+    "type": "Apartment",
+    "address": { "street": "Via Panisperna 63", "area": "Monti", "city": "Rome", "postcode": "00184", "country": "Italy" },
+    "location": { "lat": 41.8968, "lng": 12.4904 },
+    "score": 9.2,
+    "reviewCount": 117,
+    "scores": { "Staff": 9.4, "Facilities": 9.0, "Cleanliness": 9.3, "Comfort": 9.1, "Value for money": 9.0, "Location": 9.6, "Free WiFi": 9.0 },
+    "summary": "A two-bedroom loft above a wine bar in Monti, ten minutes' walk from the Colosseum.",
+    "description": [
+      "A converted workshop on Via Panisperna, with a mezzanine bedroom, a second bedroom below and a long kitchen table for six. Brick vaults and big steel windows keep it cool in summer.",
+      "Monti's piazza, with its fountain and evening crowd, is two minutes down the hill. The Colosseum is ten minutes away on foot."
+    ],
+    "highlights": [
+      { "icon": "family", "title": "Room for six", "text": "Two bedrooms and a sofa bed, two bathrooms." },
+      { "icon": "kitchen", "title": "Big kitchen table", "text": "A full kitchen and a table that seats six." },
+      { "icon": "pin", "title": "Ten minutes to the Colosseum", "text": "Guests rate the location 9.6." }
+    ],
+    "popular": ["wifi", "ac", "kitchen", "washer", "family", "workspace"],
+    "amenityGroups": [
+      { "name": "Kitchen", "items": ["Oven", "Hob", "Dishwasher", "Moka pots", "Dining table for six"] },
+      { "name": "Bedroom", "items": ["Linen", "Air conditioning", "Mezzanine bedroom"] },
+      { "name": "Bathroom", "items": ["Two bathrooms", "Walk-in shower", "Hairdryer"] },
+      { "name": "Laundry", "items": ["Washing machine", "Drying rack"] }
+    ],
+    "gallery": [
+      { "src": "/assets/property/room-loft.jpg", "alt": "The mezzanine bedroom under the vaults" },
+      { "src": "/assets/rome.jpg", "alt": "Rome at sunset" },
+      { "src": "/assets/property/kitchen.jpg", "alt": "The long kitchen table" },
+      { "src": "/assets/property/room-twin.jpg", "alt": "The second bedroom with twin beds" },
+      { "src": "/assets/property/bathroom.jpg", "alt": "Bathroom with a walk-in shower" }
+    ],
+    "rooms": [
+      { "id": "loft", "name": "Two-Bedroom Loft", "image": "/assets/property/room-loft.jpg", "size": 95, "beds": "1 king bed, 2 single beds and 1 sofa bed", "sleeps": 6, "price": 246, "refundable": true, "breakfast": false, "inventory": 1, "features": ["2 bedrooms", "2 bathrooms", "Full kitchen", "Washing machine"] }
+    ],
+    "nearby": [
+      { "group": "What's nearby", "items": [["Piazza della Madonna dei Monti", "200 m"], ["Trajan's Forum", "550 m"], ["Colosseum", "850 m"], ["Trevi Fountain", "1.3 km"]] },
+      { "group": "Restaurants & cafés", "items": [["La Barrique wine bar", "0 m"], ["Ai Tre Scalini", "150 m"]] },
+      { "group": "Getting around", "items": [["Cavour metro", "300 m"], ["Roma Termini", "1.2 km"], ["Fiumicino Airport", "32 km"]] }
+    ],
+    "reviews": [
+      { "author": "Rachel G.", "country": "United States", "traveller": "Family", "roomId": "loft", "nights": 5, "date": "2026-10-08", "score": 9.4, "title": "Ideal for a family", "liked": "Two bathrooms with teenagers was a lifesaver. Monti is the perfect neighbourhood.", "disliked": "The mezzanine stairs are steep." },
+      { "author": "Pablo C.", "country": "Argentina", "traveller": "Group", "roomId": "loft", "nights": 4, "date": "2026-07-03", "score": 9.0, "title": "Cool and stylish", "liked": "Stayed cool even in July. Loved cooking at the long table.", "disliked": "Some noise from the wine bar until midnight." },
+      { "author": "Ingrid H.", "country": "Sweden", "traveller": "Couple", "roomId": "loft", "nights": 3, "date": "2026-04-21", "score": 9.2, "title": "Walk everywhere", "liked": "We walked to the Colosseum, the Forum and Trevi.", "disliked": "Too big for just two of us!" }
+    ],
+    "policies": { "checkIn": "From 15:00, the host meets you", "checkOut": "Until 10:00", "children": "Children of any age are welcome. The mezzanine has a railing.", "age": "The main guest must be 25 or older.", "pets": "Pets are not allowed.", "quiet": "No parties. Quiet hours from 23:00 to 08:00.", "payment": "Paid online at booking. The Rome city tax is paid in cash.", "minNights": 3 }
+  },
+  {
+    "id": "leith",
+    "name": "Shore Street Flat",
+    "type": "Apartment",
+    "address": { "street": "The Shore 28", "area": "Leith", "city": "Edinburgh", "postcode": "EH6 6QN", "country": "Scotland" },
+    "location": { "lat": 55.9764, "lng": -3.1705 },
+    "score": 9.0,
+    "reviewCount": 84,
+    "scores": { "Staff": 9.2, "Facilities": 8.8, "Cleanliness": 9.2, "Comfort": 9.0, "Value for money": 9.1, "Location": 8.8, "Free WiFi": 9.0 },
+    "summary": "A harbour-front flat in Leith, above the Water of Leith and its seafood restaurants.",
+    "description": [
+      "A bright two-bedroom flat in an old bonded warehouse on The Shore, the cobbled quay where the Water of Leith meets the harbour. The living room looks straight over the water.",
+      "Some of Edinburgh's best seafood restaurants are downstairs, and the tram takes you to Princes Street in twenty minutes."
+    ],
+    "highlights": [
+      { "icon": "view", "title": "On the water", "text": "The living room looks over the Water of Leith." },
+      { "icon": "kitchen", "title": "Full kitchen", "text": "Oven, hob, dishwasher and a coffee machine." },
+      { "icon": "parking", "title": "Free parking", "text": "One space in the courtyard behind the building." }
+    ],
+    "popular": ["wifi", "kitchen", "washer", "parking", "view", "family"],
+    "amenityGroups": [
+      { "name": "Kitchen", "items": ["Oven", "Hob", "Dishwasher", "Coffee machine"] },
+      { "name": "Bedroom", "items": ["Linen", "Wardrobe", "Blackout blinds"] },
+      { "name": "Laundry", "items": ["Washer-dryer", "Iron"] },
+      { "name": "Parking", "items": ["One free space in the courtyard"] }
+    ],
+    "gallery": [
+      { "src": "/assets/property/kitchen.jpg", "alt": "The open kitchen and living room" },
+      { "src": "/assets/edinburgh.jpg", "alt": "Edinburgh, twenty minutes by tram" },
+      { "src": "/assets/property/bedroom.jpg", "alt": "The main bedroom" },
+      { "src": "/assets/property/room-twin.jpg", "alt": "The twin bedroom" }
+    ],
+    "rooms": [
+      { "id": "flat", "name": "Two-Bedroom Flat", "image": "/assets/property/kitchen.jpg", "size": 76, "beds": "1 king bed and 2 single beds", "sleeps": 4, "price": 172, "refundable": true, "breakfast": false, "inventory": 1, "features": ["Water view", "2 bedrooms", "Full kitchen", "Free parking"] }
+    ],
+    "nearby": [
+      { "group": "What's nearby", "items": [["The Shore", "0 m"], ["Royal Yacht Britannia", "1.4 km"], ["Leith Links", "900 m"], ["Edinburgh Castle", "4.5 km"]] },
+      { "group": "Restaurants & cafés", "items": [["The Kitchin", "350 m"], ["Fishers in Leith", "60 m"]] },
+      { "group": "Getting around", "items": [["The Shore tram stop", "400 m"], ["Edinburgh Waverley", "3.5 km"], ["Edinburgh Airport", "15 km"]] }
+    ],
+    "reviews": [
+      { "author": "Fiona M.", "country": "Ireland", "traveller": "Family", "roomId": "flat", "nights": 4, "date": "2026-10-22", "score": 9.2, "title": "Lovely spot by the water", "liked": "Watching the swans from the sofa, and amazing seafood downstairs.", "disliked": "A bit far from the Old Town on foot." },
+      { "author": "Hugo B.", "country": "France", "traveller": "Couple", "roomId": "flat", "nights": 3, "date": "2026-08-11", "score": 8.8, "title": "Great for the festival", "liked": "Quiet base away from the Fringe crowds, with the tram close by.", "disliked": "Bedroom faces the street." },
+      { "author": "Priya K.", "country": "United Kingdom", "traveller": "Group", "roomId": "flat", "nights": 2, "date": "2026-05-30", "score": 9.0, "title": "Clean and spacious", "liked": "Spotless, with everything we needed in the kitchen.", "disliked": "Nothing to note." }
+    ],
+    "policies": { "checkIn": "From 16:00, self check-in with a key safe", "checkOut": "Until 10:00", "children": "Children of any age are welcome. A cot is available.", "age": "The main guest must be 21 or older.", "pets": "Well-behaved dogs are welcome (one only).", "quiet": "No parties. Quiet hours from 22:00 to 08:00.", "payment": "Paid online at booking.", "minNights": 2 }
+  },
+  {
+    "id": "yali",
+    "name": "Yalı on the Bosphorus",
+    "type": "Villa",
+    "address": { "street": "Kuzguncuk Sahil Yolu 6", "area": "Kuzguncuk", "city": "Istanbul", "postcode": "34674", "country": "Turkey" },
+    "location": { "lat": 41.0355, "lng": 29.0302 },
+    "score": 9.5,
+    "reviewCount": 76,
+    "scores": { "Staff": 9.7, "Facilities": 9.4, "Cleanliness": 9.5, "Comfort": 9.5, "Value for money": 8.9, "Location": 9.2, "Free WiFi": 8.8 },
+    "summary": "A wooden waterside mansion on the Asian shore, with its own jetty on the Bosphorus.",
+    "description": [
+      "A restored nineteenth-century yalı in Kuzguncuk, painted oxblood red and standing right on the water. Four bedrooms, a long salon and a waterside terrace with its own jetty.",
+      "A housekeeper prepares breakfast every morning, and a private boat can take you across to the old city in twenty minutes."
+    ],
+    "highlights": [
+      { "icon": "home", "title": "The whole mansion", "text": "Four bedrooms, three bathrooms and the jetty, never shared." },
+      { "icon": "view", "title": "On the Bosphorus", "text": "Ships pass a few metres from the terrace." },
+      { "icon": "breakfast", "title": "Breakfast every morning", "text": "Prepared by the housekeeper and served on the terrace." }
+    ],
+    "popular": ["wifi", "breakfast", "ac", "terrace", "view", "kitchen", "family", "parking"],
+    "amenityGroups": [
+      { "name": "Bedroom", "items": ["Four bedrooms", "Linen", "Air conditioning"] },
+      { "name": "Bathroom", "items": ["Three bathrooms", "Hammam-style shower", "Bathrobes"] },
+      { "name": "Kitchen", "items": ["Full kitchen", "Dining table for ten"] },
+      { "name": "Services", "items": ["Daily housekeeper", "Breakfast included", "Private boat (paid)"] }
+    ],
+    "gallery": [
+      { "src": "/assets/villa.jpg", "alt": "The yalı from the water" },
+      { "src": "/assets/istanbul.jpg", "alt": "The Bosphorus at sunset" },
+      { "src": "/assets/property/bedroom.jpg", "alt": "The main bedroom over the water" },
+      { "src": "/assets/property/dining.jpg", "alt": "The long dining table" },
+      { "src": "/assets/property/breakfast.jpg", "alt": "Breakfast on the terrace" }
+    ],
+    "rooms": [
+      { "id": "yali", "name": "Whole mansion with breakfast", "image": "/assets/villa.jpg", "size": 320, "beds": "3 king beds and 2 single beds", "sleeps": 8, "price": 720, "refundable": true, "breakfast": true, "inventory": 1, "features": ["4 bedrooms", "3 bathrooms", "Private jetty", "Daily housekeeper"] },
+      { "id": "yali-flex", "name": "Whole mansion, non-refundable", "image": "/assets/property/bedroom.jpg", "size": 320, "beds": "3 king beds and 2 single beds", "sleeps": 8, "price": 648, "refundable": false, "breakfast": true, "inventory": 1, "features": ["4 bedrooms", "3 bathrooms", "Private jetty", "Lower price"] }
+    ],
+    "nearby": [
+      { "group": "What's nearby", "items": [["Kuzguncuk village", "200 m"], ["Beylerbeyi Palace", "1.8 km"], ["Çamlıca Hill", "4 km"]] },
+      { "group": "Restaurants & cafés", "items": [["İcadiye Caddesi cafés", "300 m"], ["Çınaraltı tea garden", "250 m"]] },
+      { "group": "Getting around", "items": [["Üsküdar ferry pier", "2.2 km"], ["Üsküdar Marmaray", "2.4 km"], ["Sabiha Gökçen Airport", "40 km"]] }
+    ],
+    "reviews": [
+      { "author": "Selin Y.", "country": "Turkey", "traveller": "Family", "roomId": "yali", "nights": 4, "date": "2026-09-27", "score": 9.8, "title": "A dream house", "liked": "Breakfast on the water every morning while the ships went by. Our kids still talk about it.", "disliked": "Nothing." },
+      { "author": "George L.", "country": "Greece", "traveller": "Group", "roomId": "yali-flex", "nights": 3, "date": "2026-07-09", "score": 9.2, "title": "Unique", "liked": "Nowhere else in Istanbul feels like this.", "disliked": "The ferry takes time to reach the old city." },
+      { "author": "Amelia S.", "country": "Australia", "traveller": "Family", "roomId": "yali", "nights": 5, "date": "2026-05-15", "score": 9.4, "title": "Wonderful housekeeper", "liked": "Ayşe looked after us like family and cooked an incredible dinner.", "disliked": "Old house, so some floors creak." }
+    ],
+    "policies": { "checkIn": "From 15:00, the host meets you at the house", "checkOut": "Until 11:00", "children": "Children of any age are welcome. The jetty has no railing, so supervise young children.", "age": "The main guest must be 25 or older.", "pets": "Pets are not allowed.", "quiet": "No parties or events.", "payment": "Bank transfer or card before arrival. A security deposit is held.", "minNights": 3 }
+  },
+  {
+    "id": "agave",
+    "name": "Casa Agave",
+    "type": "Villa",
+    "address": { "street": "Calle Encinos 14", "area": "San Felipe del Agua", "city": "Oaxaca", "postcode": "68020", "country": "Mexico" },
+    "location": { "lat": 17.0945, "lng": -96.7204 },
+    "score": 9.3,
+    "reviewCount": 64,
+    "scores": { "Staff": 9.6, "Facilities": 9.2, "Cleanliness": 9.3, "Comfort": 9.3, "Value for money": 9.3, "Location": 8.6, "Free WiFi": 8.6 },
+    "summary": "An adobe house in the hills above Oaxaca, with a pool, a garden of agave and a cook on request.",
+    "description": [
+      "Casa Agave is a three-bedroom adobe house in San Felipe del Agua, on the green slopes above the city. A pool sits in a garden of agave and bougainvillea, with views down to the valley.",
+      "Rosa, the cook, will make breakfast or a full Oaxacan dinner on request. The centre is fifteen minutes away by car or taxi."
+    ],
+    "highlights": [
+      { "icon": "pool", "title": "Private pool", "text": "Heated in winter, with a shaded terrace." },
+      { "icon": "home", "title": "The whole house", "text": "Three bedrooms, never shared." },
+      { "icon": "restaurant", "title": "Cook on request", "text": "Mole, tlayudas and fresh tortillas made at home." }
+    ],
+    "popular": ["wifi", "pool", "garden", "kitchen", "parking", "family", "fireplace"],
+    "amenityGroups": [
+      { "name": "Bedroom", "items": ["Three bedrooms", "Linen", "Ceiling fans"] },
+      { "name": "Kitchen", "items": ["Full kitchen", "Clay comal", "Coffee maker"] },
+      { "name": "Outdoors", "items": ["Private pool", "Agave garden", "Outdoor fireplace"] },
+      { "name": "Parking", "items": ["Free parking for two cars"] }
+    ],
+    "gallery": [
+      { "src": "/assets/property/house-exterior.jpg", "alt": "The adobe house and garden" },
+      { "src": "/assets/oaxaca.jpg", "alt": "Oaxaca, fifteen minutes away" },
+      { "src": "/assets/property/pool-deck.jpg", "alt": "The pool terrace" },
+      { "src": "/assets/property/bedroom.jpg", "alt": "The main bedroom" },
+      { "src": "/assets/property/kitchen.jpg", "alt": "The kitchen" }
+    ],
+    "rooms": [
+      { "id": "house", "name": "Whole house", "image": "/assets/property/house-exterior.jpg", "size": 210, "beds": "2 king beds and 2 single beds", "sleeps": 6, "price": 238, "refundable": true, "breakfast": false, "inventory": 1, "features": ["3 bedrooms", "Private pool", "Full kitchen", "Free parking"] },
+      { "id": "house-breakfast", "name": "Whole house with breakfast", "image": "/assets/property/breakfast.jpg", "size": 210, "beds": "2 king beds and 2 single beds", "sleeps": 6, "price": 272, "refundable": true, "breakfast": true, "inventory": 1, "features": ["3 bedrooms", "Breakfast by Rosa", "Private pool", "Free parking"] }
+    ],
+    "nearby": [
+      { "group": "What's nearby", "items": [["San Felipe hiking trails", "400 m"], ["Santo Domingo church", "5 km"], ["Monte Albán", "14 km"]] },
+      { "group": "Restaurants & cafés", "items": [["Rosa's kitchen", "0 m"], ["Casa Oaxaca", "5 km"]] },
+      { "group": "Getting around", "items": [["Taxi to the centre", "15 min"], ["Oaxaca bus station", "5.5 km"], ["Oaxaca Airport", "16 km"]] }
+    ],
+    "reviews": [
+      { "author": "Sarah N.", "country": "United States", "traveller": "Family", "roomId": "house-breakfast", "nights": 6, "date": "2026-10-30", "score": 9.6, "title": "Rosa's breakfasts", "liked": "Rosa's chilaquiles every morning, and the pool after a day in town.", "disliked": "You need taxis to get around." },
+      { "author": "Diego R.", "country": "Mexico", "traveller": "Group", "roomId": "house", "nights": 3, "date": "2026-08-04", "score": 9.0, "title": "Beautiful house", "liked": "Huge garden, great views and lots of space.", "disliked": "WiFi is weak in the far bedroom." },
+      { "author": "Eva K.", "country": "Czech Republic", "traveller": "Couple", "roomId": "house", "nights": 5, "date": "2026-03-12", "score": 9.2, "title": "Peaceful hills", "liked": "Hummingbirds in the garden every morning.", "disliked": "Nights get cold, bring a sweater." }
+    ],
+    "policies": { "checkIn": "From 15:00, the host meets you", "checkOut": "Until 11:00", "children": "Children of any age are welcome. The pool is not fenced.", "age": "The main guest must be 25 or older.", "pets": "Dogs are welcome on request.", "quiet": "No parties. Quiet hours from 22:00 to 08:00.", "payment": "Paid online at booking.", "minNights": 3 }
+  },
+  {
+    "id": "pergola",
+    "name": "Villa Pergola",
+    "type": "Villa",
+    "address": { "street": "Via Pogerola 31", "area": "Pogerola", "city": "Amalfi", "postcode": "84011", "country": "Italy" },
+    "location": { "lat": 40.6389, "lng": 14.5926 },
+    "score": 9.6,
+    "reviewCount": 92,
+    "scores": { "Staff": 9.8, "Facilities": 9.5, "Cleanliness": 9.6, "Comfort": 9.6, "Value for money": 9.0, "Location": 9.2, "Free WiFi": 8.7 },
+    "summary": "A clifftop villa under a vine pergola, with a pool hanging over the Amalfi coast.",
+    "description": [
+      "Villa Pergola sits on the hillside at Pogerola, three hundred metres above Amalfi. A long pergola of vines and lemons shades the terrace, and an infinity pool looks straight down the coast.",
+      "Four bedrooms each have their own bathroom. A cook and a driver can be arranged, and the bus to Amalfi stops at the gate."
+    ],
+    "highlights": [
+      { "icon": "pool", "title": "Infinity pool", "text": "Looking straight down the coast to Atrani and Minori." },
+      { "icon": "terrace", "title": "Vine pergola", "text": "Dinner under the vines and lemons every evening." },
+      { "icon": "home", "title": "The whole villa", "text": "Four bedrooms, four bathrooms, never shared." }
+    ],
+    "popular": ["wifi", "pool", "terrace", "view", "kitchen", "ac", "family", "parking"],
+    "amenityGroups": [
+      { "name": "Bedroom", "items": ["Four bedrooms", "Linen", "Air conditioning"] },
+      { "name": "Bathroom", "items": ["Four bathrooms", "Rain shower", "Bathrobes"] },
+      { "name": "Outdoors", "items": ["Infinity pool", "Pergola terrace", "Lemon garden", "Barbecue"] },
+      { "name": "Services", "items": ["Cook on request", "Driver on request", "Weekly cleaning"] }
+    ],
+    "gallery": [
+      { "src": "/assets/property/pool-deck.jpg", "alt": "The infinity pool over the coast" },
+      { "src": "/assets/amalfi.jpg", "alt": "Amalfi, below the villa" },
+      { "src": "/assets/property/dining.jpg", "alt": "Dinner under the pergola" },
+      { "src": "/assets/property/bedroom.jpg", "alt": "A sea view bedroom" },
+      { "src": "/assets/property/kitchen.jpg", "alt": "The kitchen" }
+    ],
+    "rooms": [
+      { "id": "villa", "name": "Whole villa", "image": "/assets/property/pool-deck.jpg", "size": 280, "beds": "3 king beds and 2 single beds", "sleeps": 8, "price": 690, "refundable": true, "breakfast": false, "inventory": 1, "features": ["4 bedrooms", "4 bathrooms", "Infinity pool", "Sea view"] },
+      { "id": "villa-breakfast", "name": "Whole villa with breakfast", "image": "/assets/property/breakfast.jpg", "size": 280, "beds": "3 king beds and 2 single beds", "sleeps": 8, "price": 760, "refundable": true, "breakfast": true, "inventory": 1, "features": ["4 bedrooms", "Breakfast on the terrace", "Infinity pool", "Sea view"] }
+    ],
+    "nearby": [
+      { "group": "What's nearby", "items": [["Amalfi Cathedral", "2.6 km"], ["Path of the Gods trailhead", "11 km"], ["Ravello", "8 km"]] },
+      { "group": "Restaurants & cafés", "items": [["Trattoria in Pogerola square", "300 m"], ["Pasticceria Pansa, Amalfi", "2.6 km"]] },
+      { "group": "Getting around", "items": [["SITA bus stop", "0 m"], ["Amalfi ferry pier", "2.8 km"], ["Naples Airport", "62 km"]] }
+    ],
+    "reviews": [
+      { "author": "Matteo B.", "country": "Italy", "traveller": "Family", "roomId": "villa", "nights": 7, "date": "2026-09-03", "score": 9.8, "title": "That pool", "liked": "Swimming at the edge of the pool with the whole coast below. Magical.", "disliked": "The road up is narrow." },
+      { "author": "Ellie J.", "country": "United Kingdom", "traveller": "Group", "roomId": "villa-breakfast", "nights": 5, "date": "2026-07-26", "score": 9.6, "title": "Dinners under the vines", "liked": "Every bedroom had its own bathroom, and the cook was excellent.", "disliked": "Nothing." },
+      { "author": "Kenji O.", "country": "Japan", "traveller": "Family", "roomId": "villa", "nights": 4, "date": "2026-06-07", "score": 9.4, "title": "Better than the photos", "liked": "The view from every room.", "disliked": "You need the bus or a driver to go down." }
+    ],
+    "policies": { "checkIn": "From 16:00, the host meets you", "checkOut": "Until 10:00", "children": "Children of any age are welcome. The pool is fenced.", "age": "The main guest must be 25 or older.", "pets": "Pets are not allowed.", "quiet": "No parties or events.", "payment": "Bank transfer or card before arrival. A security deposit is held.", "minNights": 4 }
+  },
+  {
+    "id": "foz",
+    "name": "Casa da Foz",
+    "type": "Villa",
+    "address": { "street": "Rua do Passeio Alegre 220", "area": "Foz do Douro", "city": "Porto", "postcode": "4150-570", "country": "Portugal" },
+    "location": { "lat": 41.1489, "lng": -8.6716 },
+    "score": 9.2,
+    "reviewCount": 71,
+    "scores": { "Staff": 9.5, "Facilities": 9.1, "Cleanliness": 9.3, "Comfort": 9.2, "Value for money": 9.0, "Location": 8.9, "Free WiFi": 9.0 },
+    "summary": "A tiled family house where the Douro meets the Atlantic, with a garden and a tram to the city.",
+    "description": [
+      "Casa da Foz is a 1920s house faced in blue and white azulejos, on the promenade where the Douro river meets the sea. Three bedrooms, a sunny garden with a lemon tree and a fireplace for Atlantic evenings.",
+      "The historic tram 1 runs along the river to Ribeira in twenty minutes, and the beaches of Foz are across the road."
+    ],
+    "highlights": [
+      { "icon": "home", "title": "The whole house", "text": "Three bedrooms and a garden, never shared." },
+      { "icon": "fireplace", "title": "Fireplace", "text": "Wood is stacked and ready for cool evenings." },
+      { "icon": "pin", "title": "By the sea", "text": "The beach and the river promenade are across the road." }
+    ],
+    "popular": ["wifi", "garden", "kitchen", "fireplace", "washer", "family", "parking"],
+    "amenityGroups": [
+      { "name": "Bedroom", "items": ["Three bedrooms", "Linen", "Heaters"] },
+      { "name": "Kitchen", "items": ["Full kitchen", "Dishwasher", "Espresso machine"] },
+      { "name": "Outdoors", "items": ["Garden with a lemon tree", "Outdoor dining table"] },
+      { "name": "Laundry", "items": ["Washing machine", "Iron"] }
+    ],
+    "gallery": [
+      { "src": "/assets/property/bedroom.jpg", "alt": "The main bedroom with sea light" },
+      { "src": "/assets/porto.jpg", "alt": "The garden terrace" },
+      { "src": "/assets/property/kitchen.jpg", "alt": "The kitchen" },
+      { "src": "/assets/property/dining.jpg", "alt": "The dining room by the fireplace" },
+      { "src": "/assets/property/house-exterior.jpg", "alt": "The tiled façade" }
+    ],
+    "rooms": [
+      { "id": "house", "name": "Whole house", "image": "/assets/property/bedroom.jpg", "size": 180, "beds": "2 queen beds and 2 single beds", "sleeps": 6, "price": 226, "refundable": true, "breakfast": false, "inventory": 1, "features": ["3 bedrooms", "Garden", "Fireplace", "Full kitchen"] },
+      { "id": "house-flex", "name": "Whole house, non-refundable", "image": "/assets/property/house-exterior.jpg", "size": 180, "beds": "2 queen beds and 2 single beds", "sleeps": 6, "price": 198, "refundable": false, "breakfast": false, "inventory": 1, "features": ["3 bedrooms", "Garden", "Fireplace", "Lower price"] }
+    ],
+    "nearby": [
+      { "group": "What's nearby", "items": [["Praia dos Ingleses", "200 m"], ["Felgueiras lighthouse", "700 m"], ["Serralves Museum", "2.5 km"], ["Ribeira", "6 km"]] },
+      { "group": "Restaurants & cafés", "items": [["Praia da Luz café", "900 m"], ["Cafeína", "500 m"]] },
+      { "group": "Getting around", "items": [["Tram 1 stop", "100 m"], ["São Bento station", "6.5 km"], ["Porto Airport", "15 km"]] }
+    ],
+    "reviews": [
+      { "author": "Maria S.", "country": "Spain", "traveller": "Family", "roomId": "house", "nights": 5, "date": "2026-10-03", "score": 9.4, "title": "Sea air and the old tram", "liked": "Beach in the morning, tram into the city in the afternoon.", "disliked": "Parking is on the street." },
+      { "author": "Ben A.", "country": "United States", "traveller": "Group", "roomId": "house-flex", "nights": 4, "date": "2026-08-17", "score": 9.0, "title": "Gorgeous tiles", "liked": "The house is beautiful inside and out.", "disliked": "No air conditioning, though rarely needed." },
+      { "author": "Lena W.", "country": "Germany", "traveller": "Couple", "roomId": "house", "nights": 3, "date": "2026-02-14", "score": 9.2, "title": "Cosy in winter", "liked": "Fires every evening while the Atlantic roared outside.", "disliked": "Large for two." }
+    ],
+    "policies": { "checkIn": "From 15:00, self check-in with a key safe", "checkOut": "Until 11:00", "children": "Children of any age are welcome. A cot and high chair are available.", "age": "The main guest must be 25 or older.", "pets": "Dogs are welcome on request.", "quiet": "No parties. Quiet hours from 22:00 to 08:00.", "payment": "Paid online at booking.", "minNights": 2 }
   }
 ]

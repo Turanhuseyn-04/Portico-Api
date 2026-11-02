@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Portico.Domain.Platform;
 using Portico.Domain.Properties;
 using Portico.Domain.Reservations;
@@ -11,13 +12,14 @@ public static class CatalogSeed
 {
     private static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);
 
-    public static async Task EnsureAsync(PorticoDbContext db, CancellationToken cancellationToken)
+    public static async Task EnsureAsync(PorticoDbContext db, ILogger logger, CancellationToken cancellationToken)
     {
         var stays = ReadStays();
         if (!await db.Properties.AnyAsync(cancellationToken))
         {
             db.Properties.AddRange(stays.Select(ToProperty));
             await db.SaveChangesAsync(cancellationToken);
+            logger.LogInformation("Seeded an empty database with {StayCount} catalog stays.", stays.Count);
         }
         else
         {
@@ -25,9 +27,10 @@ public static class CatalogSeed
             {
                 db.Reviews.AddRange(stays.SelectMany(stay => stay.Reviews.Select(review => ToReview(stay.Id, review))));
                 await db.SaveChangesAsync(cancellationToken);
+                logger.LogInformation("Seeded catalog reviews for {StayCount} stays.", stays.Count);
             }
 
-            await EnsureNewStaysAsync(db, stays, cancellationToken);
+            await EnsureNewStaysAsync(db, stays, logger, cancellationToken);
         }
 
         await RememberSeededAsync(db, stays, cancellationToken);
@@ -37,7 +40,7 @@ public static class CatalogSeed
     }
 
     // Stays added to the catalog after a database was first seeded. A stay is seeded once, so one an admin deletes stays deleted.
-    private static async Task EnsureNewStaysAsync(PorticoDbContext db, List<CatalogStay> stays, CancellationToken cancellationToken)
+    private static async Task EnsureNewStaysAsync(PorticoDbContext db, List<CatalogStay> stays, ILogger logger, CancellationToken cancellationToken)
     {
         var seeded = await ReadSeededAsync(db, cancellationToken);
         var known = await db.Properties.Select(property => property.Id).ToListAsync(cancellationToken);
@@ -46,6 +49,7 @@ public static class CatalogSeed
 
         db.Properties.AddRange(missing.Select(ToProperty));
         await db.SaveChangesAsync(cancellationToken);
+        logger.LogInformation("Added {StayCount} new catalog stays: {StayIds}.", missing.Count, missing.Select(stay => stay.Id).ToArray());
     }
 
     private static async Task RememberSeededAsync(PorticoDbContext db, List<CatalogStay> stays, CancellationToken cancellationToken)

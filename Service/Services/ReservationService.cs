@@ -1,11 +1,13 @@
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
 using Portico.Domain.Properties;
 using Portico.Domain.Reservations;
 using Repository.Repositories.Interfaces;
 using Service.Helpers.DTOs.Reservations;
 using Service.Helpers.Exceptions;
+using Service.Helpers.Logging;
 using Service.Services.Interfaces;
 
 namespace Service.Services;
@@ -17,12 +19,14 @@ public class ReservationService : IReservationService
     private readonly IReservationRepository _reservations;
     private readonly IPropertyRepository _properties;
     private readonly IPropertyService _catalog;
+    private readonly ILogger<ReservationService> _logger;
 
-    public ReservationService(IReservationRepository reservations, IPropertyRepository properties, IPropertyService catalog)
+    public ReservationService(IReservationRepository reservations, IPropertyRepository properties, IPropertyService catalog, ILogger<ReservationService> logger)
     {
         _reservations = reservations;
         _properties = properties;
         _catalog = catalog;
+        _logger = logger;
     }
 
     // The same limits the Web's booking form uses.
@@ -66,7 +70,12 @@ public class ReservationService : IReservationService
             var offers = await _catalog.AvailabilityAsync(property.Id, request.CheckIn, request.CheckOut, cancellationToken);
             var offer = offers.FirstOrDefault(item => item.RoomId == room.Id);
             if (offer is null) throw new NotFoundException("That stay does not exist.");
-            if (offer.Left < rooms) throw new ConflictException("That room was just taken for these dates.");
+            if (offer.Left < rooms)
+            {
+                _logger.LogWarning("Reservation refused for {PropertyId}/{RoomId} {CheckIn}–{CheckOut}: {Requested} room(s) asked, {Left} left.",
+                    property.Id, room.Id, request.CheckIn, request.CheckOut, rooms, offer.Left);
+                throw new ConflictException("That room was just taken for these dates.");
+            }
 
             var reference = await NextReference(cancellationToken);
             var total = offer.Nightly * offer.Nights * rooms;
@@ -95,6 +104,9 @@ public class ReservationService : IReservationService
                 Status = "Pending"
             };
             await _reservations.AddAsync(reservation, cancellationToken);
+            _logger.LogInformation(
+                "Reservation {Reference} created for {Email}: {PropertyId}/{RoomId}, {CheckIn}–{CheckOut} ({Nights} nights, {Rooms} room(s)), {Total} {Currency}, status {Status}.",
+                reference, LogMask.Email(email), property.Id, room.Id, request.CheckIn, request.CheckOut, offer.Nights, rooms, total, reservation.Currency, reservation.Status);
             return new ReservationCreated(reference, reservation.Status, total, reservation.Currency);
         }, cancellationToken);
     }
@@ -120,6 +132,8 @@ public class ReservationService : IReservationService
         row.Status = "Cancelled";
         row.Refund = Refund(row);
         await _reservations.SaveAsync(cancellationToken);
+        _logger.LogInformation("Reservation {Reference} cancelled by {Actor}: refund {Refund} of {Total} {Currency}.",
+            row.Reference, ownerEmail is null ? "staff" : "guest", row.Refund, row.Total, row.Currency);
         return Map(row);
     }
 

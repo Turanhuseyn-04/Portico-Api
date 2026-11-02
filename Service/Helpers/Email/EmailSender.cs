@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Mail;
 using Microsoft.Extensions.Logging;
+using Service.Helpers.Logging;
 
 namespace Service.Helpers.Email;
 
@@ -78,6 +79,6 @@ public class SmtpEmailSender : IEmailSender
         }
 
         await client.SendMailAsync(mail, cancellationToken);
-        _logger.LogInformation(_options.UsesSmtp ? "Sent \"{Subject}\" to {To}." : "Wrote \"{Subject}\" for {To} to the mail folder.", message.Subject, message.To);
+        _logger.LogInformation(_options.UsesSmtp ? "Sent \"{Subject}\" to {To}." : "Wrote \"{Subject}\" for {To} to the mail folder.", message.Subject, LogMask.Email(message.To));
     }
 }

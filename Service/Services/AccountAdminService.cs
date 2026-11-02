@@ -1,7 +1,9 @@
+using Microsoft.Extensions.Logging;
 using Portico.Domain.Accounts;
 using Repository.Repositories.Interfaces;
 using Service.Helpers.DTOs.Admin;
 using Service.Helpers.Exceptions;
+using Service.Helpers.Logging;
 using Service.Services.Interfaces;
 
 namespace Service.Services;
@@ -10,10 +12,12 @@ namespace Service.Services;
 public class AccountAdminService : IAccountAdminService
 {
     private readonly IAccountRepository _accounts;
+    private readonly ILogger<AccountAdminService> _logger;
 
-    public AccountAdminService(IAccountRepository accounts)
+    public AccountAdminService(IAccountRepository accounts, ILogger<AccountAdminService> logger)
     {
         _accounts = accounts;
+        _logger = logger;
     }
 
     public async Task<IReadOnlyList<AccountRowDto>> GetAllAsync(CancellationToken cancellationToken)
@@ -42,6 +46,8 @@ public class AccountAdminService : IAccountAdminService
 
         account.Role = next;
         await _accounts.SaveAsync(cancellationToken);
+        _logger.LogInformation("Role of {Target} changed from {PreviousRole} to {Role} by {Actor}.",
+            LogMask.Email(targetEmail), previous, next, LogMask.Email(actorEmail));
         return new RoleChanged(Map(account), previous);
     }
 

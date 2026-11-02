@@ -9,6 +9,7 @@ using Repository.Repositories.Interfaces;
 using Service.Helpers.DTOs.Accounts;
 using Service.Helpers.Email;
 using Service.Helpers.Exceptions;
+using Service.Helpers.Logging;
 using Service.Services.Interfaces;
 
 namespace Service.Services;
@@ -64,6 +65,8 @@ public class AccountService : IAccountService
             var sent = account.EmailConfirmed
                 ? await TrySendAsync(AlreadyRegisteredMessage(account), cancellationToken)
                 : await ResendIfDueAsync(account, cancellationToken);
+            _logger.LogInformation("Registration repeated for {Email} (confirmed: {EmailConfirmed}); the inbox was notified and nothing changed.",
+                LogMask.Email(email), account.EmailConfirmed);
             return new Registered(name, email, ConfirmationRequired: true, EmailSent: sent);
         }
 
@@ -81,6 +84,8 @@ public class AccountService : IAccountService
         var token = IssueConfirmToken(account);
         await _accounts.SaveAsync(cancellationToken);
 
+        _logger.LogInformation("Account registered for {Email}; waiting for email confirmation.", LogMask.Email(email));
+
         var delivered = await TrySendAsync(ConfirmationMessage(account, token), cancellationToken);
         return new Registered(name, email, ConfirmationRequired: true, EmailSent: delivered);
     }
@@ -89,12 +94,18 @@ public class AccountService : IAccountService
     // cannot be guessed by trying many. A right password resets the count.
     public async Task<AccountProfile?> SignInAsync(SignInRequest request, CancellationToken cancellationToken)
     {
-        var account = await _accounts.FindByEmailAsync((request.Email ?? "").Trim(), includeSaved: false, cancellationToken);
-        if (account?.PasswordHash is null) return null;
+        var email = (request.Email ?? "").Trim();
+        var account = await _accounts.FindByEmailAsync(email, includeSaved: false, cancellationToken);
+        if (account?.PasswordHash is null)
+        {
+            _logger.LogWarning("Sign-in failed for {Email}: no account with a password.", LogMask.Email(email));
+            return null;
+        }
 
         var now = DateTime.UtcNow;
         if (account.LockedUntil > now)
         {
+            _logger.LogWarning("Sign-in refused for {Email}: locked until {LockedUntil:u}.", LogMask.Email(email), account.LockedUntil);
             var minutes = (int)Math.Ceiling((account.LockedUntil.Value - now).TotalMinutes);
             throw new TooManyRequestsException($"Too many wrong passwords. Try again in {minutes} minute{(minutes == 1 ? "" : "s")}.");
         }
@@ -105,8 +116,15 @@ public class AccountService : IAccountService
             account.FailedSignIns++;
             if (account.FailedSignIns >= MaxFailedSignIns)
             {
+                _logger.LogWarning("Account {Email} locked for {LockoutMinutes} minutes after {FailedSignIns} wrong passwords in a row.",
+                    LogMask.Email(email), LockoutLength.TotalMinutes, account.FailedSignIns);
                 account.FailedSignIns = 0;
                 account.LockedUntil = now.Add(LockoutLength);
+            }
+            else
+            {
+                _logger.LogWarning("Sign-in failed for {Email}: wrong password ({FailedSignIns} of {MaxFailedSignIns}).",
+                    LogMask.Email(email), account.FailedSignIns, MaxFailedSignIns);
             }
 
             await _accounts.SaveAsync(cancellationToken);
@@ -120,8 +138,13 @@ public class AccountService : IAccountService
         await _accounts.SaveAsync(cancellationToken);
 
         // Checked after the password, so an unconfirmed account is only revealed to someone who knows it.
-        if (!account.EmailConfirmed) throw new ForbiddenException("Confirm your email first. We sent a link when you registered.");
+        if (!account.EmailConfirmed)
+        {
+            _logger.LogInformation("Sign-in refused for {Email}: email not confirmed yet.", LogMask.Email(email));
+            throw new ForbiddenException("Confirm your email first. We sent a link when you registered.");
+        }
 
+        _logger.LogInformation("Signed in {Email} as {Role}.", LogMask.Email(email), account.Role);
         return Profile(account);
     }
 
@@ -129,7 +152,11 @@ public class AccountService : IAccountService
     public async Task<AccountProfile> ConfirmEmailAsync(ConfirmEmailRequest request, CancellationToken cancellationToken)
     {
         var account = await _accounts.FindByEmailAsync(request.Email.Trim(), includeSaved: false, cancellationToken);
-        if (account is null) throw new BadRequestException("That confirmation link is not valid.");
+        if (account is null)
+        {
+            _logger.LogWarning("Email confirmation failed for {Email}: no such account.", LogMask.Email(request.Email));
+            throw new BadRequestException("That confirmation link is not valid.");
+        }
         if (account.EmailConfirmed) return Profile(account);
 
         var valid = account.ConfirmTokenHash is not null
@@ -137,12 +164,17 @@ public class AccountService : IAccountService
             && CryptographicOperations.FixedTimeEquals(
                 Encoding.ASCII.GetBytes(HashToken(request.Token ?? "")),
                 Encoding.ASCII.GetBytes(account.ConfirmTokenHash));
-        if (!valid) throw new BadRequestException("That confirmation link is not valid or has expired. Ask for a new one.");
+        if (!valid)
+        {
+            _logger.LogWarning("Email confirmation failed for {Email}: the link is wrong or expired.", LogMask.Email(account.Email));
+            throw new BadRequestException("That confirmation link is not valid or has expired. Ask for a new one.");
+        }
 
         account.EmailConfirmed = true;
         account.ConfirmTokenHash = null;
         account.ConfirmTokenExpires = null;
         await _accounts.SaveAsync(cancellationToken);
+        _logger.LogInformation("Email confirmed for {Email}.", LogMask.Email(account.Email));
         return Profile(account);
     }
 
@@ -159,7 +191,11 @@ public class AccountService : IAccountService
     private async Task<bool> ResendIfDueAsync(Account account, CancellationToken cancellationToken)
     {
         var lastSent = account.ConfirmTokenExpires - ConfirmLinkLifetime;
-        if (lastSent > DateTime.UtcNow - ResendGap) return true;
+        if (lastSent > DateTime.UtcNow - ResendGap)
+        {
+            _logger.LogDebug("Confirmation link for {Email} not re-sent: one went out less than a minute ago.", LogMask.Email(account.Email));
+            return true;
+        }
 
         var token = IssueConfirmToken(account);
         await _accounts.SaveAsync(cancellationToken);
@@ -206,7 +242,7 @@ public class AccountService : IAccountService
         }
         catch (Exception ex) when (ex is SmtpException or InvalidOperationException or IOException or UnauthorizedAccessException)
         {
-            _logger.LogError(ex, "The email \"{Subject}\" for {Email} could not be sent.", message.Subject, message.To);
+            _logger.LogError(ex, "The email \"{Subject}\" for {Email} could not be sent.", message.Subject, LogMask.Email(message.To));
             return false;
         }
     }
@@ -267,17 +303,22 @@ public class AccountService : IAccountService
     public async Task EnsureSuperAdminAsync(string name, string email, string password, CancellationToken cancellationToken)
     {
         var account = await _accounts.FindByEmailAsync(email.Trim(), includeSaved: false, cancellationToken);
+        var created = account is null;
         if (account is null)
         {
             account = new Account { Email = email.Trim(), Name = name.Trim() };
             await _accounts.AddAsync(account, cancellationToken);
         }
 
+        var promoted = account.Role != AccountRoles.SuperAdmin;
         account.Role = AccountRoles.SuperAdmin;
         account.EmailConfirmed = true;
         if (string.IsNullOrWhiteSpace(account.Name)) account.Name = name.Trim();
         account.PasswordHash ??= _hasher.HashPassword(account, password);
         await _accounts.SaveAsync(cancellationToken);
+
+        if (created || promoted)
+            _logger.LogInformation("Configured SuperAdmin {Email} {Change}.", LogMask.Email(email), created ? "created" : "given the SuperAdmin role");
     }
 
     private async Task<Account> FindWithSavedAsync(string email, CancellationToken cancellationToken)

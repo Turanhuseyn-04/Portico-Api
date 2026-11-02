@@ -1,6 +1,8 @@
 using System.Reflection;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Portico.Domain.Platform;
 using Portico.Domain.Properties;
 using Portico.Domain.Reservations;
 
@@ -10,23 +12,73 @@ public static class CatalogSeed
 {
     private static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);
 
-    public static async Task EnsureAsync(PorticoDbContext db, CancellationToken cancellationToken)
+    public static async Task EnsureAsync(PorticoDbContext db, ILogger logger, CancellationToken cancellationToken)
     {
         var stays = ReadStays();
         if (!await db.Properties.AnyAsync(cancellationToken))
         {
             db.Properties.AddRange(stays.Select(ToProperty));
             await db.SaveChangesAsync(cancellationToken);
+            logger.LogInformation("Seeded an empty database with {StayCount} catalog stays.", stays.Count);
         }
-        else if (!await db.Reviews.AnyAsync(cancellationToken))
+        else
         {
-            db.Reviews.AddRange(stays.SelectMany(stay => stay.Reviews.Select(review => ToReview(stay.Id, review))));
-            await db.SaveChangesAsync(cancellationToken);
+            if (!await db.Reviews.AnyAsync(cancellationToken))
+            {
+                db.Reviews.AddRange(stays.SelectMany(stay => stay.Reviews.Select(review => ToReview(stay.Id, review))));
+                await db.SaveChangesAsync(cancellationToken);
+                logger.LogInformation("Seeded catalog reviews for {StayCount} stays.", stays.Count);
+            }
+
+            await EnsureNewStaysAsync(db, stays, logger, cancellationToken);
         }
+
+        await RememberSeededAsync(db, stays, cancellationToken);
 
         await EnsureSampleReservationAsync(db, cancellationToken);
         await EnsurePhotosAsync(db, cancellationToken);
     }
+
+    // Stays added to the catalog after a database was first seeded. A stay is seeded once, so one an admin deletes stays deleted.
+    private static async Task EnsureNewStaysAsync(PorticoDbContext db, List<CatalogStay> stays, ILogger logger, CancellationToken cancellationToken)
+    {
+        var seeded = await ReadSeededAsync(db, cancellationToken);
+        var known = await db.Properties.Select(property => property.Id).ToListAsync(cancellationToken);
+        var missing = stays.Where(stay => !seeded.Contains(stay.Id) && !known.Contains(stay.Id)).ToList();
+        if (missing.Count == 0) return;
+
+        db.Properties.AddRange(missing.Select(ToProperty));
+        await db.SaveChangesAsync(cancellationToken);
+        logger.LogInformation("Added {StayCount} new catalog stays: {StayIds}.", missing.Count, missing.Select(stay => stay.Id).ToArray());
+    }
+
+    private static async Task RememberSeededAsync(PorticoDbContext db, List<CatalogStay> stays, CancellationToken cancellationToken)
+    {
+        var seeded = await ReadSeededAsync(db, cancellationToken);
+        seeded.UnionWith(stays.Select(stay => stay.Id));
+        var value = string.Join(",", seeded.Order(StringComparer.Ordinal));
+
+        var setting = await db.Settings.FirstOrDefaultAsync(row => row.Key == SeededStaysKey, cancellationToken);
+        if (setting is null) db.Settings.Add(new SiteSetting { Key = SeededStaysKey, Value = value });
+        else if (setting.Value == value) return;
+        else setting.Value = value;
+        await db.SaveChangesAsync(cancellationToken);
+    }
+
+    private static async Task<HashSet<string>> ReadSeededAsync(PorticoDbContext db, CancellationToken cancellationToken)
+    {
+        var setting = await db.Settings.AsNoTracking().FirstOrDefaultAsync(row => row.Key == SeededStaysKey, cancellationToken);
+        // Databases seeded before this list existed already had the first eight stays.
+        var ids = setting is null ? FirstStays : setting.Value.Split(',', StringSplitOptions.RemoveEmptyEntries);
+        return new HashSet<string>(ids, StringComparer.Ordinal);
+    }
+
+    private const string SeededStaysKey = "CatalogSeededStays";
+
+    private static readonly string[] FirstStays =
+    [
+        "marble", "screens", "atelier", "riad", "orchard", "patio", "greenhouse", "gallery"
+    ];
 
     private static async Task EnsurePhotosAsync(PorticoDbContext db, CancellationToken cancellationToken)
     {

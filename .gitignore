@@ -7,3 +7,6 @@
 
 # Confirmation emails written to disk in development
 **/App_Data/mail/
+
+# Serilog files (see LogFiles:Directory)
+**/logs/

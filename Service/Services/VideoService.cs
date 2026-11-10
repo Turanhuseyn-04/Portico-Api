@@ -1,5 +1,6 @@
 using Portico.Domain.Content;
 using Repository.Repositories.Interfaces;
+using Service.Helpers;
 using Service.Helpers.DTOs.Admin;
 using Service.Helpers.Exceptions;
 using Service.Services.Interfaces;
@@ -56,7 +57,7 @@ public class VideoService : IVideoService
 
     private static void Apply(SiteVideo video, VideoRequest request)
     {
-        video.Src = request.Src.Trim();
+        video.Src = SitePath.Require(request.Src, "video");
         video.Order = request.Order;
     }
 

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Portico.Api.Security;
 using Portico.Domain.Accounts;
 using Service.Helpers.DTOs.Admin;
 using Service.Services.Interfaces;
@@ -7,6 +8,7 @@ using Service.Services.Interfaces;
 namespace Portico.Api.Controllers.Admin;
 
 [ApiController]
+// Staff (Admin or SuperAdmin) may read and edit. Creating and deleting is for a SuperAdmin only.
 [Authorize(Roles = AccountRoles.Staff)]
 [Route("admin/properties")]
 public class PropertiesController : ControllerBase
@@ -30,6 +32,7 @@ public class PropertiesController : ControllerBase
         return Ok(await _properties.GetAsync(id, cancellationToken));
     }
 
+    [Authorize(Roles = AccountRoles.SuperAdmin)]
     [HttpPost]
     public async Task<IActionResult> CreateAsync(AdminPropertyRequest request, CancellationToken cancellationToken)
     {
@@ -39,9 +42,11 @@ public class PropertiesController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> EditAsync(string id, AdminPropertyRequest request, CancellationToken cancellationToken)
     {
-        return Ok(await _properties.EditAsync(id, request, cancellationToken));
+        var superAdmin = User.RoleOf() == AccountRoles.SuperAdmin;
+        return Ok(await _properties.EditAsync(id, request, superAdmin, cancellationToken));
     }
 
+    [Authorize(Roles = AccountRoles.SuperAdmin)]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(string id, CancellationToken cancellationToken)
     {

@@ -56,10 +56,12 @@ public class AdminPropertyService : IAdminPropertyService
         return Map(property);
     }
 
-    public async Task<AdminPropertyDto> EditAsync(string id, AdminPropertyRequest request, CancellationToken cancellationToken)
+    public async Task<AdminPropertyDto> EditAsync(string id, AdminPropertyRequest request, bool canAddOrRemoveRooms, CancellationToken cancellationToken)
     {
         var property = await _properties.FindAsync(id, cancellationToken);
         if (property is null) throw new NotFoundException("That stay does not exist.");
+        if (!canAddOrRemoveRooms && !SameRooms(property, request.Rooms))
+            throw new ForbiddenException("Only a SuperAdmin can add or remove rooms.");
         await ApplyRoomsAsync(property, request.Rooms, cancellationToken);
         Apply(property, request);
         await _properties.SaveAsync(cancellationToken);
@@ -76,6 +78,16 @@ public class AdminPropertyService : IAdminPropertyService
         await _properties.RemoveSavedStaysAsync(id, cancellationToken);
         _properties.Remove(property);
         await _properties.SaveAsync(cancellationToken);
+    }
+
+    // True when the request names exactly the rooms the stay already has (blank ids are ignored, as in Apply).
+    private static bool SameRooms(Property property, IReadOnlyList<AdminRoomRequest> rooms)
+    {
+        var incoming = rooms
+            .Select(room => room.Id.Trim())
+            .Where(roomId => roomId.Length > 0)
+            .ToHashSet(StringComparer.Ordinal);
+        return incoming.SetEquals(property.Rooms.Select(room => room.Id));
     }
 
     private async Task ApplyRoomsAsync(Property property, IReadOnlyList<AdminRoomRequest> rooms, CancellationToken cancellationToken)

@@ -182,7 +182,7 @@ public class AdminPropertyServiceTests
     {
         var property = Existing("double", "suite");
 
-        await _service.EditAsync("marble", Request("marble", RoomRequest("double", 150m), RoomRequest("loft", 200m)), default);
+        await _service.EditAsync("marble", Request("marble", RoomRequest("double", 150m), RoomRequest("loft", 200m)), canAddOrRemoveRooms: true, default);
 
         Assert.Equal(new[] { "double", "loft" }, property.Rooms.Select(r => r.Id).OrderBy(id => id));
         Assert.Equal(150m, property.Rooms.Single(r => r.Id == "double").Price);
@@ -194,7 +194,7 @@ public class AdminPropertyServiceTests
         var property = Existing("double", "suite");
         _repo.Setup(r => r.RoomHasReservationAsync("marble", "suite", It.IsAny<CancellationToken>())).ReturnsAsync(true);
 
-        await Assert.ThrowsAsync<ConflictException>(() => _service.EditAsync("marble", Request("marble", RoomRequest("double", 150m)), default));
+        await Assert.ThrowsAsync<ConflictException>(() => _service.EditAsync("marble", Request("marble", RoomRequest("double", 150m)), canAddOrRemoveRooms: true, default));
         Assert.Contains(property.Rooms, r => r.Id == "suite");
         _repo.Verify(r => r.SaveAsync(It.IsAny<CancellationToken>()), Times.Never);
     }
@@ -202,7 +202,46 @@ public class AdminPropertyServiceTests
     [Fact]
     public async Task Edit_Unknown_ThrowsNotFound()
     {
-        await Assert.ThrowsAsync<NotFoundException>(() => _service.EditAsync("nowhere", Request("nowhere"), default));
+        await Assert.ThrowsAsync<NotFoundException>(() => _service.EditAsync("nowhere", Request("nowhere"), canAddOrRemoveRooms: true, default));
+    }
+
+    // ---------- Admin (not SuperAdmin) edits ----------
+
+    [Fact]
+    public async Task Edit_AdminChangingExistingRooms_IsAllowed()
+    {
+        var property = Existing("double", "suite");
+
+        await _service.EditAsync("marble", Request("marble", RoomRequest("suite", 300m), RoomRequest(" double ", 150m)), canAddOrRemoveRooms: false, default);
+
+        Assert.Equal(150m, property.Rooms.Single(r => r.Id == "double").Price);
+        Assert.Equal(300m, property.Rooms.Single(r => r.Id == "suite").Price);
+        _repo.Verify(r => r.SaveAsync(It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task Edit_AdminAddingRoom_ThrowsForbiddenAndChangesNothing()
+    {
+        var property = Existing("double");
+
+        await Assert.ThrowsAsync<ForbiddenException>(() =>
+            _service.EditAsync("marble", Request("marble", RoomRequest("double", 150m), RoomRequest("loft", 200m)), canAddOrRemoveRooms: false, default));
+
+        Assert.Equal(new[] { "double" }, property.Rooms.Select(r => r.Id));
+        Assert.Equal(100m, property.Rooms.Single().Price);
+        _repo.Verify(r => r.SaveAsync(It.IsAny<CancellationToken>()), Times.Never);
+    }
+
+    [Fact]
+    public async Task Edit_AdminRemovingRoom_ThrowsForbiddenAndChangesNothing()
+    {
+        var property = Existing("double", "suite");
+
+        await Assert.ThrowsAsync<ForbiddenException>(() =>
+            _service.EditAsync("marble", Request("marble", RoomRequest("double", 150m)), canAddOrRemoveRooms: false, default));
+
+        Assert.Equal(2, property.Rooms.Count);
+        _repo.Verify(r => r.SaveAsync(It.IsAny<CancellationToken>()), Times.Never);
     }
 
     [Fact]

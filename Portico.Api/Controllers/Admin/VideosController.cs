@@ -7,6 +7,7 @@ using Service.Services.Interfaces;
 namespace Portico.Api.Controllers.Admin;
 
 [ApiController]
+// Staff (Admin or SuperAdmin) may read and edit. Creating and deleting is for a SuperAdmin only.
 [Authorize(Roles = AccountRoles.Staff)]
 [Route("admin/videos")]
 public class VideosController : ControllerBase
@@ -30,6 +31,7 @@ public class VideosController : ControllerBase
         return Ok(await _videos.GetAsync(id, cancellationToken));
     }
 
+    [Authorize(Roles = AccountRoles.SuperAdmin)]
     [HttpPost]
     public async Task<IActionResult> CreateAsync(VideoRequest request, CancellationToken cancellationToken)
     {
@@ -42,6 +44,7 @@ public class VideosController : ControllerBase
         return Ok(await _videos.EditAsync(id, request, cancellationToken));
     }
 
+    [Authorize(Roles = AccountRoles.SuperAdmin)]
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteAsync(int id, CancellationToken cancellationToken)
     {

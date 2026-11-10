@@ -28,7 +28,8 @@ public static class AccountRoles
     public const string Admin = "Admin";
     public const string SuperAdmin = "SuperAdmin";
 
-    // Staff run the houses. Only a SuperAdmin manages accounts, roles, settings, and the audit log.
+    // Staff run the houses: an Admin reads and edits rooms, reviews, photos, slides, and videos. Only a SuperAdmin
+    // creates or deletes them, and manages accounts, roles, settings, and the audit log.
     public const string Staff = Admin + "," + SuperAdmin;
 
     public static readonly IReadOnlyList<string> All = new[] { Guest, Admin, SuperAdmin };

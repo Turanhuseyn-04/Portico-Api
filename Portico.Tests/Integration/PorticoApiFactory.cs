@@ -76,6 +76,16 @@ public class PorticoApiFactory : WebApplicationFactory<Program>
 
     public async Task<HttpClient> SuperAdminAsync() => ClientWithToken(await SignInAsync(SuperAdminEmail, SuperAdminPassword));
 
+    // A new guest the SuperAdmin promotes to Admin. The token keeps working, since the role is read on every request.
+    public async Task<HttpClient> NewAdminAsync()
+    {
+        var email = $"admin-{Guid.NewGuid():N}@portico.test";
+        var admin = await NewGuestAsync(email);
+        var boss = await SuperAdminAsync();
+        (await boss.PutAsJsonAsync($"/admin/accounts/{email}/role", new { role = "Admin" })).EnsureSuccessStatusCode();
+        return admin;
+    }
+
     // Registers a guest, opens the link from the captured email, signs in, and returns a client carrying the token.
     public async Task<HttpClient> NewGuestAsync(string? email = null, string password = "guest-password-1")
     {

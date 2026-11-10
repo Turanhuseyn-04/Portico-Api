@@ -174,3 +174,6 @@ finally
 
 static Microsoft.Extensions.Logging.ILogger AuthLogger(HttpContext context) =>
     context.RequestServices.GetRequiredService<ILoggerFactory>().CreateLogger("Portico.Api.Authentication");
+
+// Lets Portico.Tests start the API in memory with WebApplicationFactory<Program>.
+public partial class Program { }

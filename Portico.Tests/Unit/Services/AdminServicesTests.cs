@@ -396,9 +396,36 @@ public class SlideServiceTests
         var slide = new Slide { Id = 1, City = "Old" };
         _slides.Setup(r => r.FindAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(slide);
 
-        await _service.EditAsync(1, new SlideRequest { City = "New" }, default);
+        await _service.EditAsync(1, new SlideRequest { City = "New", Country = "Italy", Image = "/uploads/slides/new.jpg" }, default);
 
-        Assert.Equal("New", slide.City);
+        Assert.Equal(("New", "/uploads/slides/new.jpg"), (slide.City, slide.Image));
+    }
+
+    public static TheoryData<string> BadPaths => new()
+    {
+        "", "   ", "rome.jpg", "https://evil.example/x.jpg", "//evil.example/x.jpg", "javascript:alert(1)",
+        "/assets/../secret.jpg", "/assets\\x.jpg", "/a b.jpg", "/x.jpg\" onerror=\"alert(1)", "/" + new string('a', 300)
+    };
+
+    [Theory]
+    [MemberData(nameof(BadPaths))]
+    public async Task CreateAndEdit_ImageNotOnThisSite_ThrowBadRequestAndChangeNothing(string image)
+    {
+        await Assert.ThrowsAsync<BadRequestException>(() => _service.CreateAsync(new SlideRequest { City = "Rome", Country = "Italy", Image = image }, default));
+        _slides.Verify(r => r.AddAsync(It.IsAny<Slide>(), It.IsAny<CancellationToken>()), Times.Never);
+
+        var slide = new Slide { Id = 1, City = "Old", Country = "Italy", Image = "/old.jpg" };
+        _slides.Setup(r => r.FindAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(slide);
+        await Assert.ThrowsAsync<BadRequestException>(() => _service.EditAsync(1, new SlideRequest { City = "New", Country = "Italy", Image = image }, default));
+        Assert.Equal(("Old", "/old.jpg"), (slide.City, slide.Image));
+    }
+
+    [Theory]
+    [InlineData("", "Italy")]
+    [InlineData("Rome", " ")]
+    public async Task Create_MissingCityOrCountry_ThrowsBadRequest(string city, string country)
+    {
+        await Assert.ThrowsAsync<BadRequestException>(() => _service.CreateAsync(new SlideRequest { City = city, Country = country, Image = "/r.jpg" }, default));
     }
 
     [Fact]
@@ -423,6 +450,16 @@ public class VideoServiceTests
         var dto = await _service.CreateAsync(new VideoRequest { Src = " /v.mp4 ", Order = 2 }, default);
         Assert.Equal(("/v.mp4", 2), (dto.Src, dto.Order));
         _videos.Verify(r => r.SaveAsync(It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData("https://evil.example/v.mp4")]
+    [InlineData("/uploads/../v.mp4")]
+    public async Task Create_VideoNotOnThisSite_ThrowsBadRequest(string src)
+    {
+        await Assert.ThrowsAsync<BadRequestException>(() => _service.CreateAsync(new VideoRequest { Src = src }, default));
+        _videos.Verify(r => r.AddAsync(It.IsAny<SiteVideo>(), It.IsAny<CancellationToken>()), Times.Never);
     }
 
     [Fact]

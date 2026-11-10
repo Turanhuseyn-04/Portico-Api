@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Portico.Domain.Content;
 using Portico.Domain.Platform;
 using Portico.Domain.Properties;
 using Portico.Domain.Reservations;
@@ -37,6 +38,57 @@ public static class CatalogSeed
 
         await EnsureSampleReservationAsync(db, cancellationToken);
         await EnsurePhotosAsync(db, cancellationToken);
+        await EnsureHomeContentAsync(db, logger, cancellationToken);
+    }
+
+    private const string HomeContentSeededKey = "HomeContentSeeded";
+
+    // The home page's trending destinations and video band, which used to be written into Portico.Web's views.
+    // Seeded once, and only into an empty table, so slides and videos an admin deleted or added are left alone.
+    private static readonly (string City, string Country, string Image)[] HomeSlides =
+    [
+        ("Rome", "Italy", "/assets/rome.jpg"),
+        ("Athens", "Greece", "/assets/athens.jpg"),
+        ("Paris", "France", "/assets/paris.jpg"),
+        ("Istanbul", "Türkiye", "/assets/istanbul.jpg"),
+        ("Venice", "Italy", "/assets/venice.jpg"),
+        ("Lisbon", "Portugal", "/assets/lisbon-city.jpg"),
+        ("Kyoto", "Japan", "/assets/kyoto-city.jpg"),
+        ("Marrakech", "Morocco", "/assets/marrakech-city.jpg")
+    ];
+
+    private static readonly string[] HomeVideos =
+    [
+        "/assets/videos/villas/14041585_1920_1080_25fps.mp4",
+        "/assets/videos/resorts/3576398-uhd_3840_2160_25fps.mp4"
+    ];
+
+    private static async Task EnsureHomeContentAsync(PorticoDbContext db, ILogger logger, CancellationToken cancellationToken)
+    {
+        if (await db.Settings.AnyAsync(setting => setting.Key == HomeContentSeededKey, cancellationToken)) return;
+
+        if (!await db.Slides.AnyAsync(cancellationToken))
+        {
+            var cities = await db.Properties.Select(property => property.City).ToListAsync(cancellationToken);
+            db.Slides.AddRange(HomeSlides.Select((slide, index) => new Slide
+            {
+                City = slide.City,
+                Country = slide.Country,
+                Image = slide.Image,
+                Stays = cities.Count(city => string.Equals(city, slide.City, StringComparison.OrdinalIgnoreCase)),
+                Order = index
+            }));
+            logger.LogInformation("Seeded {SlideCount} home page slides.", HomeSlides.Length);
+        }
+
+        if (!await db.Videos.AnyAsync(cancellationToken))
+        {
+            db.Videos.AddRange(HomeVideos.Select((src, index) => new SiteVideo { Src = src, Order = index }));
+            logger.LogInformation("Seeded {VideoCount} home page videos.", HomeVideos.Length);
+        }
+
+        db.Settings.Add(new SiteSetting { Key = HomeContentSeededKey, Value = DateTime.UtcNow.ToString("O") });
+        await db.SaveChangesAsync(cancellationToken);
     }
 
     // Stays added to the catalog after a database was first seeded. A stay is seeded once, so one an admin deletes stays deleted.

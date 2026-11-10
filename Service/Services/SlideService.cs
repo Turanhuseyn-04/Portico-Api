@@ -1,5 +1,6 @@
 using Portico.Domain.Content;
 using Repository.Repositories.Interfaces;
+using Service.Helpers;
 using Service.Helpers.DTOs.Admin;
 using Service.Helpers.Exceptions;
 using Service.Services.Interfaces;
@@ -56,9 +57,16 @@ public class SlideService : ISlideService
 
     private static void Apply(Slide slide, SlideRequest request)
     {
-        slide.City = request.City.Trim();
-        slide.Country = request.Country.Trim();
-        slide.Image = request.Image.Trim();
+        // Checked before anything changes, so a refused edit leaves the slide as it was.
+        var city = (request.City ?? "").Trim();
+        var country = (request.Country ?? "").Trim();
+        if (city.Length == 0) throw new BadRequestException("A city is required.");
+        if (country.Length == 0) throw new BadRequestException("A country is required.");
+        var image = SitePath.Require(request.Image, "image");
+
+        slide.City = city;
+        slide.Country = country;
+        slide.Image = image;
         slide.Stays = request.Stays;
         slide.Order = request.Order;
     }

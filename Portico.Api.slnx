@@ -3,4 +3,5 @@
   <Project Path="Domain/Domain.csproj" />
   <Project Path="Repository/Repository.csproj" />
   <Project Path="Service/Service.csproj" />
+  <Project Path="Portico.Tests/Portico.Tests.csproj" />
 </Solution>
